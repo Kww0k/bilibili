@@ -1,0 +1,25 @@
+server:
+  port: 9301
+  servlet:
+    context-path: /api/video
+spring:
+  mail:
+    username: E19858591692@163.com
+    password: ILMWDPNGFMTVJUEG
+    host: smtp.163.com
+  data:
+    redis:
+      host: 192.168.233.150
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.233.150:3306/bilibili?serverTimezone=UTC&characterEncoding=UTF-8
+    username: root
+    password: 123456
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-field: delFlag
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+      id-type: auto
+    banner: false
