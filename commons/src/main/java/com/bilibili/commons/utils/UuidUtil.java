@@ -2,7 +2,6 @@ package com.bilibili.commons.utils;
 
 import org.springframework.stereotype.Component;
 
-import java.util.Random;
 import java.util.UUID;
 
 @Component

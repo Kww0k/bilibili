@@ -118,6 +118,9 @@ const showBar = () => {
   if (document.getElementById('videoBox').className === 'videoBox') {
     topButton.value = true
     vplayDisplay.value = 'block'
+    stopDisplay.value = 'block'
+    consoles.value = 'flex'
+    topHeight.value = topHeight.value - 97
   }
 
 }
@@ -126,6 +129,9 @@ const unShowBar = () => {
   if (document.getElementById('videoBox').className === 'videoBox') {
     topButton.value = false
     vplayDisplay.value = 'none'
+    stopDisplay.value = 'none'
+    consoles.value = 'none'
+    topHeight.value = topHeight.value + 97
   }
 }
 
@@ -248,13 +254,13 @@ onMounted(() => {
           <video :style="{ height: videoHeight.toString( ) + 'px', width: videoWidth.toString() + 'px'}" id="vd"
                  src="../assets/img/屏幕录制2023-08-29%2012.58.04.mov"/>
           <div
-              :style="{ height: vplayHeight.toString( ) + 'px', width: vplayWight.toString() + 'px', display: vplayDisplay}"
+              :style="{ height: vplayHeight.toString( ) + 'px', width: vplayWight.toString() + 'px'}"
               id="vplay" class="vplay">
-            <div @click="play" id="care" :style="{height: topHeight.toString() + 'px' }">
-              <el-button @click.stop @click="console.log(111)" v-if="topButton">关注</el-button>
+            <div @click="play" id="care" :style="{height: (topHeight + 97)+ 'px' }">
+              <el-button :style="{display: vplayDisplay}" @click.stop v-if="topButton">关注</el-button>
             </div>
             <div>
-              <div @click="play" id="stop" style="width: 100%; text-align: right; height: 50px">
+              <div :style="{display: stopDisplay}" @click="play" id="stop" style="width: 100%; text-align: right; height: 50px">
                 <el-button style="width: 50px">暂停</el-button>
               </div>
               <div style="height: 5px; width: 100%">
@@ -264,7 +270,7 @@ onMounted(() => {
                   </div>
                 </div>
               </div>
-              <div id="consoles" class="consoles">
+              <div id="consoles" class="consoles" :style="{display : consoles}">
                 <!-- 左边组件 -->
                 <div id="group1" class="group1">
                   <div id="play" class="play">
@@ -427,7 +433,7 @@ onMounted(() => {
   height: 45px;
   font-size: 13px;
   bottom: 0;
-  color: white; /*控件颜爸*/
+  color: white;
 }
 
 .group1, .group2 {
