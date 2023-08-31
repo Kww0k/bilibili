@@ -99,9 +99,8 @@ onMounted(() => {
                     <el-button type="primary" plain @click="openVideo(scope.row.videoUrl)">预览</el-button>
                   </template>
                 </el-table-column>
-                <el-table-column label="操作" width="170">
+                <el-table-column label="操作">
                   <template v-slot="scope">
-                    <el-button type="success" plain>修改</el-button>
                     <el-popconfirm title="你确定要删除这条记录吗?" @confirm="del(scope.row.id)">
                       <template #reference>
                         <el-button type="danger" plain>删除</el-button>
