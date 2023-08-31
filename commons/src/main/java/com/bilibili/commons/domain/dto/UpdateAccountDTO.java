@@ -17,10 +17,6 @@ public class UpdateAccountDTO {
     @NotNull(message = "id不能为空")
     private Integer id;
     /**
-     * 用户名
-     */
-    private String username;
-    /**
      * 昵称
      */
     private String nickname;

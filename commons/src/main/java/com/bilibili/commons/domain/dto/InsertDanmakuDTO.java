@@ -29,5 +29,6 @@ public class InsertDanmakuDTO {
      */
     private String type;
 
+    @NotNull(message = "视频id不能为空")
     private Integer videoId;
 }
