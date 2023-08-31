@@ -2,6 +2,7 @@ package com.bilibili.file.controller.web;
 
 import com.bilibili.commons.domain.RestBean;
 import com.bilibili.commons.domain.entity.Files;
+import com.bilibili.commons.domain.vo.FileListVO;
 import com.bilibili.file.service.FilesService;
 import io.minio.errors.MinioException;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -56,6 +58,18 @@ public class WebMinioController {
     @GetMapping("/getFileById/{id}")
     public RestBean<Files> getFileById(@PathVariable Integer id) {
         return RestBean.success(filesService.getById(id));
+    }
+
+    /**
+     * 获取轮播图
+     *
+     * @author Silvery
+     * @since 2023/8/31 10:45
+     * @return RestBean<List<FileListVO>>
+     */
+    @GetMapping("/listBanner")
+    public RestBean<List<FileListVO>> listBanner() {
+        return filesService.listBanner();
     }
 
 }

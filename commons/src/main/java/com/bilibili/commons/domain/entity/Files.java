@@ -41,6 +41,11 @@ public class Files  {
      * 文件地址
      */
     private String url;
+
+    /**
+     * 是否是轮播图
+     */
+    private String banner;
     @TableField(fill = FieldFill.INSERT)
     private String createBy;
     @TableField(fill = FieldFill.INSERT)

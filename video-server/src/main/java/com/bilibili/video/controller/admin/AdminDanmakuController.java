@@ -17,7 +17,7 @@ import java.util.List;
  * @since 2023/8/28 16:58
  */
 @RestController
-@RequestMapping("/danmaku")
+@RequestMapping("/admin/danmaku")
 @RequiredArgsConstructor
 @Validated
 public class AdminDanmakuController {

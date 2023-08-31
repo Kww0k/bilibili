@@ -1,8 +1,8 @@
 <template>
   <div style="width: 100%; height: 100vh">
     <div style="width: 100%; height: 100%;
-    background-image: url(http://192.168.233.150:9000/picture/155301692693640__1692693967850.pic_hd?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minioadmin%2F20230822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230822T084608Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=cea5b1bd74d663a5e698245ac1282fe07bfd1797588f6ad1f8cbbb3ef178482d);
-    background-size: cover;background-repeat: no-repeat;background-position: center;">
+    background-size: cover;background-repeat: no-repeat;background-position: center;"
+         :style="{ backgroundImage: `url(${url1})` }">
       <el-form  style="width: 400px ;border-radius: 5px; position: absolute; text-align: center; top: 50%; left: 80%; transform: translate(-50%, -50%); background-color: rgba(255, 255, 255, 0.5)">
         <div style="font-size: 30px; font-weight: bold; margin-top: 20px">
           登陆
@@ -40,6 +40,9 @@ import {loginApi} from "@/api/login";
 import {ElMessage} from "element-plus";
 import {LocalStorageService, SessionStorageService} from "@/util/storage";
 import {STORAGE_PREFIX, TOKEN, USER} from "@/config/cache";
+import request from "@/net";
+
+const url1 = ref('')
 
 const form = ref<Login>({
   username: '',
@@ -48,6 +51,9 @@ const form = ref<Login>({
 
 
 onMounted(() => {
+  request.get("/file/web/file/getFileById/" + 34).then((res : any) => {
+    url1.value = res.data.url
+  })
   SessionStorageService.clearAll()
   LocalStorageService.clearAll()
 })

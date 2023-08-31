@@ -22,7 +22,7 @@ public class DanmakuListVO {
     /**
      * 弹幕出现时间
      */
-    private Double time;
+    private String time;
     /**
      * 弹幕类型
      */

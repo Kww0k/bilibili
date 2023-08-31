@@ -28,4 +28,6 @@ public interface FilesService extends IService<Files> {
     RestBean<List<FileListVO>> listPicture(String name);
 
     RestBean<List<FileListVO>> listVideo(String name);
+
+    RestBean<List<FileListVO>> listBanner();
 }

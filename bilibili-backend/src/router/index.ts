@@ -34,11 +34,6 @@ const router = createRouter({
           component: () => import('@/views/dashboard/home/examine/ExaminePage.vue')
         },
         {
-          path: '/home/banner',
-          name: 'dashboard-banner',
-          component: () => import('@/views/dashboard/home/banner/BannerPage.vue')
-        },
-        {
           path: '/income',
           name: 'dashboard-income',
           component: () => import('@/views/dashboard/income/IncomePage.vue')
@@ -94,16 +89,11 @@ const router = createRouter({
           component: () => import('../views/dashboard/video/review/ReviewPage.vue')
         },
         {
-          path: '/video/scrolling',
-          name: 'dashboard-scrolling',
-          component: () => import('../views/dashboard/video/scrolling/ScorllingPage.vue')
+          path: '/video/danmu',
+          name: 'dashboard-danmu',
+          component: () => import('@/views/dashboard/video/danmu/Danmu.vue')
         }
       ]
-    },
-    {
-      path: '/test',
-      name: 'dashboard-test',
-      component: () => import('@/views/Test.vue')
     },
     {
       path: '/login',

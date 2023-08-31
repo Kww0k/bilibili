@@ -30,4 +30,6 @@ public class AdminMinioController {
     public RestBean<List<FileListVO>> listVideo(String name) {
         return filesService.listVideo(name);
     }
+
+
 }

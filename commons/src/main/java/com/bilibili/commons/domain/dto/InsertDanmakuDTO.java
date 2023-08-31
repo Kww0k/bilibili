@@ -23,7 +23,7 @@ public class InsertDanmakuDTO {
      * 弹幕出现时间
      */
     @NotNull(message = "时间不能为空")
-    private Double time;
+    private String time;
     /**
      * 弹幕类型
      */

@@ -4,7 +4,7 @@ import {SessionStorageService} from "@/util/storage";
 import {STORAGE_PREFIX, TOKEN} from "@/config/cache";
 import {Plus} from "@element-plus/icons-vue";
 import type {BaseResponse} from "../../../../type/response/response";
-import {computed, onMounted, reactive, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import type {Ref} from 'vue'
 import type {UploadProps} from "element-plus";
 import {ElMessage} from "element-plus";
@@ -15,8 +15,8 @@ import request from "@/net";
 const insertForm = ref<InsertVideo>({
   title: '',
   description: '',
-  previewUrl: 'http://192.168.233.150:9000/picture/155341692693648__1692694000793.pic_hd?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minioadmin%2F20230822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230822T084641Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=61d63eb5518bae39a855906be5f2166e87e9b6c7082cec23f1fc30b0482f7808',
-  videoUrl: 'http://192.168.233.150:9000/video/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62023-08-28%2012_1693197281823.34?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minioadmin%2F20230828%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230828T043442Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=6c94f9dc0d6ac815ab6c5c8edfaa5c1f4a1363d03677e399d6bf8fbc291c6343',
+  previewUrl: '',
+  videoUrl: '',
   visibility: '',
   typeId: null
 })
@@ -32,8 +32,8 @@ const sub = () => {
       insertForm.value = {
         title: '',
         description: '',
-        previewUrl: 'http://192.168.233.150:9000/picture/155341692693648__1692694000793.pic_hd?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minioadmin%2F20230822%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230822T084641Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=61d63eb5518bae39a855906be5f2166e87e9b6c7082cec23f1fc30b0482f7808',
-        videoUrl: 'http://192.168.233.150:9000/video/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%88%B62023-08-28%2012_1693197281823.34?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minioadmin%2F20230828%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230828T043442Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=6c94f9dc0d6ac815ab6c5c8edfaa5c1f4a1363d03677e399d6bf8fbc291c6343',
+        previewUrl: '',
+        videoUrl: '',
         visibility: '',
         typeId: null
       }

@@ -120,14 +120,6 @@ import router from "@/router";
                   <span>审核管理</span>
                 </template>
               </el-menu-item>
-              <el-menu-item index="5-3" @click="router.push('/home/banner')">
-                <template #title>
-                  <el-icon>
-                    <PictureFilled/>
-                  </el-icon>
-                  <span>Banner管理</span>
-                </template>
-              </el-menu-item>
             </el-menu-item-group>
           </el-sub-menu>
           <el-sub-menu index="6">
@@ -214,7 +206,7 @@ import router from "@/router";
                   <span>视频管理</span>
                 </template>
               </el-menu-item>
-              <el-menu-item index="8-2" @click="router.push('/video/scrolling')">
+              <el-menu-item index="8-2" @click="router.push('/video/danmu')">
                 <template #title>
                   <el-icon>
                     <ChatLineSquare/>
