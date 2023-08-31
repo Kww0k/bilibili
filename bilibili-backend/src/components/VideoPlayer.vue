@@ -253,6 +253,10 @@ onMounted(() => {
              class="videoBox">
           <video :style="{ height: videoHeight.toString( ) + 'px', width: videoWidth.toString() + 'px'}" id="vd"
                  src="../assets/img/屏幕录制2023-08-29%2012.58.04.mov"/>
+          <!-- 弹幕 -->
+          <div id="danmu" class="danmu">
+          </div>
+
           <div
               :style="{ height: vplayHeight.toString( ) + 'px', width: vplayWight.toString() + 'px'}"
               id="vplay" class="vplay">
@@ -312,12 +316,11 @@ onMounted(() => {
         </div>
       </div>
       <div :style="{ height: commitDanmuHeight.toString( ) + 'px', width: commitDanmuWidth.toString() + 'px'}"
-           style=" box-shadow: 0 0 10px grey;background-color: white">
+           style=" box-shadow: 0 0 10px grey;background-color: white" class="flex items-center">
+        <div>
+          <el-button>弹幕</el-button>
+        </div>
       </div>
-      <!-- 弹幕 -->
-      <div id="danmu" class="danmu">
-      </div>
-
     </div>
     <!-- 右边 -->
     <aside style="margin-left: 20px"
@@ -328,6 +331,32 @@ onMounted(() => {
 </template>
 
 <style scoped>
+@keyframes danmuAnimation{
+  0%{
+    right: 0;
+    transform:translate(100%, 0);
+  }
+  100%{
+    right: 100%;
+    transform:translate(0, 0);
+  }
+}
+.danmu {
+  position:absolute;/*叠放在视频窗口上*/
+  top: 0;
+  left: 0;
+  z-index: 200;
+  overflow: hidden;
+}
+.danmu div{
+  position: absolute;
+  right: 100%;
+  font-size: 20px;
+  color: #fefcc9;
+  white-space: nowrap;
+  text-shadow: 0 0 2px #999;
+  animation: danmuAnimation ease-in 10s;
+}
 .speed {
   width: 80px;
   text-align: center;
