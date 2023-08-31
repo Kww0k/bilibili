@@ -7,6 +7,16 @@ package com.bilibili.commons.constants;
 public class AppConstants {
 
     /**
+     * 网关url
+     */
+    public static final String REQUEST_URL = "127.0.0.1";
+
+    /**
+     * 网关端口
+     */
+    public static final String REQUEST_PORT = "8080";
+
+    /**
      * 认证请求头
      */
     public static final String AUTH_HEADER = "Authorization";

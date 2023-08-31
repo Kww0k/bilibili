@@ -22,12 +22,12 @@ public class WebConfig {
         // 允许哪个方法进行跨域
         corsConfiguration.addAllowedMethod("*");
         // 允许哪个请求来源进行跨域
-        // corsConfiguration.addAllowedOrigin("*");
-        corsConfiguration.addAllowedOriginPattern("*");
+        corsConfiguration.addAllowedOriginPattern("http://localhost:5174");
+        corsConfiguration.addAllowedOriginPattern("http://localhost:5174");
         // 是否允许携带cookie进行跨域
         corsConfiguration.setAllowCredentials(true);
 
-        source.registerCorsConfiguration("/**",corsConfiguration);
+        source.registerCorsConfiguration("/**", corsConfiguration);
         return new CorsWebFilter(source);
     }
 }

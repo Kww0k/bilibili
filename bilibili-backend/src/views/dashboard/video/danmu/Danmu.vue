@@ -29,14 +29,24 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted, ref} from "vue";
+import {onMounted, Ref, ref} from "vue";
 import request from "@/net";
+import type {DanmuList} from "../../../../../type/response/dashboard/video/danmu";
+import {listDanmuApi} from "@/api/dashboard/video/danmu";
 
+const danmuList : Ref<DanmuList[]> = ref([])
 const url1 = ref('')
 const url2 = ref('')
 const url3 = ref('')
 
+const getList = () => {
+  listDanmuApi().then((data) => {
+    danmuList.value = data
+  })
+}
+
 onMounted(() => {
+  getList()
   request.get("/file/web/file/getFileById/" + 65).then((res : any) => {
     url1.value = res.data.url
   })

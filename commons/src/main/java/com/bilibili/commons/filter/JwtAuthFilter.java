@@ -16,8 +16,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Objects;
 
-import static com.bilibili.commons.constants.AppConstants.AUTH_HEADER;
+import static com.bilibili.commons.constants.AppConstants.*;
 
 /**
  * @author Silvery
@@ -31,6 +32,9 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) throws ServletException, IOException {
+        if (!Objects.equals(request.getRemoteAddr(), REQUEST_URL) ||
+                !Objects.equals(request.getHeader("X-Forwarded-Port"), REQUEST_PORT))
+            filterChain.doFilter(request, response);
         // 获取token
         String authorization = request.getHeader(AUTH_HEADER);
         DecodedJWT jwt = jwtUtils.resolveJwt(authorization);
