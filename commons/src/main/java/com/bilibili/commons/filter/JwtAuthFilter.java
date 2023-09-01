@@ -32,9 +32,9 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) throws ServletException, IOException {
-        if (!Objects.equals(request.getRemoteAddr(), REQUEST_URL) ||
-                !Objects.equals(request.getHeader("X-Forwarded-Port"), REQUEST_PORT))
-            filterChain.doFilter(request, response);
+//        if (!Objects.equals(request.getRemoteAddr(), REQUEST_URL) ||
+//                !Objects.equals(request.getHeader("X-Forwarded-Port"), REQUEST_PORT))
+//            throw new RuntimeException();
         // 获取token
         String authorization = request.getHeader(AUTH_HEADER);
         DecodedJWT jwt = jwtUtils.resolveJwt(authorization);
