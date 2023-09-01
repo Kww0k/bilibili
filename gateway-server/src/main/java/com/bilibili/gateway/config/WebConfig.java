@@ -23,7 +23,7 @@ public class WebConfig {
         corsConfiguration.addAllowedMethod("*");
         // 允许哪个请求来源进行跨域
         corsConfiguration.addAllowedOriginPattern("http://localhost:5174");
-        corsConfiguration.addAllowedOriginPattern("http://localhost:5174");
+        corsConfiguration.addAllowedOriginPattern("http://localhost:5173");
         // 是否允许携带cookie进行跨域
         corsConfiguration.setAllowCredentials(true);
 

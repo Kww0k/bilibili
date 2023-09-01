@@ -22,5 +22,5 @@ public class UpdateDanmakuDTO {
     /**
      * 弹幕出现时间
      */
-    private Double time;
+    private String time;
 }

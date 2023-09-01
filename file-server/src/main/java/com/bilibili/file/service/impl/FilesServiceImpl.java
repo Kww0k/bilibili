@@ -15,7 +15,6 @@ import com.bilibili.file.service.FilesService;
 import com.bilibili.file.utils.MinioUtilS;
 import io.minio.errors.MinioException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;

@@ -6,7 +6,7 @@ export interface DanmuList {
 }
 
 export interface UpdateDanmu {
-    id : number,
+    id : number | null,
     content : string,
     color : string,
     time : string
