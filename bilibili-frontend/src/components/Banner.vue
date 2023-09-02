@@ -10,7 +10,7 @@ const isNext = ref(false)
 const bannerList = ref([])
 
 const stopAutoPlay = () => {
-  for (let i = 0; i < timer.value; i++)
+  for (let i = 0; i <= timer.value; i++)
     clearInterval(i)
 }
 
@@ -62,8 +62,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="container" >
-    <div class="img-box" @mouseout="startAutoPlay" @mouseover="stopAutoPlay">
+  <div class="container"  @mouseout="startAutoPlay" @mouseover="stopAutoPlay">
+    <div class="img-box">
       <img v-for="item in bannerList"
           :src="item.url"/>
     </div>
@@ -73,7 +73,9 @@ onMounted(() => {
           111
         </div>
         <ul class="dots">
-          <li v-for="(item, index) in bannerList" :class="[index === activeIndex ? 'pacman' : 'dot', isPrev ? 'l' : null]">
+          <li v-for="(item, index) in bannerList"
+              :class="[index === activeIndex ? 'pacman' : 'dot', isPrev ? 'l' : null]"
+              @click="changeBanner(index)">
             <div v-if="index===activeIndex"></div>
             <div v-if="index===activeIndex"></div>
           </li>
