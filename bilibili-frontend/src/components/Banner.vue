@@ -52,6 +52,7 @@ const getBannerList = () => {
       bannerList.value = res.data
     else
       ElMessage.error(res.message)
+    console.log(bannerList.value[activeIndex.value].name)
   })
 }
 
@@ -70,7 +71,7 @@ onMounted(() => {
     <div class="bottom-box">
       <div class="l-box">
         <div class="title">
-          111
+          {{ bannerList && bannerList.length > 0 ? bannerList[activeIndex].name : '' }}
         </div>
         <ul class="dots">
           <li v-for="(item, index) in bannerList"
@@ -93,7 +94,6 @@ onMounted(() => {
 li {
   list-style: none;
 }
-
 .container {
   border-radius: 6px;
   overflow: hidden;
