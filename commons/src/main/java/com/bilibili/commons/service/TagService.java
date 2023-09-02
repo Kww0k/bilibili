@@ -7,6 +7,7 @@ import com.bilibili.commons.domain.dto.UpdateTagDTO;
 import com.bilibili.commons.domain.entity.Tag;
 import com.bilibili.commons.domain.vo.ParentTagListVO;
 import com.bilibili.commons.domain.vo.SimpleTagListVO;
+import com.bilibili.commons.domain.vo.TagListVO;
 
 import java.util.List;
 
@@ -74,5 +75,5 @@ public interface TagService extends IService<Tag> {
      * @since 2023/8/28 14:18
      * @return RestBean<List<ParentTagListVO>>
      */
-    RestBean<List<ParentTagListVO>> listTag();
+    RestBean<List<TagListVO>> listTag();
 }

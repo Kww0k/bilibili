@@ -1,13 +1,28 @@
 <script setup lang="ts">
 import {onMounted, ref} from 'vue';
+import type {Ref} from "vue";
 import Navigate from "@/components/Navigate.vue";
 import request from "@/net";
+import type {TagList} from "../../../type/tag";
+import {listTagApi} from "@/api/tag";
+import Banner from "@/components/Banner.vue";
 
 const message = ref('Hello, world!');
 const height = ref('simple')
+const tagList : Ref<TagList[]> = ref([])
+
+
 const url1 = ref('')
 const url2 = ref('')
 const user = ref('')
+
+
+
+const getTagList = () => {
+  listTagApi().then((data) => {
+    tagList.value = data
+  })
+}
 
 window.addEventListener('scroll', function () {
   let scrollDistance = window.scrollY;
@@ -18,6 +33,7 @@ window.addEventListener('scroll', function () {
 });
 
 onMounted(() => {
+  getTagList()
   request.get("/file/web/file/getFileById/" + 96).then((res: any) => {
     url1.value = res.data.url
   })
@@ -46,7 +62,7 @@ onMounted(() => {
     </div>
     <div class="main-body">
       <div class="main-channel">
-        <div style="z-index: 0;display: flex;align-items: center;margin-right: 20px;height: 72px; margin-top: 24px">
+        <div style="z-index: 0;display: flex;align-items: center;margin-right: 20px;height: 100%; padding-top: 24px">
           <div v-if="user == ''" style="width: 70px;height: 100%">
             <div>
               <div class="channel-item">
@@ -92,14 +108,19 @@ onMounted(() => {
             </div>
           </div>
         </div>
-        <div style="flex-grow: 1;height: 100%; background-color: black">
+        <div style="flex-grow: 1;height: 100%; margin-left: -14px; display: flex">
+          <div style="flex-grow: 1;height: 100%; background-color: red">
 
+          </div>
+          <div style="width: 240px; height: 100%;background-color: black">
+
+          </div>
         </div>
       </div>
       <div class="main-suggest">
         <el-row :gutter="20" class="suggest-body">
           <el-col :span="10">
-            <el-input placeholder="请输入商品编码"/>
+            <Banner/>
           </el-col>
           <el-col :span="5">
             <el-input placeholder="请输入商品编码"/>
@@ -135,7 +156,7 @@ onMounted(() => {
   </div>
 </template>
 
-<style>
+<style scoped>
 .channel-title {
   font-size: 14px;
   line-height: 20px;
@@ -186,6 +207,8 @@ onMounted(() => {
 
 <style scoped>
 .main-body {
+  max-width: 1620px;
+  min-width: 1384px;
   width: 90%;
   margin: 0 auto;
 }

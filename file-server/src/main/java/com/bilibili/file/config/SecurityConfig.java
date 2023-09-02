@@ -35,7 +35,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(conf -> conf
-                        .requestMatchers("/web/file/getFileById/**").permitAll()
+                        .requestMatchers("/web/file/getFileById/**", "/web/file/listBanner").permitAll()
                         .anyRequest().authenticated())
                 // 异常处理
                 .exceptionHandling(conf -> conf

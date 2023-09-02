@@ -8,6 +8,7 @@ import com.bilibili.commons.domain.dto.UpdateTagDTO;
 import com.bilibili.commons.domain.entity.Tag;
 import com.bilibili.commons.domain.vo.ParentTagListVO;
 import com.bilibili.commons.domain.vo.SimpleTagListVO;
+import com.bilibili.commons.domain.vo.TagListVO;
 import com.bilibili.commons.exctption.video.TagNotFIndException;
 import com.bilibili.commons.mapper.TagMapper;
 import com.bilibili.commons.service.TagService;
@@ -16,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 import static com.bilibili.commons.constants.AppConstants.FALSE_CODE;
 import static com.bilibili.commons.constants.AppConstants.PARENT_TAG;
@@ -76,9 +78,17 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagSe
     }
 
     @Override
-    public RestBean<List<ParentTagListVO>> listTag() {
-        return RestBean.success(baseMapper.selectList(null).stream()
-                .map(tag -> beanCopyUtils.copyBean(tag, ParentTagListVO.class))
-                .toList());
+    public RestBean<List<TagListVO>> listTag() {
+        List<Tag> tags = baseMapper.selectList(null);
+        List<TagListVO> tagListVOS = beanCopyUtils.copyBeanList(tags, TagListVO.class);
+        List<TagListVO> parentNode = tagListVOS.stream()
+                .filter(tag -> Objects.equals(tag.getParentId(), PARENT_TAG))
+                .toList();
+        for (TagListVO tagListVO : parentNode) {
+            tagListVO.setChildren(tagListVOS.stream()
+                    .filter(tagListVO1 -> Objects.equals(tagListVO.getId(), tagListVO1.getParentId()))
+                    .toList());
+        }
+        return RestBean.success(parentNode);
     }
 }

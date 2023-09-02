@@ -254,7 +254,7 @@ const endJump = (index: number) => {
 
 <style scoped>
 .header-big {
-  animation: avatarFadeSmall .35s both;
+  transform: scale(1);
   position: absolute;
   top: 5px;
   right: 10px;
@@ -282,7 +282,6 @@ const endJump = (index: number) => {
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  animation: fadeIn .6s both;
 }
 
 .right-entry-outside {
@@ -353,7 +352,14 @@ const endJump = (index: number) => {
   right: 10px;
   cursor: pointer;
 }
-
+.nav-search-input .el-input__wrapper:hover {
+  box-shadow: none;
+  background-color: transparent;
+}
+.nav-search-input .el-input__wrapper {
+  box-shadow: none;
+  background-color: transparent;
+}
 .nav-search-input {
   flex: 1;
   overflow: hidden;

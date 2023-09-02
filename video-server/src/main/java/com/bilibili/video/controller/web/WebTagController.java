@@ -4,6 +4,7 @@ import com.bilibili.commons.annotation.SystemLog;
 import com.bilibili.commons.domain.RestBean;
 import com.bilibili.commons.domain.vo.ParentTagListVO;
 import com.bilibili.commons.domain.vo.SimpleTagListVO;
+import com.bilibili.commons.domain.vo.TagListVO;
 import com.bilibili.commons.service.TagService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -39,7 +40,7 @@ public class WebTagController {
 
     @SystemLog(businessName = "获取所以标签")
     @GetMapping("/listTag")
-    public RestBean<List<ParentTagListVO>> listTag() {
+    public RestBean<List<TagListVO>> listTag() {
         return tagService.listTag();
     }
 }
