@@ -45,7 +45,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div style="height: 200vh; width: 100vw;">
+  <div style="height: 200vh; 100%">
     <div>
       <Navigate :message="message" :type="height"/>
       <div id="header_banner" class="header_banner" style="height: 19vh">

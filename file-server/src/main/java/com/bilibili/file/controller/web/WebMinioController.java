@@ -1,5 +1,6 @@
 package com.bilibili.file.controller.web;
 
+import com.bilibili.commons.annotation.SystemLog;
 import com.bilibili.commons.domain.RestBean;
 import com.bilibili.commons.domain.entity.Files;
 import com.bilibili.commons.domain.vo.FileListVO;
@@ -68,6 +69,7 @@ public class WebMinioController {
      * @return RestBean<List<FileListVO>>
      */
     @GetMapping("/listBanner")
+    @SystemLog(businessName = "通过id获取图片")
     public RestBean<List<FileListVO>> listBanner() {
         return filesService.listBanner();
     }

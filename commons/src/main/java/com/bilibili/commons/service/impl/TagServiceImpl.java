@@ -13,6 +13,7 @@ import com.bilibili.commons.exctption.video.TagNotFIndException;
 import com.bilibili.commons.mapper.TagMapper;
 import com.bilibili.commons.service.TagService;
 import com.bilibili.commons.utils.BeanCopyUtils;
+import com.bilibili.commons.utils.RedisCache;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,7 @@ import java.util.Objects;
 
 import static com.bilibili.commons.constants.AppConstants.FALSE_CODE;
 import static com.bilibili.commons.constants.AppConstants.PARENT_TAG;
+import static com.bilibili.commons.constants.VideoConstants.HOME_TAG_CACHE;
 
 /**
  * (Tag)表服务实现类
@@ -33,6 +35,8 @@ import static com.bilibili.commons.constants.AppConstants.PARENT_TAG;
 public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagService {
 
     private final BeanCopyUtils beanCopyUtils;
+
+    private final RedisCache redisCache;
 
     @Override
     public RestBean<List<ParentTagListVO>> listParentTag() {
@@ -79,16 +83,6 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagSe
 
     @Override
     public RestBean<List<TagListVO>> listTag() {
-        List<Tag> tags = baseMapper.selectList(null);
-        List<TagListVO> tagListVOS = beanCopyUtils.copyBeanList(tags, TagListVO.class);
-        List<TagListVO> parentNode = tagListVOS.stream()
-                .filter(tag -> Objects.equals(tag.getParentId(), PARENT_TAG))
-                .toList();
-        for (TagListVO tagListVO : parentNode) {
-            tagListVO.setChildren(tagListVOS.stream()
-                    .filter(tagListVO1 -> Objects.equals(tagListVO.getId(), tagListVO1.getParentId()))
-                    .toList());
-        }
-        return RestBean.success(parentNode);
+        return RestBean.success(redisCache.getCacheList(HOME_TAG_CACHE));
     }
 }

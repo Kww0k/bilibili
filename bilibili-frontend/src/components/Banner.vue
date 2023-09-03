@@ -6,7 +6,6 @@ import {ElMessage} from "element-plus";
 const timer = ref(0)
 const activeIndex = ref(0)
 const isPrev = ref(false)
-const isNext = ref(false)
 const bannerList = ref([])
 
 const stopAutoPlay = () => {
@@ -15,6 +14,7 @@ const stopAutoPlay = () => {
 }
 
 const startAutoPlay = () => {
+  stopAutoPlay()
   timer.value = setInterval(function () {
     activeIndex.value = activeIndex.value + 1
     if (activeIndex.value > bannerList.value.length - 1)
@@ -52,19 +52,22 @@ const getBannerList = () => {
       bannerList.value = res.data
     else
       ElMessage.error(res.message)
-    console.log(bannerList.value[activeIndex.value].name)
   })
 }
 
 onMounted(() => {
   getBannerList()
   startAutoPlay()
+  let container = document.getElementById('container');
+  let imgBox =  document.getElementById('img-box')
+  imgBox.style.height = container.offsetWidth / (488 / 275) + 'px'
+  container.style.height = container.offsetWidth / (488 / 275) + 85 + 'px'
 })
 </script>
 
 <template>
-  <div class="container"  @mouseout="startAutoPlay" @mouseover="stopAutoPlay">
-    <div class="img-box">
+  <div id="container" class="container"  @mouseout="startAutoPlay" @mouseover="stopAutoPlay">
+    <div id="img-box" class="img-box">
       <img v-for="item in bannerList"
           :src="item.url"/>
     </div>
@@ -98,11 +101,10 @@ li {
   border-radius: 6px;
   overflow: hidden;
   width: 100%;
-  height: 360px;
 }
 
 .img-box {
-  height: 275px;
+  width: 100%;
   display: flex;
   margin-left: calc( -100% * var(--m-left));
   transition: 0.35s;
@@ -164,26 +166,46 @@ li {
   cursor: pointer;
 }
 
-.bottom-box li.pacman .l {
+/* 吃豆人朝向左 */
+.bottom-box li.pacman.l {
   transform: rotate(180deg);
 }
-
+/* 接下来分别为吃豆人的两个部分设置动画 */
 .bottom-box li.pacman div:nth-child(1) {
+  /* 执行动画：动画名 时长 线性的 停留在最后一帧 */
   animation: pacman1 0.75s linear forwards;
 }
-
 .bottom-box li.pacman div:nth-child(2) {
   animation: pacman2 0.75s linear forwards;
 }
 
+/* 指示器选中态（吃豆人） */
+.bottom-box li.pacman {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  background-color: transparent;
+  margin-top: 1px;
+}
+/* 吃豆人由两个div组成 */
 .bottom-box li.pacman div {
   width: 0;
   height: 0;
   border: 7px solid #fff;
   border-radius: 50%;
+  border-right-width: 7px;
   border-right-color: transparent;
+  /* 绝对定位 两个重合 */
   position: absolute;
-  margin-top: -3px;
+}
+
+/* 指示器选中态（吃豆人） */
+.bottom-box li.pacman {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  background-color: transparent;
+  margin-top: 1px;
 }
 
 .bottom-box .r-box {
@@ -213,28 +235,28 @@ li {
   0% {
     transform: rotate(360deg);
   }
-  0% {
+  40% {
     transform: rotate(270deg);
   }
-  0% {
+  60% {
     transform: rotate(360deg);
   }
-  0% {
+  100% {
     transform: rotate(270deg);
   }
 }
 
-@keyframes pacman1 {
+@keyframes pacman2 {
   0% {
     transform: rotate(0deg);
   }
-  0% {
+  40% {
     transform: rotate(90deg);
   }
-  0% {
+  60% {
     transform: rotate(0deg);
   }
-  0% {
+  100% {
     transform: rotate(90deg);
   }
 }
