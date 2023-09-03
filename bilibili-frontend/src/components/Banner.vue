@@ -79,7 +79,7 @@ onMounted(() => {
         <ul class="dots">
           <li v-for="(item, index) in bannerList"
               :class="[index === activeIndex ? 'pacman' : 'dot', isPrev ? 'l' : null]"
-              @click="changeBanner(index)">
+              @click="changeBanner(index, index<=activeIndex)">
             <div v-if="index===activeIndex"></div>
             <div v-if="index===activeIndex"></div>
           </li>
@@ -94,6 +94,10 @@ onMounted(() => {
 </template>
 
 <style scoped>
+ul {
+  margin: 0;
+  padding: 0;
+}
 li {
   list-style: none;
 }
