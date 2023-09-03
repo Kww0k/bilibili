@@ -41,6 +41,7 @@ public class Runner implements CommandLineRunner {
                     .filter(tagListVO1 -> Objects.equals(tagListVO.getId(), tagListVO1.getParentId()))
                     .toList());
         }
+        redisCache.deleteObject(HOME_TAG_CACHE);
         redisCache.setCacheList(HOME_TAG_CACHE, parentNode);
     }
 }

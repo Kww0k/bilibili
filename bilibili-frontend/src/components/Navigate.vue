@@ -304,7 +304,9 @@ const endJump = (index: number) => {
   text-align: center;
   cursor: pointer;
 }
-
+.bt:hover {
+  background-color: #fc8bab;
+}
 .bt {
   display: flex;
   align-items: center;
