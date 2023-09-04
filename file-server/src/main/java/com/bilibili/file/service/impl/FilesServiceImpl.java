@@ -2,6 +2,7 @@ package com.bilibili.file.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.bilibili.commons.cache.FileListCache;
 import com.bilibili.commons.domain.RestBean;
 import com.bilibili.commons.domain.entity.Files;
 import com.bilibili.commons.domain.vo.FileListVO;
@@ -43,6 +44,8 @@ public class FilesServiceImpl extends ServiceImpl<FilesMapper, Files> implements
 
     private final TypeUtils typeUtils;
 
+    private final FileListCache fileListCache;
+
     @Override
     public RestBean<Files> uploadPicture(MultipartFile file) throws MinioException, NoSuchAlgorithmException, IOException, InvalidKeyException {
         return RestBean.success(upload(file, PICTURE_BUCK));
@@ -55,20 +58,22 @@ public class FilesServiceImpl extends ServiceImpl<FilesMapper, Files> implements
 
     @Override
     public RestBean<List<FileListVO>> listPicture(String name) {
-        return RestBean.success(beanCopyUtils.copyBeanList(baseMapper.selectList(
-                        new LambdaQueryWrapper<Files>()
-                                .eq(Files::getType, PICTURE_BUCK)
-                                .like(StringUtils.hasText(name), Files::getName, name)),
-                FileListVO.class));
+        return RestBean.success(fileListCache.getList()
+                .stream()
+                .filter(files -> Objects.equals(files.getType(), PICTURE_BUCK))
+                .filter(files -> !StringUtils.hasText(name) || files.getName().contains(name))
+                .map(files -> beanCopyUtils.copyBean(files, FileListVO.class))
+                .toList());
     }
 
     @Override
     public RestBean<List<FileListVO>> listVideo(String name) {
-        return RestBean.success(beanCopyUtils.copyBeanList(baseMapper.selectList(
-                        new LambdaQueryWrapper<Files>()
-                                .eq(Files::getType, VIDEO_BUCK)
-                                .like(StringUtils.hasText(name), Files::getName, name)),
-                FileListVO.class));
+        return RestBean.success(fileListCache.getList()
+                .stream()
+                .filter(files -> Objects.equals(files.getType(), VIDEO_BUCK))
+                .filter(files -> !StringUtils.hasText(name) || files.getName().contains(name))
+                .map(files -> beanCopyUtils.copyBean(files, FileListVO.class))
+                .toList());
     }
 
     @Override
@@ -78,6 +83,11 @@ public class FilesServiceImpl extends ServiceImpl<FilesMapper, Files> implements
                                 .eq(Files::getType, PICTURE_BUCK)
                                 .eq(Files::getBanner, BANNER_VALUE)),
                 FileListVO.class));
+    }
+
+    @Override
+    public Files getByFileById(Integer id) {
+        return fileListCache.getOnt(id);
     }
 
     private Files upload(MultipartFile file, String type) throws MinioException, NoSuchAlgorithmException, IOException, InvalidKeyException {
@@ -99,6 +109,7 @@ public class FilesServiceImpl extends ServiceImpl<FilesMapper, Files> implements
                 .setFileType(Objects.requireNonNull(file.getOriginalFilename())
                         .substring(file.getOriginalFilename().lastIndexOf(".") + 1));
         baseMapper.insert(files);
+        fileListCache.save(baseMapper.selectById(files.getId()));
         return files;
     }
 }

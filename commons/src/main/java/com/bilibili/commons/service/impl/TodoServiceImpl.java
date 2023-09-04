@@ -2,6 +2,7 @@ package com.bilibili.commons.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.bilibili.commons.cache.TodoListCache;
 import com.bilibili.commons.domain.RestBean;
 import com.bilibili.commons.domain.dto.InsertTodoDTO;
 import com.bilibili.commons.domain.dto.UpdateTodoDTO;
@@ -31,25 +32,30 @@ public class TodoServiceImpl extends ServiceImpl<TodoMapper, Todo> implements To
 
     private final BeanCopyUtils beanCopyUtils;
 
+    private final TodoListCache todoListCache;
+
     @Override
     public RestBean<List<TodoListVO>> listTodo(String todoAffair) {
-        return RestBean.success(baseMapper.selectList(new LambdaQueryWrapper<Todo>()
-                        .like(StringUtils.hasText(todoAffair), Todo::getTodoAffair, todoAffair))
-                .stream()
+        return RestBean.success(todoListCache.getTodoList().stream()
+                .filter(todo -> !StringUtils.hasText(todoAffair) || todo.getTodoAffair().contains(todoAffair))
                 .map(todo -> beanCopyUtils.copyBean(todo, TodoListVO.class))
                 .toList());
     }
 
     @Override
     public RestBean<Void> insertTodo(InsertTodoDTO insertTodoDTO) {
-        baseMapper.insert(beanCopyUtils.copyBean(insertTodoDTO, Todo.class));
+        Todo todo = beanCopyUtils.copyBean(insertTodoDTO, Todo.class);
+        baseMapper.insert(todo);
+        todoListCache.save(baseMapper.selectById(todo.getId()));
         return RestBean.success();
     }
 
     @Override
     public RestBean<Void> updateTodoById(UpdateTodoDTO updateTodoDTO) {
-        if (baseMapper.updateById(beanCopyUtils.copyBean(updateTodoDTO, Todo.class)) == FALSE_CODE)
+        Todo todo = beanCopyUtils.copyBean(updateTodoDTO, Todo.class);
+        if (baseMapper.updateById(todo) == FALSE_CODE)
             throw new TodoNotFindException();
+        todoListCache.save(baseMapper.selectById(todo.getId()));
         return RestBean.success();
     }
 
@@ -57,6 +63,7 @@ public class TodoServiceImpl extends ServiceImpl<TodoMapper, Todo> implements To
     public RestBean<Void> deleteTodoById(Integer id) {
         if (baseMapper.deleteById(id) == FALSE_CODE)
             throw new TodoNotFindException();
+        todoListCache.delete(id);
         return RestBean.success();
     }
 }

@@ -1,7 +1,7 @@
 package com.bilibili.commons.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.bilibili.commons.cache.TagCache;
 import com.bilibili.commons.domain.RestBean;
 import com.bilibili.commons.domain.dto.InsertTagDTO;
 import com.bilibili.commons.domain.dto.UpdateTagDTO;
@@ -13,7 +13,6 @@ import com.bilibili.commons.exctption.video.TagNotFIndException;
 import com.bilibili.commons.mapper.TagMapper;
 import com.bilibili.commons.service.TagService;
 import com.bilibili.commons.utils.BeanCopyUtils;
-import com.bilibili.commons.utils.RedisCache;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +21,6 @@ import java.util.Objects;
 
 import static com.bilibili.commons.constants.AppConstants.FALSE_CODE;
 import static com.bilibili.commons.constants.AppConstants.PARENT_TAG;
-import static com.bilibili.commons.constants.VideoConstants.HOME_TAG_CACHE;
 
 /**
  * (Tag)表服务实现类
@@ -36,12 +34,13 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagSe
 
     private final BeanCopyUtils beanCopyUtils;
 
-    private final RedisCache redisCache;
+    private final TagCache tagCache;
 
     @Override
     public RestBean<List<ParentTagListVO>> listParentTag() {
-        List<Tag> tags = baseMapper.selectList(new LambdaQueryWrapper<Tag>().eq(Tag::getParentId, PARENT_TAG));
-        return RestBean.success(tags.stream()
+        return RestBean.success(tagCache.getList()
+                .stream()
+                .filter(tag -> Objects.equals(tag.getParentId(), PARENT_TAG))
                 .map(tag -> beanCopyUtils.copyBean(tag, ParentTagListVO.class))
                 .toList());
     }
@@ -51,7 +50,9 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagSe
         if (insertTagDTO.getParentId() != null && insertTagDTO.getParentId() > 0)
             if (baseMapper.selectById(insertTagDTO.getParentId()) == null)
                 throw new TagNotFIndException();
-        baseMapper.insert(beanCopyUtils.copyBean(insertTagDTO, Tag.class));
+        Tag tag = beanCopyUtils.copyBean(insertTagDTO, Tag.class);
+        baseMapper.insert(tag);
+        tagCache.save(tag);
         return RestBean.success();
     }
 
@@ -60,8 +61,10 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagSe
         if (updateTagDTO.getParentId() != null && updateTagDTO.getParentId() > 0)
             if (baseMapper.selectById(updateTagDTO.getParentId()) == null)
                 throw new TagNotFIndException();
-        if (baseMapper.updateById(beanCopyUtils.copyBean(updateTagDTO, Tag.class)) == FALSE_CODE)
+        Tag tag = beanCopyUtils.copyBean(updateTagDTO, Tag.class);
+        if (baseMapper.updateById(tag) == FALSE_CODE)
             throw new TagNotFIndException();
+        tagCache.save(tag);
         return RestBean.success();
     }
 
@@ -69,13 +72,15 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagSe
     public RestBean<Void> deleteTagById(Integer id) {
         if (baseMapper.deleteById(id) == FALSE_CODE)
             throw new TagNotFIndException();
+        tagCache.delete(id);
         return RestBean.success();
     }
 
     @Override
     public RestBean<List<SimpleTagListVO>> listSimpleTag() {
-        return RestBean.success(baseMapper.selectList(
-                new LambdaQueryWrapper<Tag>().ne(Tag::getParentId, PARENT_TAG)).stream()
+        return RestBean.success(tagCache.getList()
+                .stream()
+                .filter(tag -> !Objects.equals(tag.getParentId(), PARENT_TAG))
                 .map(tag -> beanCopyUtils.copyBean(tag, SimpleTagListVO.class)
                         .setParent(baseMapper.selectById(tag.getParentId()).getName()))
                 .toList());
@@ -83,6 +88,16 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagSe
 
     @Override
     public RestBean<List<TagListVO>> listTag() {
-        return RestBean.success(redisCache.getCacheList(HOME_TAG_CACHE));
+        List<TagListVO> parentNode = tagCache.getList().stream()
+                .filter(tag -> Objects.equals(tag.getParentId(), PARENT_TAG))
+                .map(tag -> beanCopyUtils.copyBean(tag, TagListVO.class))
+                .toList();
+        for (TagListVO tagListVO : parentNode) {
+            tagListVO.setChildren(tagCache.getList().stream()
+                    .filter(tagListVO1 -> Objects.equals(tagListVO.getId(), tagListVO1.getParentId()))
+                    .map(tag -> beanCopyUtils.copyBean(tag, TagListVO.class))
+                    .toList());
+        }
+        return RestBean.success(parentNode);
     }
 }

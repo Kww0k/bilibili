@@ -38,7 +38,7 @@ public class WebTagController {
         return tagService.listSimpleTag();
     }
 
-    @SystemLog(businessName = "获取所以标签")
+    @SystemLog(businessName = "获取所有标签")
     @GetMapping("/listTag")
     public RestBean<List<TagListVO>> listTag() {
         return tagService.listTag();

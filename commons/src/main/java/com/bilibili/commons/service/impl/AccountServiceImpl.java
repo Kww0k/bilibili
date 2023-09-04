@@ -2,6 +2,7 @@ package com.bilibili.commons.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.bilibili.commons.cache.AccountListCache;
 import com.bilibili.commons.domain.LoginUser;
 import com.bilibili.commons.domain.RestBean;
 import com.bilibili.commons.domain.dto.EmailLoginDTO;
@@ -45,6 +46,8 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
 
     private final UuidUtil uuidUtil;
 
+    private final AccountListCache accountListCache;
+
     private final BeanCopyUtils beanCopyUtils;
 
     private final FlowUtils flowUtils;
@@ -83,11 +86,11 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
 
     @Override
     public RestBean<List<AccountAuthVO>> listAccount(String username) {
-        List<AccountAuthVO> accountAuthVOList = baseMapper.selectList(
-                new LambdaQueryWrapper<Account>()
-                        .like(StringUtils.hasText(username), Account::getUsername, username))
+        List<Account> accountList = accountListCache.getAccountList();
+        List<AccountAuthVO> accountAuthVOList = accountList
                 .stream()
                 .filter(account -> !Objects.equals(account.getId(), securityUtil.getUserId()))
+                .filter(account -> !StringUtils.hasText(username) || account.getUsername().contains(username))
                 .map(account -> beanCopyUtils.copyBean(account, AccountAuthVO.class))
                 .toList();
         return RestBean.success(accountAuthVOList);
@@ -100,7 +103,9 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
         if (!StringUtils.hasText(insertAccountDTO.getNickname()))
             insertAccountDTO.setNickname(NAME_START + (new Random().nextInt(89999999) + 10000000));
         insertAccountDTO.setPassword(passwordEncoder.encode(insertAccountDTO.getPassword()));
-        baseMapper.insert(beanCopyUtils.copyBean(insertAccountDTO, Account.class));
+        Account account = beanCopyUtils.copyBean(insertAccountDTO, Account.class);
+        baseMapper.insert(account);
+        accountListCache.saveAccount(baseMapper.selectById(account.getId()));
         return RestBean.success();
     }
 
@@ -110,6 +115,7 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
             updateAccountDTO.setPassword(passwordEncoder.encode(updateAccountDTO.getPassword()));
         if (baseMapper.updateById(beanCopyUtils.copyBean(updateAccountDTO, Account.class)) == FALSE_CODE)
             throw new UserNotFindException();
+        accountListCache.saveAccount(baseMapper.selectById(updateAccountDTO.getId()));
         return RestBean.success();
     }
 
@@ -117,6 +123,7 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
     public RestBean<Void> deleteAccountById(Integer id) {
         if (baseMapper.deleteById(id) == FALSE_CODE)
             throw new UserNotFindException();
+        accountListCache.deleteKey(id);
         return RestBean.success();
     }
 

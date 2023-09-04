@@ -2,6 +2,7 @@ package com.bilibili.commons.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.bilibili.commons.cache.DanmakuCache;
 import com.bilibili.commons.domain.RestBean;
 import com.bilibili.commons.domain.dto.InsertDanmakuDTO;
 import com.bilibili.commons.domain.dto.UpdateDanmakuDTO;
@@ -15,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 import static com.bilibili.commons.constants.AppConstants.FALSE_CODE;
 
@@ -30,9 +32,11 @@ public class DanmakuServiceImpl extends ServiceImpl<DanmakuMapper, Danmaku> impl
 
     private final BeanCopyUtils beanCopyUtils;
 
+    private final DanmakuCache danmakuCache;
+
     @Override
     public RestBean<List<DanmakuListVO>> listDanmaku() {
-        return RestBean.success(baseMapper.selectList(null)
+        return RestBean.success(danmakuCache.getList()
                 .stream()
                 .map(danmaku -> beanCopyUtils.copyBean(danmaku, DanmakuListVO.class))
                 .toList());
@@ -40,14 +44,18 @@ public class DanmakuServiceImpl extends ServiceImpl<DanmakuMapper, Danmaku> impl
 
     @Override
     public RestBean<Void> insertDanmaku(InsertDanmakuDTO insertDanmakuDTO) {
-        baseMapper.insert(beanCopyUtils.copyBean(insertDanmakuDTO, Danmaku.class));
+        Danmaku danmaku = beanCopyUtils.copyBean(insertDanmakuDTO, Danmaku.class);
+        baseMapper.insert(danmaku);
+        danmakuCache.save(danmaku);
         return RestBean.success();
     }
 
     @Override
     public RestBean<Void> updateDanmakuById(UpdateDanmakuDTO updateDanmakuDTO) {
-        if (baseMapper.updateById(beanCopyUtils.copyBean(updateDanmakuDTO, Danmaku.class)) == FALSE_CODE)
+        Danmaku danmaku = beanCopyUtils.copyBean(updateDanmakuDTO, Danmaku.class);
+        if (baseMapper.updateById(danmaku) == FALSE_CODE)
             throw new DanmakuNotFindException();
+        danmakuCache.save(danmaku);
         return RestBean.success();
     }
 
@@ -55,15 +63,15 @@ public class DanmakuServiceImpl extends ServiceImpl<DanmakuMapper, Danmaku> impl
     public RestBean<Void> deleteDanmakuById(Integer id) {
         if (baseMapper.deleteById(id) == FALSE_CODE)
             throw new DanmakuNotFindException();
+        danmakuCache.delete(id);
         return RestBean.success();
     }
 
     @Override
     public RestBean<List<DanmakuListVO>> listDanmakuByVideoId(Integer id) {
-        return RestBean.success(baseMapper.selectList(
-                new LambdaQueryWrapper<Danmaku>()
-                        .eq(Danmaku::getVideoId, id))
+        return RestBean.success(danmakuCache.getList()
                 .stream()
+                .filter(danmaku -> Objects.equals(danmaku.getVideoId(), id))
                 .map(danmaku -> beanCopyUtils.copyBean(danmaku, DanmakuListVO.class))
                 .toList());
     }

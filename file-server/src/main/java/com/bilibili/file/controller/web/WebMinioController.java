@@ -58,7 +58,7 @@ public class WebMinioController {
      */
     @GetMapping("/getFileById/{id}")
     public RestBean<Files> getFileById(@PathVariable Integer id) {
-        return RestBean.success(filesService.getById(id));
+        return RestBean.success(filesService.getByFileById(id));
     }
 
     /**
