@@ -32,7 +32,7 @@ public class WebMinioController {
      * @return Object
      */
     @PostMapping("/uploadPicture")
-    public RestBean<String> uploadPicture(MultipartFile file) throws MinioException, NoSuchAlgorithmException, IOException, InvalidKeyException {
+    public RestBean<Files> uploadPicture(MultipartFile file) throws MinioException, NoSuchAlgorithmException, IOException, InvalidKeyException {
         return filesService.uploadPicture(file);
     }
 
@@ -45,7 +45,7 @@ public class WebMinioController {
      * @return Object
      */
     @PostMapping("/uploadVideo")
-    public RestBean<String> uploadVideo(MultipartFile file) throws MinioException, NoSuchAlgorithmException, IOException, InvalidKeyException {
+    public RestBean<Files> uploadVideo(MultipartFile file) throws MinioException, NoSuchAlgorithmException, IOException, InvalidKeyException {
         return filesService.uploadVideo(file);
     }
 

@@ -9,6 +9,7 @@ import com.bilibili.commons.domain.entity.Video;
 import com.bilibili.commons.domain.vo.VideoListVO;
 import com.bilibili.commons.exctption.video.VideoInfoNotFindException;
 import com.bilibili.commons.mapper.AccountMapper;
+import com.bilibili.commons.mapper.FilesMapper;
 import com.bilibili.commons.mapper.TagMapper;
 import com.bilibili.commons.mapper.VideoMapper;
 import com.bilibili.commons.service.VideoService;
@@ -37,6 +38,8 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     private final AccountMapper accountMapper;
 
     private final TagMapper tagMapper;
+
+    private final FilesMapper filesMapper;
 
     @Override
     public RestBean<List<VideoListVO>> listPassVideo(String title, Integer typeId) {
@@ -93,6 +96,8 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                         .like(StringUtils.hasText(title), Video::getTitle, title))
                 .stream()
                 .map(video -> beanCopyUtils.copyBean(video, VideoListVO.class)
+                        .setPreviewUrl(filesMapper.selectById(video.getPreviewId()).getUrl())
+                        .setVideoUrl(filesMapper.selectById(video.getVideoId()).getUrl())
                         .setCreateBy(accountMapper.selectById(video.getCreateBy()).getNickname())
                         .setType(tagMapper.selectById(video.getTypeId()).getName()))
                 .toList();

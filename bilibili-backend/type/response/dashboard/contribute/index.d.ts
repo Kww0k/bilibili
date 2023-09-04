@@ -1,8 +1,8 @@
 export interface InsertVideo {
     title : string,
     description : string,
-    previewUrl : string,
-    videoUrl : string,
+    previewId : number | null,
+    videoId : number | null,
     visibility : string,
     typeId : number | null
 }

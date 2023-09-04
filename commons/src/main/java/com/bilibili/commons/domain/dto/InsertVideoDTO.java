@@ -24,8 +24,8 @@ public class InsertVideoDTO {
     /**
      * 封面图片地址
      */
-    @NotBlank(message = "封面图片不能为空")
-    private String previewUrl;
+    @NotNull(message = "封面图片不能为空")
+    private Integer previewId;
     /**
      * 对应标签id
      */
@@ -34,8 +34,8 @@ public class InsertVideoDTO {
     /**
      * 视频地址
      */
-    @NotBlank(message = "视频地址不能为空")
-    private String videoUrl;
+    @NotNull(message = "视频地址不能为空")
+    private Integer videoId;
     /**
      * 谁可见
      */

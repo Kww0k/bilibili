@@ -12,11 +12,13 @@ import type {InsertVideo, TagList} from "../../../../type/response/dashboard/con
 import {insertVideoTest, listTagApi} from "@/api/dashboard/contribute";
 import request from "@/net";
 
+const imgUrl = ref('')
+const videoUrl = ref('')
 const insertForm = ref<InsertVideo>({
   title: '',
   description: '',
-  previewUrl: '',
-  videoUrl: '',
+  previewId: null,
+  videoId: null,
   visibility: '',
   typeId: null
 })
@@ -32,11 +34,13 @@ const sub = () => {
       insertForm.value = {
         title: '',
         description: '',
-        previewUrl: '',
-        videoUrl: '',
+        previewId: null,
+        videoId: null,
         visibility: '',
         typeId: null
       }
+      imgUrl.value = ''
+      videoUrl.value = ''
       ElMessage.success("提交成功")
     } else {
       ElMessage.error(data.message)
@@ -45,10 +49,11 @@ const sub = () => {
 }
 
 const handleAvatarSuccess: UploadProps['onSuccess'] = (
-    response: BaseResponse<string>
+    response: BaseResponse<any>
 ) => {
   if (response.code === 200) {
-    insertForm.value.previewUrl = response.data
+    insertForm.value.previewId = response.data.id
+    imgUrl.value = response.data.url
     ElMessage.success("上传成功")
   } else {
     ElMessage.error(response.message)
@@ -56,10 +61,11 @@ const handleAvatarSuccess: UploadProps['onSuccess'] = (
 }
 
 const handleVideoSuccess: UploadProps['onSuccess'] = (
-    response: BaseResponse<string>
+    response: BaseResponse<any>
 ) => {
   if (response.code === 200) {
-    insertForm.value.videoUrl = response.data
+    insertForm.value.videoId = response.data.id
+    videoUrl.value = response.data.url
     ElMessage.success("上传成功")
   } else {
     ElMessage.error(response.message)
@@ -129,7 +135,7 @@ onMounted(()=> {
                     :on-success="handleAvatarSuccess"
                     :before-upload="beforeAvatarUpload"
                 >
-                  <img v-if="insertForm.previewUrl" :src="insertForm.previewUrl" class="avatar" alt="111"/>
+                  <img v-if="imgUrl != ''" :src="imgUrl" class="avatar" alt="111"/>
                   <el-icon v-else class="avatar-uploader-icon">
                     <Plus/>
                   </el-icon>
@@ -151,7 +157,7 @@ onMounted(()=> {
                     :on-success="handleVideoSuccess"
                     :before-upload="beforeVideoUpload"
                 >
-                  <el-image v-if="insertForm.videoUrl" :src="insertForm.videoUrl" class="avatar" alt="111"/>
+                  <el-image v-if="videoUrl != ''" :src="videoUrl" class="avatar" alt="111"/>
                   <el-icon v-else class="avatar-uploader-icon">
                     <Plus/>
                   </el-icon>

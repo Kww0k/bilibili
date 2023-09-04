@@ -21,9 +21,9 @@ import java.util.List;
  */
 public interface FilesService extends IService<Files> {
 
-    RestBean<String> uploadPicture(MultipartFile file) throws MinioException, NoSuchAlgorithmException, IOException, InvalidKeyException;
+    RestBean<Files> uploadPicture(MultipartFile file) throws MinioException, NoSuchAlgorithmException, IOException, InvalidKeyException;
 
-    RestBean<String> uploadVideo(MultipartFile file) throws MinioException, NoSuchAlgorithmException, IOException, InvalidKeyException;
+    RestBean<Files> uploadVideo(MultipartFile file) throws MinioException, NoSuchAlgorithmException, IOException, InvalidKeyException;
 
     RestBean<List<FileListVO>> listPicture(String name);
 

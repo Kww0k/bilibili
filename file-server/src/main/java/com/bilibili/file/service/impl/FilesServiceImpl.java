@@ -44,12 +44,12 @@ public class FilesServiceImpl extends ServiceImpl<FilesMapper, Files> implements
     private final TypeUtils typeUtils;
 
     @Override
-    public RestBean<String> uploadPicture(MultipartFile file) throws MinioException, NoSuchAlgorithmException, IOException, InvalidKeyException {
+    public RestBean<Files> uploadPicture(MultipartFile file) throws MinioException, NoSuchAlgorithmException, IOException, InvalidKeyException {
         return RestBean.success(upload(file, PICTURE_BUCK));
     }
 
     @Override
-    public RestBean<String> uploadVideo(MultipartFile file) throws MinioException, NoSuchAlgorithmException, IOException, InvalidKeyException {
+    public RestBean<Files> uploadVideo(MultipartFile file) throws MinioException, NoSuchAlgorithmException, IOException, InvalidKeyException {
         return RestBean.success(upload(file, VIDEO_BUCK));
     }
 
@@ -80,25 +80,25 @@ public class FilesServiceImpl extends ServiceImpl<FilesMapper, Files> implements
                 FileListVO.class));
     }
 
-    private String upload(MultipartFile file, String type) throws MinioException, NoSuchAlgorithmException, IOException, InvalidKeyException {
+    private Files upload(MultipartFile file, String type) throws MinioException, NoSuchAlgorithmException, IOException, InvalidKeyException {
         if (Objects.equals(type, PICTURE_BUCK))
             if (!typeUtils.isPicture(file))
                 throw new NotPictureException();
         if (Objects.equals(type, VIDEO_BUCK))
             if (!typeUtils.isVideo(file))
                 throw new NotVideoException();
-
         List<String> upload = minioUtilS.upload(new MultipartFile[]{file}, type);
         if (upload.isEmpty())
             throw new UploadFalseException();
         String url = minioUtilS.generatePreviewUrl(upload.get(FILE_POSITION), type);
         if (!StringUtils.hasText(url))
             throw new UploadFalseException();
-        baseMapper.insert(new Files().setName(upload.get(FILE_POSITION))
+        Files files = new Files().setName(upload.get(FILE_POSITION))
                 .setUrl(url)
                 .setType(type)
                 .setFileType(Objects.requireNonNull(file.getOriginalFilename())
-                        .substring(file.getOriginalFilename().lastIndexOf(".") + 1)));
-        return url;
+                        .substring(file.getOriginalFilename().lastIndexOf(".") + 1));
+        baseMapper.insert(files);
+        return files;
     }
 }

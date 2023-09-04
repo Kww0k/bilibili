@@ -37,11 +37,15 @@ public class Video  {
      /**
      * 封面图片地址
      */
-    private String previewUrl;
+    private Integer previewId;
      /**
      * 视频地址
      */
-    private String videoUrl;
+    private Integer videoId;
+    /**
+     * 是否是轮播图
+     */
+    private String banner;
      /**
      * 对应标签id
      */
