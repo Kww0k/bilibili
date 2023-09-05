@@ -32,10 +32,6 @@ public class VideoListVO {
      */
     private String type;
     /**
-     * 谁可见
-     */
-    private String visibility;
-    /**
      * 创建时间
      */
     private String createTime;

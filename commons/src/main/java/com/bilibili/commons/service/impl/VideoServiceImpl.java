@@ -82,7 +82,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
 
     @Override
     public RestBean<Void> passVideo(Integer id) {
-        Video video = videoCache.getOnt(id);
+        Video video = videoCache.getOne(id);
         if (video == null)
             throw new VideoInfoNotFindException();
         baseMapper.updateById(video.setStatus(PASS_VIDEO));
@@ -92,7 +92,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
 
     @Override
     public RestBean<Void> unPassVideo(Integer id) {
-        Video video = videoCache.getOnt(id);
+        Video video = videoCache.getOne(id);
         if (video == null)
             throw new VideoInfoNotFindException();
         baseMapper.updateById(video.setStatus(NOT_PASS_VIDEO));
@@ -139,6 +139,14 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                         .setCreateTime(video.getCreateTime().substring(5, 10))
                         .setCreateBy(accountMapper.selectById(video.getCreateBy()).getNickname()))
                 .toList());
+    }
+
+    @Override
+    public RestBean<VideoListVO> getCardInfo(Integer id) {
+        Video video = videoCache.getOne(id);
+        if (video == null || Objects.equals(video.getStatus(), NOT_PASS_VIDEO))
+            throw new VideoInfoNotFindException();
+        return RestBean.success(beanCopyUtils.copyBean(video, VideoListVO.class));
     }
 
     private List<VideoListVO> getList(String title, Integer typeId, String status) {

@@ -27,7 +27,7 @@ public class VideoCache {
         map.put(video.getId(), video);
     }
 
-    public Video getOnt(Integer id) {
+    public Video getOne(Integer id) {
         return map.get(id);
     }
 

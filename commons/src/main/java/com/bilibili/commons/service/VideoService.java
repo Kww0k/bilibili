@@ -117,4 +117,14 @@ public interface VideoService extends IService<Video> {
      * @return RestBean<CardVO>
      */
     RestBean<List<CardVO>> listCard();
+
+    /**
+     * 通过id获取信息
+     *
+     * @author Silvery
+     * @since 2023/9/5 16:43
+     * @param id 视频信息id
+     * @return RestBean<VideoListVO>
+     */
+    RestBean<VideoListVO> getCardInfo(Integer id);
 }

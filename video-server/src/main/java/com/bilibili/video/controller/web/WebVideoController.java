@@ -4,10 +4,12 @@ import com.bilibili.commons.annotation.SystemLog;
 import com.bilibili.commons.domain.RestBean;
 import com.bilibili.commons.domain.vo.BannerVO;
 import com.bilibili.commons.domain.vo.CardVO;
+import com.bilibili.commons.domain.vo.VideoListVO;
 import com.bilibili.commons.service.VideoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,5 +44,9 @@ public class WebVideoController {
         return videoService.listCard();
     }
 
+    @GetMapping("/getCardInfo/{id}")
+    public RestBean<VideoListVO> getCardInfo(@PathVariable Integer id) {
+        return videoService.getCardInfo(id);
+    }
 
 }
