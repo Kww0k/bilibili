@@ -7,6 +7,7 @@ import type {TagList} from "../../../type/tag";
 import {listTagApi} from "@/api/tag";
 import Banner from "@/components/Banner.vue";
 import ChannelA from "@/components/ChannelA.vue";
+import PageCard from "@/components/PageCard.vue";
 
 const message = ref('Hello, world!');
 const height = ref('simple')
@@ -49,7 +50,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div style="height: 200vh;">
+  <div>
     <div>
       <Navigate :message="message" :type="height"/>
       <div id="header_banner" class="header_banner" style="height: 19vh">
@@ -152,37 +153,57 @@ onMounted(() => {
         </div>
       </div>
       <div class="main-suggest">
-        <el-row :gutter="20" class="suggest-body">
+        <el-row :gutter="15" class="suggest-body">
           <el-col :span="10">
             <Banner/>
           </el-col>
           <el-col :span="5">
-            <el-input placeholder="请输入商品编码"/>
+            <PageCard/>
+            <PageCard style="margin-top: 20px; margin-bottom: 60px"/>
           </el-col>
           <el-col :span="5">
-            <el-input placeholder="请输入商品编码"/>
+            <PageCard/>
+            <PageCard style="margin-top: 20px; margin-bottom: 60px"/>
           </el-col>
           <el-col :span="5">
-            <el-input placeholder="请输入商品编码"/>
+            <PageCard/>
+            <PageCard style="margin-top: 20px; margin-bottom: 60px"/>
           </el-col>
         </el-row>
       </div>
       <div class="main-video">
-        <el-row :gutter="20" class="video-body">
+        <el-row :gutter="15" class="video-body">
           <el-col :span="5">
-            <el-input placeholder="请输入商品编码"/>
+            <PageCard style=" margin-bottom: 60px"/>
           </el-col>
           <el-col :span="5">
-            <el-input placeholder="请输入商品编码"/>
+            <PageCard style=" margin-bottom: 60px"/>
           </el-col>
           <el-col :span="5">
-            <el-input placeholder="请输入商品编码"/>
+            <PageCard style=" margin-bottom: 60px"/>
           </el-col>
           <el-col :span="5">
-            <el-input placeholder="请输入商品编码"/>
+            <PageCard style=" margin-bottom: 60px"/>
           </el-col>
           <el-col :span="5">
-            <el-input placeholder="请输入商品编码"/>
+            <PageCard style=" margin-bottom: 60px"/>
+          </el-col>
+        </el-row>
+        <el-row :gutter="15" class="video-body">
+          <el-col :span="5">
+            <PageCard style=" margin-bottom: 60px"/>
+          </el-col>
+          <el-col :span="5">
+            <PageCard style=" margin-bottom: 60px"/>
+          </el-col>
+          <el-col :span="5">
+            <PageCard style=" margin-bottom: 60px"/>
+          </el-col>
+          <el-col :span="5">
+            <PageCard style=" margin-bottom: 60px"/>
+          </el-col>
+          <el-col :span="5">
+            <PageCard style=" margin-bottom: 60px"/>
           </el-col>
         </el-row>
       </div>
