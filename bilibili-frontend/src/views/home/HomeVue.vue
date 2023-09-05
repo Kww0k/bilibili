@@ -9,12 +9,13 @@ import Banner from "@/components/Banner.vue";
 import ChannelA from "@/components/ChannelA.vue";
 import PageCard from "@/components/PageCard.vue";
 import type {Card} from "../../../type/card";
-import {listAdviceApi} from "@/api/card";
+import {listAdviceApi, listCardApi} from "@/api/card";
 
 const height = ref('simple')
 const showList : Ref<TagList[]> = ref([])
 const moreList : Ref<TagList[]> = ref([])
 const adviceList : Ref<Card[][]> = ref([])
+const cardList : Ref<Card[][]> = ref([])
 
 const url1 = ref('')
 const url2 = ref('')
@@ -23,10 +24,27 @@ const user = ref('')
 
 const getAdviceList = () => {
   listAdviceApi().then((data) => {
-    console.log(data)
     for (let i = 0; i < data.length; i += 2)
       adviceList.value.push([data[i], data[i + 1]]);
-    console.log(adviceList.value)
+  })
+}
+
+const getCardList = () => {
+  listCardApi().then((data) => {
+    const nullCard : Card = {
+      id : 0,
+      title : '',
+      previewUrl : '',
+      videoUrl : '',
+      createBy : '',
+      createTime : ''
+    }
+    for (let i = 0; i < data.length; i += 5)
+      cardList.value.push([data[i] ? data[i] : nullCard,
+        data[i + 1]  ? data[i + 1] : nullCard,
+        data[i + 2]  ? data[i + 2] : nullCard,
+        data[i + 3]  ? data[i + 3] : nullCard,
+        data[i + 4]  ? data[i + 4] : nullCard]);
   })
 }
 
@@ -56,6 +74,7 @@ onMounted(() => {
   // @ts-ignore
   document.getElementById('inner-banner').style.padding = '0 ' + (document.body.clientWidth - document.getElementById('main-body').clientWidth) / 2 + 'px'
   getAdviceList()
+  getCardList()
 })
 
 </script>
@@ -188,38 +207,16 @@ onMounted(() => {
         </el-row>
       </div>
       <div class="main-video">
-        <el-row :gutter="15" class="video-body">
-          <el-col :span="5">
-            <PageCard style=" margin-bottom: 60px"/>
-          </el-col>
-          <el-col :span="5">
-            <PageCard style=" margin-bottom: 60px"/>
-          </el-col>
-          <el-col :span="5">
-            <PageCard style=" margin-bottom: 60px"/>
-          </el-col>
-          <el-col :span="5">
-            <PageCard style=" margin-bottom: 60px"/>
-          </el-col>
-          <el-col :span="5">
-            <PageCard style=" margin-bottom: 60px"/>
-          </el-col>
-        </el-row>
-        <el-row :gutter="15" class="video-body">
-          <el-col :span="5">
-            <PageCard style=" margin-bottom: 60px"/>
-          </el-col>
-          <el-col :span="5">
-            <PageCard style=" margin-bottom: 60px"/>
-          </el-col>
-          <el-col :span="5">
-            <PageCard style=" margin-bottom: 60px"/>
-          </el-col>
-          <el-col :span="5">
-            <PageCard style=" margin-bottom: 60px"/>
-          </el-col>
-          <el-col :span="5">
-            <PageCard style=" margin-bottom: 60px"/>
+        <el-row v-for="cards in cardList" :gutter="15" class="video-body">
+          <el-col v-for="card in cards" :span="5">
+            <PageCard v-if="card.id !== 0"
+                :id="card.id"
+                :title="card.title"
+                :preview-url="card.previewUrl"
+                :video-url="card.videoUrl"
+                :create-by="card.createBy"
+                :create-time="card.createTime"
+                style=" margin-bottom: 60px"/>
           </el-col>
         </el-row>
       </div>

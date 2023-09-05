@@ -12,3 +12,13 @@ export function listAdviceApi(): Promise<Card[]> {
             ElMessage.error(res.message)
     })
 }
+
+export function listCardApi() : Promise<Card[]> {
+    // @ts-ignore
+    return request.get('/video/web/video/listCard').then((res :BaseResponse<Card[]>) => {
+        if (res.code === 200)
+            return res.data
+        else
+            ElMessage.error(res.message)
+    })
+}

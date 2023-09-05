@@ -106,8 +106,4 @@ public class AppConstants {
      */
     public static final Integer IS_ADVICE = 1;
 
-    /**
-     * 一页有多少元素
-     */
-    public static final Integer PAGE_SIZE = 10;
 }

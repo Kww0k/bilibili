@@ -127,8 +127,19 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     }
 
     @Override
-    public RestBean<List<CardVO>> listCard(Integer pageNum) {
-        return null;
+    public RestBean<List<CardVO>> listCard() {
+        return RestBean.success(videoCache.getList()
+                .stream()
+                .filter(video -> !Objects.equals(IS_ADVICE, video.getAdvice()))
+                .filter(video -> !Objects.equals(video.getBanner(), IS_BANNER))
+                .map(video -> new CardVO()
+                        .setId(video.getId())
+                        .setTitle(video.getTitle())
+                        .setPreviewUrl(filesMapper.selectById(video.getPreviewId()).getUrl())
+                        .setVideoUrl(filesMapper.selectById(video.getVideoId()).getUrl())
+                        .setCreateTime(video.getCreateTime().substring(5, 10))
+                        .setCreateBy(accountMapper.selectById(video.getCreateBy()).getNickname()))
+                .toList());
     }
 
     private List<VideoListVO> getList(String title, Integer typeId, String status) {

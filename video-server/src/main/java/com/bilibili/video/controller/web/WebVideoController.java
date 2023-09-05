@@ -38,8 +38,8 @@ public class WebVideoController {
     }
 
     @GetMapping("/listCard")
-    public RestBean<List<CardVO>> listCard(Integer pageNum) {
-        return videoService.listCard(pageNum);
+    public RestBean<List<CardVO>> listCard() {
+        return videoService.listCard();
     }
 
 

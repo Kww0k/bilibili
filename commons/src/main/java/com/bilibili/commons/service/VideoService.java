@@ -114,8 +114,7 @@ public interface VideoService extends IService<Video> {
      *
      * @author Silvery
      * @since 2023/9/5 11:47
-     * @param pageNum 页码
      * @return RestBean<CardVO>
      */
-    RestBean<List<CardVO>> listCard(Integer pageNum);
+    RestBean<List<CardVO>> listCard();
 }
