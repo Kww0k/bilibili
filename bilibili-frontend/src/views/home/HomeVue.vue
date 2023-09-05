@@ -8,17 +8,27 @@ import {listTagApi} from "@/api/tag";
 import Banner from "@/components/Banner.vue";
 import ChannelA from "@/components/ChannelA.vue";
 import PageCard from "@/components/PageCard.vue";
+import type {Card} from "../../../type/card";
+import {listAdviceApi} from "@/api/card";
 
-const message = ref('Hello, world!');
 const height = ref('simple')
 const showList : Ref<TagList[]> = ref([])
 const moreList : Ref<TagList[]> = ref([])
-
+const adviceList : Ref<Card[][]> = ref([])
 
 const url1 = ref('')
 const url2 = ref('')
 const user = ref('')
 
+
+const getAdviceList = () => {
+  listAdviceApi().then((data) => {
+    console.log(data)
+    for (let i = 0; i < data.length; i += 2)
+      adviceList.value.push([data[i], data[i + 1]]);
+    console.log(adviceList.value)
+  })
+}
 
 const getTagList = () => {
   listTagApi().then((data) => {
@@ -45,6 +55,7 @@ onMounted(() => {
   })
   // @ts-ignore
   document.getElementById('inner-banner').style.padding = '0 ' + (document.body.clientWidth - document.getElementById('main-body').clientWidth) / 2 + 'px'
+  getAdviceList()
 })
 
 </script>
@@ -52,7 +63,7 @@ onMounted(() => {
 <template>
   <div>
     <div>
-      <Navigate :message="message" :type="height"/>
+      <Navigate :type="height"/>
       <div id="header_banner" class="header_banner" style="height: 19vh">
         <div style="width: 100%; height: 100%;
               background-size: cover;background-repeat: no-repeat;background-position: center; position: absolute"
@@ -157,17 +168,22 @@ onMounted(() => {
           <el-col :span="10">
             <Banner/>
           </el-col>
-          <el-col :span="5">
-            <PageCard/>
-            <PageCard style="margin-top: 20px; margin-bottom: 60px"/>
-          </el-col>
-          <el-col :span="5">
-            <PageCard/>
-            <PageCard style="margin-top: 20px; margin-bottom: 60px"/>
-          </el-col>
-          <el-col :span="5">
-            <PageCard/>
-            <PageCard style="margin-top: 20px; margin-bottom: 60px"/>
+          <el-col :span="5" v-for="advices in adviceList.slice(0, 3)">
+            <PageCard
+                :id="advices[0].id"
+                :title="advices[0].title"
+                :preview-url="advices[0].previewUrl"
+                :create-by="advices[0].createBy"
+                :create-time="advices[0].createTime"
+                :video-url="advices[0].videoUrl"/>
+            <PageCard
+                :id="advices[1].id"
+                :title="advices[1].title"
+                :preview-url="advices[1].previewUrl"
+                :video-url="advices[1].videoUrl"
+                :create-by="advices[1].createBy"
+                :create-time="advices[1].createTime"
+                style="margin-top: 20px; margin-bottom: 60px"/>
           </el-col>
         </el-row>
       </div>

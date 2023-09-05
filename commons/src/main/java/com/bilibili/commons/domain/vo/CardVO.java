@@ -23,4 +23,8 @@ public class CardVO {
      * 视频地址
      */
     private String videoUrl;
+
+    private String createTime;
+
+    private String createBy;
 }

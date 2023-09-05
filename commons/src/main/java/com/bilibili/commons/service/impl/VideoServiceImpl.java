@@ -116,9 +116,13 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         return RestBean.success(videoCache.getList()
                 .stream()
                 .filter(video -> Objects.equals(IS_ADVICE, video.getAdvice()))
-                .map(video -> beanCopyUtils.copyBean(video, CardVO.class)
+                .map(video -> new CardVO()
+                        .setId(video.getId())
+                        .setTitle(video.getTitle())
                         .setPreviewUrl(filesMapper.selectById(video.getPreviewId()).getUrl())
-                        .setVideoUrl(filesMapper.selectById(video.getVideoId()).getUrl()))
+                        .setVideoUrl(filesMapper.selectById(video.getVideoId()).getUrl())
+                        .setCreateTime(video.getCreateTime().substring(5, 10))
+                        .setCreateBy(accountMapper.selectById(video.getCreateBy()).getNickname()))
                 .toList());
     }
 

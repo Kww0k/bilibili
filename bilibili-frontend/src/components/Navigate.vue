@@ -231,10 +231,6 @@ const isHovered = ref(false)
 const avatarType = ref(false)
 
 const props = defineProps({
-  message: {
-    type: String,
-    required: true
-  },
   type: {
     type: String,
     required: true
