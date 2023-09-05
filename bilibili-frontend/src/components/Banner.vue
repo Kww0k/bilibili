@@ -43,13 +43,19 @@ const changeBanner = (index, prev) => {
   isPrev.value = prev
   document.querySelector('.img-box').style
       .setProperty('--m-left', activeIndex.value.toString())
+  document.querySelector('.bottom-box').style
+      .setProperty('--b-color', bannerList.value[activeIndex.value].color)
   startAutoPlay()
 }
 
 const getBannerList = () => {
   request.get('/video/web/video/listBanner').then((res) => {
-    if (res.code === 200)
+    if (res.code === 200) {
       bannerList.value = res.data
+      document.querySelector('.bottom-box').style
+          .setProperty('--b-color', bannerList.value[activeIndex.value].color)
+      startAutoPlay()
+    }
     else
       ElMessage.error(res.message)
   })
@@ -57,7 +63,6 @@ const getBannerList = () => {
 
 onMounted(() => {
   getBannerList()
-  startAutoPlay()
   let container = document.getElementById('container');
   let imgBox =  document.getElementById('img-box')
   imgBox.style.height = container.offsetWidth / (488 / 275) + 'px'

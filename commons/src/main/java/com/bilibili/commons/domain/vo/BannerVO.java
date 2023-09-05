@@ -19,4 +19,6 @@ public class BannerVO {
      * 封面图片地址
      */
     private String previewUrl;
+
+    private String color;
 }
