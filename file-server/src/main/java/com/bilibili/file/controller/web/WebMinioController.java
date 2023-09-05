@@ -61,18 +61,6 @@ public class WebMinioController {
         return RestBean.success(filesService.getByFileById(id));
     }
 
-    /**
-     * 获取轮播图
-     *
-     * @author Silvery
-     * @since 2023/8/31 10:45
-     * @return RestBean<List<FileListVO>>
-     */
-    @GetMapping("/listBanner")
-    @SystemLog(businessName = "通过id获取图片")
-    public RestBean<List<FileListVO>> listBanner() {
-        return filesService.listBanner();
-    }
 
 }
 

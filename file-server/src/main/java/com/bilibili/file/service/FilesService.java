@@ -29,7 +29,6 @@ public interface FilesService extends IService<Files> {
 
     RestBean<List<FileListVO>> listVideo(String name);
 
-    RestBean<List<FileListVO>> listBanner();
 
     Files getByFileById(Integer id);
 }

@@ -45,11 +45,19 @@ public class Video  {
     /**
      * 是否是轮播图
      */
-    private String banner;
+    private Integer banner;
      /**
      * 对应标签id
      */
     private Integer typeId;
+    /**
+     * 是否建议
+     */
+    private Integer advice;
+    /**
+     * 颜色
+     */
+    private String color;
     /**
      * 谁可见
      */

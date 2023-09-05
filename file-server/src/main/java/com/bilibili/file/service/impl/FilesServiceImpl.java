@@ -76,14 +76,6 @@ public class FilesServiceImpl extends ServiceImpl<FilesMapper, Files> implements
                 .toList());
     }
 
-    @Override
-    public RestBean<List<FileListVO>> listBanner() {
-        return RestBean.success(beanCopyUtils.copyBeanList(baseMapper.selectList(
-                        new LambdaQueryWrapper<Files>()
-                                .eq(Files::getType, PICTURE_BUCK)
-                                .eq(Files::getBanner, BANNER_VALUE)),
-                FileListVO.class));
-    }
 
     @Override
     public Files getByFileById(Integer id) {

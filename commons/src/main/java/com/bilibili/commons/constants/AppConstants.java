@@ -95,4 +95,14 @@ public class AppConstants {
      * 通过审核状态
      */
     public static final String PASS_VIDEO = "已审核";
+
+    /**
+     * 是不是轮播图
+     */
+    public static final Integer IS_BANNER = 1;
+
+    /**
+     * 是不是建议
+     */
+    public static final Integer IS_ADVICE = 1;
 }

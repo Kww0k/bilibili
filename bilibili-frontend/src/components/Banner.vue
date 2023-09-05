@@ -47,7 +47,7 @@ const changeBanner = (index, prev) => {
 }
 
 const getBannerList = () => {
-  request.get('/file/web/file/listBanner').then((res) => {
+  request.get('/video/web/video/listBanner').then((res) => {
     if (res.code === 200)
       bannerList.value = res.data
     else
@@ -69,12 +69,12 @@ onMounted(() => {
   <div id="container" class="container"  @mouseout="startAutoPlay" @mouseover="stopAutoPlay">
     <div id="img-box" class="img-box">
       <img v-for="item in bannerList"
-          :src="item.url"/>
+          :src="item.previewUrl"/>
     </div>
     <div class="bottom-box">
       <div class="l-box">
         <div class="title">
-          {{ bannerList && bannerList.length > 0 ? bannerList[activeIndex].name : '' }}
+          {{ bannerList && bannerList.length > 0 ? bannerList[activeIndex].title : '' }}
         </div>
         <ul class="dots">
           <li v-for="(item, index) in bannerList"

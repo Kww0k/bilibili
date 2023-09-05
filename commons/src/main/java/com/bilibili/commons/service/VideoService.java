@@ -5,6 +5,8 @@ import com.bilibili.commons.domain.RestBean;
 import com.bilibili.commons.domain.dto.InsertVideoDTO;
 import com.bilibili.commons.domain.dto.UpdateVideoDTO;
 import com.bilibili.commons.domain.entity.Video;
+import com.bilibili.commons.domain.vo.BannerVO;
+import com.bilibili.commons.domain.vo.CardVO;
 import com.bilibili.commons.domain.vo.VideoListVO;
 
 import java.util.List;
@@ -88,4 +90,32 @@ public interface VideoService extends IService<Video> {
      * @return RestBean<Void>
      */
     RestBean<Void> unPassVideo(Integer id);
+
+    /**
+     * 获取首页轮播图
+     *
+     * @author Silvery
+     * @since 2023/9/5 11:46
+     * @return RestBean<BannerVO>
+     */
+    RestBean<List<BannerVO>> listBanner();
+
+    /**
+     * 获取首页的建议
+     *
+     * @author Silvery
+     * @since 2023/9/5 11:46
+     * @return RestBean<CardVO>
+     */
+    RestBean<List<CardVO>> listAdvice();
+
+    /**
+     * 获取首页下面的卡片
+     *
+     * @author Silvery
+     * @since 2023/9/5 11:47
+     * @param pageNum 页码
+     * @return RestBean<CardVO>
+     */
+    RestBean<List<CardVO>> listCard(Integer pageNum);
 }
