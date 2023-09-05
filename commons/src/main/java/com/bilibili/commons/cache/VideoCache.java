@@ -1,6 +1,5 @@
 package com.bilibili.commons.cache;
 
-import com.bilibili.commons.domain.entity.Files;
 import com.bilibili.commons.domain.entity.Video;
 import org.springframework.stereotype.Component;
 

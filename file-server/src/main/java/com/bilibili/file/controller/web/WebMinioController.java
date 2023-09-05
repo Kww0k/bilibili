@@ -1,9 +1,7 @@
 package com.bilibili.file.controller.web;
 
-import com.bilibili.commons.annotation.SystemLog;
 import com.bilibili.commons.domain.RestBean;
 import com.bilibili.commons.domain.entity.Files;
-import com.bilibili.commons.domain.vo.FileListVO;
 import com.bilibili.file.service.FilesService;
 import io.minio.errors.MinioException;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor

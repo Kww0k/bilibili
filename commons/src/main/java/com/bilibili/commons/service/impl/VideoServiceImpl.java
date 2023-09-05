@@ -1,6 +1,5 @@
 package com.bilibili.commons.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bilibili.commons.cache.VideoCache;
 import com.bilibili.commons.domain.RestBean;

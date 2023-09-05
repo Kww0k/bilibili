@@ -1,7 +1,6 @@
 package com.bilibili.commons.cache;
 
 import com.bilibili.commons.domain.entity.Danmaku;
-import com.bilibili.commons.domain.entity.Video;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

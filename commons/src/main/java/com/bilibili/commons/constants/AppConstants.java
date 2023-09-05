@@ -61,10 +61,6 @@ public class AppConstants {
      */
     public static final String PICTURE_BUCK = "picture";
 
-    /**
-     * 是否为轮播图
-     */
-    public static final String BANNER_VALUE = "1";
 
     /**
      * 视频文件夹

@@ -19,7 +19,7 @@ public class Runner implements CommandLineRunner {
     private final TodoMapper todoMapper;
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         todoMapper.selectList(null).forEach(todoListCache::save);
     }
 }

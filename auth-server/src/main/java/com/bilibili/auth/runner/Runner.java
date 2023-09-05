@@ -19,7 +19,7 @@ public class Runner implements CommandLineRunner {
     private final AccountListCache accountListCache;
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         accountMapper.selectList(null).forEach(accountListCache::saveAccount);
     }
 }

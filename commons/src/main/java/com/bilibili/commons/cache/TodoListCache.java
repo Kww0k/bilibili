@@ -1,6 +1,5 @@
 package com.bilibili.commons.cache;
 
-import com.bilibili.commons.domain.entity.Account;
 import com.bilibili.commons.domain.entity.Todo;
 import org.springframework.stereotype.Component;
 

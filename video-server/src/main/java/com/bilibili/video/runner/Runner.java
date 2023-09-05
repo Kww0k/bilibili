@@ -31,7 +31,7 @@ public class Runner implements CommandLineRunner {
     private final DanmakuMapper danmakuMapper;
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         videoMapper.selectList(null).forEach(videoCache::save);
         tagMapper.selectList(null).forEach(tagCache::save);
         danmakuMapper.selectList(null).forEach(danmakuCache::save);
