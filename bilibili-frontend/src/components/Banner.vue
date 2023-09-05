@@ -119,6 +119,7 @@ li {
   height: 100%;
   object-fit: cover;
   object-position: center;
+  cursor: pointer;
 }
 
 .bottom-box {
@@ -154,6 +155,7 @@ li {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  cursor: pointer;
 }
 
 .bottom-box .dots {
