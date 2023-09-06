@@ -36,6 +36,7 @@ const ctime = ref('')
 const dtime = ref('')
 let cd;
 const videoPlayed = ref(false)
+const commitChoose = ref(false)
 
 const setProcess = () => {
   let video = document.getElementById("vd")
@@ -249,7 +250,7 @@ onMounted(() => {
   <div :style="{ width: playWindowWidth.toString() + 'px', height : playWindowHeight.toString() + 'px'}" id="playWindow"
        class="playWindow">
     <!-- 左边 -->
-    <div id="fullback" class="fullback" style=" box-shadow: 0 0 10px grey;">
+    <div id="fullback" class="fullback">
       <div :style="{ height: playBoxHeight.toString( ) + 'px', width: playBoxWidth.toString() + 'px'}" id="playBox"
            class="playBox">
         <!-- 视频 -->
@@ -320,21 +321,74 @@ onMounted(() => {
         </div>
       </div>
       <div :style="{ height: commitDanmuHeight.toString( ) + 'px', width: commitDanmuWidth.toString() + 'px'}"
-           style=" box-shadow: 0 0 10px grey;background-color: white" class="flex items-center">
+           style="box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);background-color: white" class="flex items-center">
         <div>
           <el-button>弹幕</el-button>
+        </div>
+      </div>
+      <div style="height: 64px; border-bottom: 1px solid #E3E5E7;" :style="{width: commitDanmuWidth.toString() + 'px'}">
+      </div>
+      <div style="height: 80px; border-bottom: 1px solid #E3E5E7;" :style="{width: commitDanmuWidth.toString() + 'px'}">
+      </div>
+      <div :style="{width: commitDanmuWidth.toString() + 'px'}">
+        <div style="width: 100%; display: flex">
+          <div class="reply-header">
+            <span class="nav-title-text" data-v-85efed82="">评论</span>
+            <span class="total-reply" data-v-85efed82="">114514</span>
+          </div>
+          <div class="choose-header">
+            <div style="cursor: pointer;font-size: 16px" :style="{color : commitChoose ? '#9499A0' : '#18191C'}">最热</div>
+            <div style="height: 11px;border-left: solid 1px; margin: 7px 12px 0;"></div>
+            <div style="cursor: pointer;font-size: 16px" :style="{color : commitChoose ? '#18191C' : '#9499A0'}">最新</div>
+          </div>
+        </div>
+        <div style="width: 100%;height: 100vh">
+
         </div>
       </div>
     </div>
     <!-- 右边 -->
     <aside style="margin-left: 20px"
-           :style="{ width : masideWidth.toString() + 'px', height : masideHeight.toString() + 'px', display: asideDisplay }"
+           :style="{ width : masideWidth.toString() + 'px', display: asideDisplay }"
            id="maside" class="maside">
+
     </aside>
   </div>
 </template>
 
 <style scoped>
+.total-reply {
+  font-size: 14px;
+  margin: 10px 36px 0 6px;
+  font-weight: 400;
+  color: #9499A0;
+}
+.nav-title-text {
+  font-size: 24px;
+  color: #18191C;
+  font-family: PingFang SC,HarmonyOS_Medium,Helvetica Neue,Microsoft YaHei,sans-serif;
+  font-weight: 500;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+.choose-header {
+  display: flex;
+  margin-top: 33px;
+  font-family: PingFang SC,HarmonyOS_Regular,Helvetica Neue,Microsoft YaHei,sans-serif;
+  font-weight: 400;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  margin-bottom: 22px;
+}
+.reply-header {
+  display: flex;
+  margin-top: 24px;
+  font-family: PingFang SC,HarmonyOS_Regular,Helvetica Neue,Microsoft YaHei,sans-serif;
+  font-weight: 400;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  margin-bottom: 22px;
+}
 @keyframes danmuAnimation{
   0%{
     right: 0;
@@ -477,6 +531,5 @@ onMounted(() => {
 .maside {
   width: 300px;
   flex: none;
-  background-color: #fefcc9;
 }
 </style>

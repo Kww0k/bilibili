@@ -144,6 +144,7 @@ window.addEventListener("resize", setSize)
       </div>
     </div>
     <video-player/>
+
   </div>
 </template>
 
