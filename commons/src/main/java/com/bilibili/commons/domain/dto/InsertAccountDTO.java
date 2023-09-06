@@ -1,6 +1,7 @@
 package com.bilibili.commons.domain.dto;
 
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
@@ -27,6 +28,7 @@ public class InsertAccountDTO {
      * 邮箱地址
      */
     @Email(message = "非法的邮箱地址")
+    @NotBlank(message = "邮箱不能为空")
     private String email;
 
 }
