@@ -78,7 +78,7 @@ public class FilesServiceImpl extends ServiceImpl<FilesMapper, Files> implements
 
     @Override
     public Files getByFileById(Integer id) {
-        return fileListCache.getOnt(id);
+        return fileListCache.getOne(id);
     }
 
     private Files upload(MultipartFile file, String type) throws MinioException, NoSuchAlgorithmException, IOException, InvalidKeyException {

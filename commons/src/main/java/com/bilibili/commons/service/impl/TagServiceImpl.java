@@ -52,7 +52,7 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagSe
                 throw new TagNotFIndException();
         Tag tag = beanCopyUtils.copyBean(insertTagDTO, Tag.class);
         baseMapper.insert(tag);
-        tagCache.save(tag);
+        tagCache.save(baseMapper.selectById(tag.getId()));
         return RestBean.success();
     }
 
@@ -64,7 +64,7 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagSe
         Tag tag = beanCopyUtils.copyBean(updateTagDTO, Tag.class);
         if (baseMapper.updateById(tag) == FALSE_CODE)
             throw new TagNotFIndException();
-        tagCache.save(tag);
+        tagCache.save(baseMapper.selectById(tag.getId()));
         return RestBean.success();
     }
 
@@ -82,7 +82,7 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagSe
                 .stream()
                 .filter(tag -> !Objects.equals(tag.getParentId(), PARENT_TAG))
                 .map(tag -> beanCopyUtils.copyBean(tag, SimpleTagListVO.class)
-                        .setParent(baseMapper.selectById(tag.getParentId()).getName()))
+                        .setParent(tagCache.getOne(tag.getParentId()).getName()))
                 .toList());
     }
 

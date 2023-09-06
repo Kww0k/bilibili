@@ -1,5 +1,7 @@
 package com.bilibili.commons.domain.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -38,25 +40,14 @@ public class Danmaku  {
      */
     private String type;
     private Integer videoId;
-     /**
-     * 创建时间
-     */
-    private String createTime;
-     /**
-     * 创建人
-     */
+    @TableField(fill = FieldFill.INSERT)
     private Integer createBy;
-     /**
-     * 更新时间
-     */
-    private String updateTime;
-     /**
-     * 更新人
-     */
+    @TableField(fill = FieldFill.INSERT)
+    private String createTime;
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Integer updateBy;
-     /**
-     * 逻辑删除
-     */
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private String updateTime;
     private Integer delFlag;
 
 

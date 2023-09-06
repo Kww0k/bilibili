@@ -1,6 +1,9 @@
 package com.bilibili.commons.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.bilibili.commons.cache.AccountListCache;
+import com.bilibili.commons.cache.FileListCache;
+import com.bilibili.commons.cache.TagCache;
 import com.bilibili.commons.cache.VideoCache;
 import com.bilibili.commons.domain.RestBean;
 import com.bilibili.commons.domain.dto.InsertVideoDTO;
@@ -38,13 +41,13 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
 
     private final BeanCopyUtils beanCopyUtils;
 
-    private final AccountMapper accountMapper;
-
-    private final TagMapper tagMapper;
-
-    private final FilesMapper filesMapper;
-
     private final VideoCache videoCache;
+
+    private final FileListCache fileListCache;
+
+    private final AccountListCache accountListCache;
+
+    private final TagCache tagCache;
 
     @Override
     public RestBean<List<VideoListVO>> listPassVideo(String title, Integer typeId) {
@@ -107,7 +110,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                 .stream()
                 .filter(video -> Objects.equals(IS_BANNER, video.getBanner()))
                 .map(video -> beanCopyUtils.copyBean(video, BannerVO.class)
-                        .setPreviewUrl(filesMapper.selectById(video.getPreviewId()).getUrl()))
+                        .setPreviewUrl(fileListCache.getOne(video.getPreviewId()).getUrl()))
                 .toList());
     }
 
@@ -119,10 +122,10 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                 .map(video -> new CardVO()
                         .setId(video.getId())
                         .setTitle(video.getTitle())
-                        .setPreviewUrl(filesMapper.selectById(video.getPreviewId()).getUrl())
-                        .setVideoUrl(filesMapper.selectById(video.getVideoId()).getUrl())
+                        .setPreviewUrl(fileListCache.getOne(video.getPreviewId()).getUrl())
+                        .setVideoUrl(fileListCache.getOne(video.getVideoId()).getUrl())
                         .setCreateTime(video.getCreateTime().substring(5, 10))
-                        .setCreateBy(accountMapper.selectById(video.getCreateBy()).getNickname()))
+                        .setCreateBy(accountListCache.getOne(video.getCreateBy()).getNickname()))
                 .toList());
     }
 
@@ -135,10 +138,10 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                 .map(video -> new CardVO()
                         .setId(video.getId())
                         .setTitle(video.getTitle())
-                        .setPreviewUrl(filesMapper.selectById(video.getPreviewId()).getUrl())
-                        .setVideoUrl(filesMapper.selectById(video.getVideoId()).getUrl())
+                        .setPreviewUrl(fileListCache.getOne(video.getPreviewId()).getUrl())
+                        .setVideoUrl(fileListCache.getOne(video.getVideoId()).getUrl())
                         .setCreateTime(video.getCreateTime().substring(5, 10))
-                        .setCreateBy(accountMapper.selectById(video.getCreateBy()).getNickname()))
+                        .setCreateBy(accountListCache.getOne(video.getCreateBy()).getNickname()))
                 .toList());
     }
 
@@ -147,7 +150,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         Video video = videoCache.getOne(id);
         if (video == null || Objects.equals(video.getStatus(), NOT_PASS_VIDEO))
             throw new VideoInfoNotFindException();
-        Account account = accountMapper.selectById(video.getCreateBy());
+        Account account = accountListCache.getOne(video.getCreateBy());
         return RestBean.success(beanCopyUtils.copyBean(video, VideoListVO.class)
                 .setNickname(account.getNickname())
                 .setUrl(account.getUrl())
@@ -161,10 +164,10 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                 .filter(video -> Objects.equals(typeId, null) | Objects.equals(typeId, video.getTypeId()))
                 .filter(video -> !StringUtils.hasText(title) | Objects.equals(title, video.getTitle()))
                 .map(video -> beanCopyUtils.copyBean(video, VideoListVO.class)
-                        .setPreviewUrl(filesMapper.selectById(video.getPreviewId()).getUrl())
-                        .setVideoUrl(filesMapper.selectById(video.getVideoId()).getUrl())
-                        .setCreateBy(accountMapper.selectById(video.getCreateBy()).getNickname())
-                        .setType(tagMapper.selectById(video.getTypeId()).getName()))
+                        .setPreviewUrl(fileListCache.getOne(video.getPreviewId()).getUrl())
+                        .setVideoUrl(fileListCache.getOne(video.getVideoId()).getUrl())
+                        .setCreateBy(accountListCache.getOne(video.getCreateBy()).getNickname())
+                        .setType(tagCache.getOne(video.getTypeId()).getName()))
                 .toList();
     }
 }

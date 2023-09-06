@@ -102,4 +102,29 @@ public class AppConstants {
      */
     public static final Integer IS_ADVICE = 1;
 
+    /**
+     * 用户缓存
+     */
+    public static final String ACCOUNT_CACHE = "account:cache";
+    /**
+     * 弹幕
+     */
+    public static final String DANMU_CACHE = "danmu:cache";
+    /**
+     * 文件缓存
+     */
+    public static final String FILE_CACHE = "file:cache";
+    /**
+     * 标签缓存
+     */
+    public static final String TAG_CACHE = "tag:cache";
+    /**
+     * 待办缓存
+     */
+    public static final String TODO_CACHE = "todo:cache";
+    /**
+     * 视频缓存
+     */
+    public static final String VIDEO_CACHE = "video:cache";
+
 }

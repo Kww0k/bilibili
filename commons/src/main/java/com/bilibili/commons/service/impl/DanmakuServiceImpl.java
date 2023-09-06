@@ -45,7 +45,7 @@ public class DanmakuServiceImpl extends ServiceImpl<DanmakuMapper, Danmaku> impl
     public RestBean<Void> insertDanmaku(InsertDanmakuDTO insertDanmakuDTO) {
         Danmaku danmaku = beanCopyUtils.copyBean(insertDanmakuDTO, Danmaku.class);
         baseMapper.insert(danmaku);
-        danmakuCache.save(danmaku);
+        danmakuCache.save(baseMapper.selectById(danmaku.getId()));
         return RestBean.success();
     }
 
@@ -54,7 +54,7 @@ public class DanmakuServiceImpl extends ServiceImpl<DanmakuMapper, Danmaku> impl
         Danmaku danmaku = beanCopyUtils.copyBean(updateDanmakuDTO, Danmaku.class);
         if (baseMapper.updateById(danmaku) == FALSE_CODE)
             throw new DanmakuNotFindException();
-        danmakuCache.save(danmaku);
+        danmakuCache.save(baseMapper.selectById(danmaku.getId()));
         return RestBean.success();
     }
 

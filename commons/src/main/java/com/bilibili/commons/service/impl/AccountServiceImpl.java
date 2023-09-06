@@ -166,7 +166,9 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
             account.setUsername(NAME_START +uuidUtil.getShortUuid());
             account.setNickname(NAME_START + (new Random().nextInt(89999999) + 10000000));
             baseMapper.insert(account);
+            accountListCache.saveAccount(baseMapper.selectById(account.getId()));
         }
+        redisCache.deleteObject(REGISTER_EMAIL + emailLoginDTO.getEmail());
         // 创建jwt 并返回
         LoginUser user = new LoginUser(account);
         String token = jwtUtils.createJwt(user);

@@ -20,6 +20,7 @@ public class Runner implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        todoMapper.selectList(null).forEach(todoListCache::save);
+        if (todoListCache == null || todoListCache.getTodoList().isEmpty())
+            todoMapper.selectList(null).forEach(todoListCache::save);
     }
 }

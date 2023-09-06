@@ -32,8 +32,11 @@ public class Runner implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        videoMapper.selectList(null).forEach(videoCache::save);
-        tagMapper.selectList(null).forEach(tagCache::save);
-        danmakuMapper.selectList(null).forEach(danmakuCache::save);
+        if (danmakuCache.getList() ==null || danmakuCache.getList().isEmpty())
+            danmakuMapper.selectList(null).forEach(danmakuCache::save);
+        if (videoCache.getList() == null || videoCache.getList().isEmpty())
+            videoMapper.selectList(null).forEach(videoCache::save);
+        if (tagCache.getList() == null || tagCache.getList().isEmpty())
+            tagMapper.selectList(null).forEach(tagCache::save);
     }
 }

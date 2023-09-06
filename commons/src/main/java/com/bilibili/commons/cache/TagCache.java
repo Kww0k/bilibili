@@ -1,37 +1,44 @@
 package com.bilibili.commons.cache;
 
+import com.bilibili.commons.domain.entity.Files;
 import com.bilibili.commons.domain.entity.Tag;
+import com.bilibili.commons.utils.RedisCache;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
+
+import static com.bilibili.commons.constants.AppConstants.FILE_CACHE;
+import static com.bilibili.commons.constants.AppConstants.TAG_CACHE;
 
 /**
  * @author Silvery
  * @since 2023/9/4 16:41
  */
 @Component
+@RequiredArgsConstructor
 public class TagCache {
 
-    private final ConcurrentHashMap<Integer, Tag> map = new ConcurrentHashMap<>();
-
-    public ConcurrentHashMap<Integer, Tag> get() {
-        return map;
-    }
+    private final RedisCache redisCache;
 
     public List<Tag> getList() {
-        return map.values().stream().toList();
+        return redisCache.getCacheMap(TAG_CACHE)
+                .values()
+                .stream()
+                .map(Tag.class::cast)
+                .toList();
     }
 
     public void save(Tag tag) {
-        map.put(tag.getId(), tag);
+        redisCache.setCacheMapValue(TAG_CACHE, TAG_CACHE + tag.getId(), tag);
     }
 
-    public Tag getOnt(Integer id) {
-        return map.get(id);
+    public Tag getOne(Integer id) {
+        return (Tag) redisCache.getCacheMap(TAG_CACHE).get(TAG_CACHE + id);
     }
 
     public void delete(Integer id) {
-        map.remove(id);
+        redisCache.delCacheMapValue(TAG_CACHE, TAG_CACHE + id);
     }
 }

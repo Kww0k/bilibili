@@ -66,14 +66,12 @@ public class Account implements Serializable {
      */
     private String signature;
     @TableField(fill = FieldFill.INSERT)
-    private String createBy;
+    private Integer createBy;
     @TableField(fill = FieldFill.INSERT)
     private String createTime;
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    private String updateBy;
+    private Integer updateBy;
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private String updateTime;
-
     private Integer delFlag;
-
 }

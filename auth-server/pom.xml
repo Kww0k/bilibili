@@ -22,6 +22,5 @@
             <groupId>com.bilibili</groupId>
             <artifactId>commons</artifactId>
         </dependency>
-
     </dependencies>
 </project>
