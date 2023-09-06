@@ -11,6 +11,7 @@ import com.bilibili.commons.domain.dto.UpdateAccountDTO;
 import com.bilibili.commons.domain.entity.Account;
 import com.bilibili.commons.domain.vo.AccountAuthVO;
 import com.bilibili.commons.domain.vo.AuthVO;
+import com.bilibili.commons.domain.vo.UpInfoVO;
 import com.bilibili.commons.exctption.auth.EmailLimitException;
 import com.bilibili.commons.exctption.auth.UserNotFindException;
 import com.bilibili.commons.exctption.auth.VerifyCodeException;
@@ -172,6 +173,11 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
         AccountAuthVO accountAuthVO = beanCopyUtils.copyBean(user.getAccount(), AccountAuthVO.class);
         AuthVO authVO = new AuthVO(accountAuthVO, token);
         return RestBean.success(authVO);
+    }
+
+    @Override
+    public RestBean<UpInfoVO> getUpInfo(Integer id) {
+        return RestBean.success(beanCopyUtils.copyBean(accountListCache.getOne(id), UpInfoVO.class));
     }
 
 

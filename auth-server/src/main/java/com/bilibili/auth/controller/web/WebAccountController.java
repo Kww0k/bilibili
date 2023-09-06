@@ -4,6 +4,7 @@ import com.bilibili.commons.annotation.SystemLog;
 import com.bilibili.commons.domain.RestBean;
 import com.bilibili.commons.domain.dto.EmailLoginDTO;
 import com.bilibili.commons.domain.vo.AuthVO;
+import com.bilibili.commons.domain.vo.UpInfoVO;
 import com.bilibili.commons.service.AccountService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
@@ -35,5 +36,11 @@ public class WebAccountController {
     @PostMapping("/registerOrLogin")
     public RestBean<AuthVO> registerOrLogin(@Valid @RequestBody EmailLoginDTO emailLoginDTO) {
         return accountService.registerOrLogin(emailLoginDTO);
+    }
+
+    @SystemLog(businessName = "获取up信息")
+    @GetMapping("/getUpInfo/{id}")
+    public RestBean<UpInfoVO> getUpInfo(@PathVariable Integer id) {
+        return accountService.getUpInfo(id);
     }
 }

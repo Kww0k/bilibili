@@ -519,7 +519,7 @@ const endJump = (index: number) => {
 }
 .top {
   color: black;
-  position: absolute;
+  position: fixed;
   z-index: 1002;
   display: flex;
   align-items: center;

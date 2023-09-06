@@ -23,6 +23,10 @@ public class AccountListCache {
         return accountMap.values().stream().toList();
     }
 
+    public Account getOne(Integer id) {
+        return accountMap.get(id);
+    }
+
     public void saveAccount(Account account) {
         accountMap.put(account.getId(), account);
     }

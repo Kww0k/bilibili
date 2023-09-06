@@ -10,7 +10,6 @@ import {
   Discount,
   HomeFilled,
   BellFilled,
-  PictureFilled,
   Iphone,
   Files,
   Tickets,

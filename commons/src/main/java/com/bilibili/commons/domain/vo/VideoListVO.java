@@ -39,4 +39,8 @@ public class VideoListVO {
      * 创建人
      */
     private String createBy;
+
+    private String nickname;
+    private String url;
+    private String signature;
 }

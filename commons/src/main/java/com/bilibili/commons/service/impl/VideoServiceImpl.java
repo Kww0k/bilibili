@@ -5,6 +5,7 @@ import com.bilibili.commons.cache.VideoCache;
 import com.bilibili.commons.domain.RestBean;
 import com.bilibili.commons.domain.dto.InsertVideoDTO;
 import com.bilibili.commons.domain.dto.UpdateVideoDTO;
+import com.bilibili.commons.domain.entity.Account;
 import com.bilibili.commons.domain.entity.Video;
 import com.bilibili.commons.domain.vo.BannerVO;
 import com.bilibili.commons.domain.vo.CardVO;
@@ -146,7 +147,11 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         Video video = videoCache.getOne(id);
         if (video == null || Objects.equals(video.getStatus(), NOT_PASS_VIDEO))
             throw new VideoInfoNotFindException();
-        return RestBean.success(beanCopyUtils.copyBean(video, VideoListVO.class));
+        Account account = accountMapper.selectById(video.getCreateBy());
+        return RestBean.success(beanCopyUtils.copyBean(video, VideoListVO.class)
+                .setNickname(account.getNickname())
+                .setUrl(account.getUrl())
+                .setSignature(account.getSignature()));
     }
 
     private List<VideoListVO> getList(String title, Integer typeId, String status) {

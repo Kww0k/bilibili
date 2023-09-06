@@ -8,6 +8,7 @@ import com.bilibili.commons.domain.dto.UpdateAccountDTO;
 import com.bilibili.commons.domain.entity.Account;
 import com.bilibili.commons.domain.vo.AccountAuthVO;
 import com.bilibili.commons.domain.vo.AuthVO;
+import com.bilibili.commons.domain.vo.UpInfoVO;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
@@ -80,4 +81,13 @@ public interface AccountService extends IService<Account>, UserDetailsService {
      */
     RestBean<AuthVO> registerOrLogin(EmailLoginDTO emailLoginDTO);
 
+    /**
+     * 根据id查询up信息
+     *
+     * @author Silvery
+     * @since 2023/9/6 14:30
+     * @param id 用户id
+     * @return RestBean<UpInfoVO>
+     */
+    RestBean<UpInfoVO> getUpInfo(Integer id);
 }

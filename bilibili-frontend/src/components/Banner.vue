@@ -2,6 +2,7 @@
 import {onMounted, ref} from "vue";
 import request from "@/net";
 import {ElMessage} from "element-plus";
+import router from "@/router";
 
 const timer = ref(0)
 const activeIndex = ref(0)
@@ -73,12 +74,12 @@ onMounted(() => {
 <template>
   <div id="container" class="container"  @mouseout="startAutoPlay" @mouseover="stopAutoPlay">
     <div id="img-box" class="img-box">
-      <img v-for="item in bannerList"
+      <img v-for="item in bannerList" @click="router.push(`/${item.id}`)"
           :src="item.previewUrl"/>
     </div>
     <div class="bottom-box">
       <div class="l-box">
-        <div class="title">
+        <div class="title" @click="router.push(`/${bannerList && bannerList.length > 0 ? bannerList[activeIndex].id : ''}`)">
           {{ bannerList && bannerList.length > 0 ? bannerList[activeIndex].title : '' }}
         </div>
         <ul class="dots">
