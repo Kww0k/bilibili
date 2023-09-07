@@ -299,10 +299,10 @@ onMounted(() => {
         </div>
       </div>
       <div class="danmu-bottom" :style="{ height: commitDanmuHeight.toString( ) + 'px', width: commitDanmuWidth.toString() + 'px'}">
-        <div style="width: cacl(100% - 24px); height: 100%;display: flex;align-items: center; margin-left: 12px">
+        <div style="width: calc(100% - 24px); height: 100%;display: flex;align-items: center; margin-left: 12px">
           <div class="danmu-bottom-left">
             <div style="position: relative">
-              1111人正在看，
+              111人正在看，
             </div>
             <div style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
               已装填 1 条弹幕
@@ -442,7 +442,7 @@ onMounted(() => {
 }
 .danmu-input {
   height: 40px;
-  width: calc(100% - 96px);
+  width: calc(100% - 84px);
   border-radius: 8px;
   min-width: 300px;
   -webkit-box-align: center;
@@ -489,7 +489,6 @@ onMounted(() => {
   vertical-align: middle;
 }
 .danmu-bottom-right {
-  width: 100%;
   -webkit-box-flex: 1;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -516,7 +515,6 @@ onMounted(() => {
   width: auto;
 }
 .danmu-bottom {
-
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   position: relative;
   background-color: white;
