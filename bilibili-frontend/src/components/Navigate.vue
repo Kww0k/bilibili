@@ -73,7 +73,7 @@
         <div class="center-entry_bar">
           <form id="nav-searchform" class="nav-searchform" style="border-radius: 8px;">
             <div class="nav-search-content">
-              <el-input v-model="text" class="nav-search-input "/>
+              <el-input :style="{backgroundColor : text !== '' ? '#F1F2F3' : 'transparent'}" class="nav-search-input " v-model="text" style="width: 100%"/>
               <div v-if="text !== '' " class="nav-search-clean" @click="text = ''">
                 <svg style="position: absolute; color: #C9CCD0" width="16" height="16" viewBox="0 0 16 16" fill="none"
                      xmlns="http://www.w3.org/2000/svg">
@@ -222,7 +222,7 @@
 </template>
 
 <script setup lang="ts">
-import {defineProps, ref} from 'vue';
+import {defineProps, onMounted, ref} from 'vue';
 import router from "@/router";
 
 const activeIndex = ref(-1);
@@ -246,6 +246,24 @@ const endJump = (index: number) => {
     activeIndex.value = -1;
   }
 };
+
+onMounted(() => {
+  // @ts-ignore
+  document.querySelector('.el-input__wrapper').style.backgroundColor = 'transparent'
+  // @ts-ignore
+  document.querySelector('.el-input__wrapper').style.boxShadow = '0 0 0 0'
+  // @ts-ignore
+  document.querySelector('.el-input__wrapper').addEventListener('mouseenter', () => {
+      // @ts-ignore
+      document.querySelector('.el-input__wrapper').style.backgroundColor = '#F1F2F3'
+  });
+  // @ts-ignore
+  document.querySelector('.el-input__wrapper').addEventListener('mouseleave', () => {
+    // @ts-ignore
+    document.querySelector('.el-input__wrapper').style.backgroundColor = 'transparent'
+  });
+
+})
 </script>
 
 <style scoped>
@@ -345,20 +363,14 @@ const endJump = (index: number) => {
 
 .nav-search-clean {
   visibility: inherit;
+  position: absolute;
   width: 16px;
   height: 16px;
-  right: 10px;
+  right: 20px;
   cursor: pointer;
 }
-.nav-search-input .el-input__wrapper:hover {
-  box-shadow: none;
-  background-color: transparent;
-}
-.nav-search-input .el-input__wrapper {
-  box-shadow: none;
-  background-color: transparent;
-}
 .nav-search-input {
+  border-radius: 6px;
   flex: 1;
   overflow: hidden;
   padding-right: 8px;
