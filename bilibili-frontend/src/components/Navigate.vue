@@ -73,7 +73,8 @@
         <div class="center-entry_bar">
           <form id="nav-searchform" class="nav-searchform" style="border-radius: 8px;">
             <div class="nav-search-content">
-              <el-input :style="{backgroundColor : text !== '' ? '#F1F2F3' : 'transparent'}" class="nav-search-input " v-model="text" style="width: 100%"/>
+              <el-input placeholder="陈玄成的ACM金牌之路" :style="{backgroundColor : text !== '' ? '#F1F2F3' : 'transparent'}"
+                        class="nav-search-input" v-model="text" style="width: 100%"/>
               <div v-if="text !== '' " class="nav-search-clean" @click="text = ''">
                 <svg style="position: absolute; color: #C9CCD0" width="16" height="16" viewBox="0 0 16 16" fill="none"
                      xmlns="http://www.w3.org/2000/svg">
@@ -378,7 +379,7 @@ onMounted(() => {
   background-color: transparent;
   box-shadow: none;
   color: #61666D;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 20px;
 }
 
@@ -418,7 +419,7 @@ onMounted(() => {
 .center-entry_bar {
   position: relative;
   margin: 0 auto;
-  min-width: 181px;
+  min-width: 400px;
   max-width: 500px;
 }
 
