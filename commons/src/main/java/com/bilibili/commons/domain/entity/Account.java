@@ -73,5 +73,5 @@ public class Account implements Serializable {
     private Integer updateBy;
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private String updateTime;
-    private Integer delFlag;
+    private String delFlag;
 }

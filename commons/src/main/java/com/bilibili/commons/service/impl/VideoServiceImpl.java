@@ -14,9 +14,6 @@ import com.bilibili.commons.domain.vo.BannerVO;
 import com.bilibili.commons.domain.vo.CardVO;
 import com.bilibili.commons.domain.vo.VideoListVO;
 import com.bilibili.commons.exctption.video.VideoInfoNotFindException;
-import com.bilibili.commons.mapper.AccountMapper;
-import com.bilibili.commons.mapper.FilesMapper;
-import com.bilibili.commons.mapper.TagMapper;
 import com.bilibili.commons.mapper.VideoMapper;
 import com.bilibili.commons.service.VideoService;
 import com.bilibili.commons.utils.BeanCopyUtils;
@@ -125,7 +122,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                         .setPreviewUrl(fileListCache.getOne(video.getPreviewId()).getUrl())
                         .setVideoUrl(fileListCache.getOne(video.getVideoId()).getUrl())
                         .setCreateTime(video.getCreateTime().substring(5, 10))
-                        .setCreateBy(accountListCache.getOne(video.getCreateBy()).getNickname()))
+                        .setCreateBy(accountListCache.getOne(Integer.valueOf(video.getCreateBy())).getNickname()))
                 .toList());
     }
 
@@ -141,7 +138,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                         .setPreviewUrl(fileListCache.getOne(video.getPreviewId()).getUrl())
                         .setVideoUrl(fileListCache.getOne(video.getVideoId()).getUrl())
                         .setCreateTime(video.getCreateTime().substring(5, 10))
-                        .setCreateBy(accountListCache.getOne(video.getCreateBy()).getNickname()))
+                        .setCreateBy(accountListCache.getOne(Integer.valueOf(video.getCreateBy())).getNickname()))
                 .toList());
     }
 
@@ -150,7 +147,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         Video video = videoCache.getOne(id);
         if (video == null || Objects.equals(video.getStatus(), NOT_PASS_VIDEO))
             throw new VideoInfoNotFindException();
-        Account account = accountListCache.getOne(video.getCreateBy());
+        Account account = accountListCache.getOne(Integer.valueOf(video.getCreateBy()));
         return RestBean.success(beanCopyUtils.copyBean(video, VideoListVO.class)
                 .setNickname(account.getNickname())
                 .setUrl(account.getUrl())
@@ -166,7 +163,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                 .map(video -> beanCopyUtils.copyBean(video, VideoListVO.class)
                         .setPreviewUrl(fileListCache.getOne(video.getPreviewId()).getUrl())
                         .setVideoUrl(fileListCache.getOne(video.getVideoId()).getUrl())
-                        .setCreateBy(accountListCache.getOne(video.getCreateBy()).getNickname())
+                        .setCreateBy(accountListCache.getOne(Integer.valueOf(video.getCreateBy())).getNickname())
                         .setType(tagCache.getOne(video.getTypeId()).getName()))
                 .toList();
     }

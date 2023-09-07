@@ -38,7 +38,7 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
         this.setFieldValByName("updateBy", getUserId(), metaObject);
     }
 
-    private String getUserId() {
+    private Integer getUserId() {
         Integer userId;
         try {
             // 这里会有一个用户不存在异常,需要捕获
@@ -47,7 +47,7 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
             // 这是插入或者更新时自动插入，所以不用返回和处理这个异常，如果有这个异常，则将id设置为-1
             userId = -1;
         }
-        return userId.toString();
+        return userId;
     }
 
 }
