@@ -122,7 +122,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                         .setPreviewUrl(fileListCache.getOne(video.getPreviewId()).getUrl())
                         .setVideoUrl(fileListCache.getOne(video.getVideoId()).getUrl())
                         .setCreateTime(video.getCreateTime().substring(5, 10))
-                        .setCreateBy(accountListCache.getOne(Integer.valueOf(video.getCreateBy())).getNickname()))
+                        .setNickName(accountListCache.getOne(video.getCreateBy()).getNickname()))
                 .toList());
     }
 
@@ -138,7 +138,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                         .setPreviewUrl(fileListCache.getOne(video.getPreviewId()).getUrl())
                         .setVideoUrl(fileListCache.getOne(video.getVideoId()).getUrl())
                         .setCreateTime(video.getCreateTime().substring(5, 10))
-                        .setCreateBy(accountListCache.getOne(Integer.valueOf(video.getCreateBy())).getNickname()))
+                        .setNickName(accountListCache.getOne(video.getCreateBy()).getNickname()))
                 .toList());
     }
 
@@ -147,7 +147,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         Video video = videoCache.getOne(id);
         if (video == null || Objects.equals(video.getStatus(), NOT_PASS_VIDEO))
             throw new VideoInfoNotFindException();
-        Account account = accountListCache.getOne(Integer.valueOf(video.getCreateBy()));
+        Account account = accountListCache.getOne(video.getCreateBy());
         return RestBean.success(beanCopyUtils.copyBean(video, VideoListVO.class)
                 .setNickname(account.getNickname())
                 .setUrl(account.getUrl())
@@ -163,7 +163,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
                 .map(video -> beanCopyUtils.copyBean(video, VideoListVO.class)
                         .setPreviewUrl(fileListCache.getOne(video.getPreviewId()).getUrl())
                         .setVideoUrl(fileListCache.getOne(video.getVideoId()).getUrl())
-                        .setCreateBy(accountListCache.getOne(Integer.valueOf(video.getCreateBy())).getNickname())
+                        .setNickname(accountListCache.getOne(video.getCreateBy()).getNickname())
                         .setType(tagCache.getOne(video.getTypeId()).getName()))
                 .toList();
     }

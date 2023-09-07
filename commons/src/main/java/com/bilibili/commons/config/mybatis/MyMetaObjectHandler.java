@@ -7,8 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
-
 /**
  * 更新时间和创建时间
  *

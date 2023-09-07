@@ -26,5 +26,7 @@ public class CardVO {
 
     private String createTime;
 
-    private String createBy;
+    private Integer createBy;
+
+    private String nickName;
 }

@@ -5,5 +5,5 @@ export interface Card {
     videoUrl : string,
     createBy : number,
     createTime : string,
-    createByName : string
+    nickName : string
 }

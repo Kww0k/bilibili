@@ -6,7 +6,7 @@ export interface Info {
     videoUrl : string,
     type : string,
     createTime : string,
-    createBy : string,
+    createBy : number,
     nickname: string,
     url : string,
     signature : string

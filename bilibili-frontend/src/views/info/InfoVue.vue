@@ -26,7 +26,7 @@ const pageInfo = ref<Info>({
   videoUrl : '',
   type : '',
   createTime : '',
-  createBy : '',
+  createBy : 0,
   url: '',
   signature : '',
   nickname : ''

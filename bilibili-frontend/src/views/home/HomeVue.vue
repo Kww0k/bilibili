@@ -31,13 +31,15 @@ const getAdviceList = () => {
 
 const getCardList = () => {
   listCardApi().then((data) => {
+    console.log(data)
     const nullCard : Card = {
       id : 0,
       title : '',
       previewUrl : '',
       videoUrl : '',
-      createBy : '',
-      createTime : ''
+      createBy : 0,
+      createTime : '',
+      nickName : ''
     }
     for (let i = 0; i < data.length; i += 5)
       cardList.value.push([data[i] ? data[i] : nullCard,
@@ -194,6 +196,7 @@ onMounted(() => {
                 :preview-url="advices[0].previewUrl"
                 :create-by="advices[0].createBy"
                 :create-time="advices[0].createTime"
+                :nickname="advices[0].nickName"
                 :video-url="advices[0].videoUrl"/>
             <PageCard
                 :id="advices[1].id"
@@ -202,6 +205,7 @@ onMounted(() => {
                 :video-url="advices[1].videoUrl"
                 :create-by="advices[1].createBy"
                 :create-time="advices[1].createTime"
+                :nickname="advices[1].nickName"
                 style="margin-top: 20px; margin-bottom: 60px"/>
           </el-col>
         </el-row>
@@ -212,6 +216,7 @@ onMounted(() => {
             <PageCard v-if="card.id !== 0"
                 :id="card.id"
                 :title="card.title"
+                :nickname="card.nickName"
                 :preview-url="card.previewUrl"
                 :video-url="card.videoUrl"
                 :create-by="card.createBy"
