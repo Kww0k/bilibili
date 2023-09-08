@@ -790,7 +790,7 @@ onMounted(() => {
         </div>
       </div>
       <div class="aside-body">
-        <div style="margin-bottom: 18px; width: 100%; display: flex; height: 12vh; margin-top: 18px">
+        <div style="margin-bottom: 18px; width: 100%; display: flex; height: 11vh; margin-top: 18px">
           <el-row :gutter="10" style="width: 100%; height: 100%">
             <el-col :span="12">
               <div style="width: 100%; height: 100%;border-radius: 6px;
@@ -823,7 +823,7 @@ onMounted(() => {
             </div>
           </div>
           <div v-for="item in cardList" style="width: 100%">
-            <el-row  :gutter="10" style="width: 100%; height: 12vh;margin-top: 8px;">
+            <el-row  :gutter="10" style="width: 100%; height: 11vh;margin-top: 8px;">
               <el-col :span="12">
                 <div style="width: 100%; height: 100%;border-radius: 6px; cursor: pointer;
                     background-size: cover;background-repeat: no-repeat;background-position: center;"
