@@ -56,7 +56,7 @@
             @animationend="endJump(5)">
           赛事
         </li>
-        <li class="left-title">
+        <li style="color: inherit" class="left-title">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
                class="download-client-trigger__icon">
             <path

@@ -235,6 +235,7 @@ window.addEventListener("resize", setSize)
 }
 .up-avatar {
   width: 48px;
+  cursor: pointer;
   height: 48px;
   flex-shrink: 0;
   display: flex;
