@@ -379,8 +379,8 @@ onMounted(() => {
   background-color: transparent;
   box-shadow: none;
   color: #61666D;
-  font-size: 16px;
-  line-height: 20px;
+  font-size: 14px;
+  line-height: 24px;
 }
 
 .nav-search-content {
