@@ -143,7 +143,7 @@ window.addEventListener("resize", setSize)
         </div>
       </div>
     </div>
-    <video-player/>
+    <video-player :video-info="pageInfo"/>
 
   </div>
 </template>

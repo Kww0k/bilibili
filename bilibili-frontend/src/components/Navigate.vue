@@ -1,5 +1,5 @@
 <template>
-  <transition name="fade">
+  <el-collapse-transition>
     <div :class="[type === 'fly' ? 'fly' : type === 'simple' ? 'simple' : 'top']" style="height: 64px; width: 100%;">
       <ul class="left-entry">
         <li v-if="type === 'simple'" style="color: inherit" class="left-title" @click="router.push('/')">
@@ -219,7 +219,7 @@
         </li>
       </ul>
     </div>
-  </transition>
+  </el-collapse-transition>
 </template>
 
 <script setup lang="ts">
