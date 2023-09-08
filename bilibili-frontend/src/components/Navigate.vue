@@ -419,7 +419,7 @@ onMounted(() => {
 .center-entry_bar {
   position: relative;
   margin: 0 auto;
-  min-width: 400px;
+  min-width: 181px;
   max-width: 500px;
 }
 

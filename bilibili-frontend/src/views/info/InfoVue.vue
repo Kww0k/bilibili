@@ -9,7 +9,7 @@ import {Warning, Message} from '@element-plus/icons-vue'
 
 const rightWidth = ref(document.body.clientWidth / 5)
 const minWidth = ref(500);
-const maxWidth = ref(1400);
+const maxWidth = ref(1500);
 const leftWidth = ref(0)
 
 const props = defineProps({
