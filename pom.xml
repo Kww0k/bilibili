@@ -36,11 +36,18 @@
         <mp.version>3.5.3.2</mp.version>
         <mysql.version>8.0.32</mysql.version>
         <minio.version>8.4.0</minio.version>
+        <netty.version>4.1.97.Final</netty.version>
     </properties>
-
 
     <dependencyManagement>
         <dependencies>
+            <!-- https://mvnrepository.com/artifact/io.netty/netty-all -->
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+
             <!-- https://mvnrepository.com/artifact/io.minio/minio -->
             <dependency>
                 <groupId>io.minio</groupId>
