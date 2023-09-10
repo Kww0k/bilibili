@@ -36,4 +36,11 @@ public class SecurityUtil {
     public Integer getUserId() {
         return getLoginUser().getAccount().getId();
     }
+
+    /**
+     * 获取用户名
+     */
+    public String getUsername() {
+        return getLoginUser().getUsername();
+    }
 }
