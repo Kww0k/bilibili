@@ -24,7 +24,7 @@
             <textarea v-model="text" style="height: 160px; width: 100%; padding: 20px; border: none; border-top: 1px solid #ccc;
              border-bottom: 1px solid #ccc; outline: none"></textarea>
             <div style="text-align: right; padding-right: 10px">
-              <el-button type="primary" size="mini" @click="send">发送</el-button>
+              <el-button type="primary" @click="send" plain>发送</el-button>
             </div>
           </div>
         </div>

@@ -121,7 +121,7 @@
           </svg>
           大会员
         </li>
-        <li class="right-entry-outside">
+        <li class="right-entry-outside" @click="router.push('/message')">
           <svg :class="{'jump': activeIndex === 7}" @mouseover="startJump(7)" @animationend="endJump(7)" width="20"
                height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="right-entry-icon">
             <path
