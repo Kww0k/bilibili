@@ -35,6 +35,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(conf -> conf
+                        .requestMatchers("/imserver/**").permitAll()
                         .anyRequest().authenticated())
                 // 异常处理
                 .exceptionHandling(conf -> conf
