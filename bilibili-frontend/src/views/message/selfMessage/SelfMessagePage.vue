@@ -153,7 +153,9 @@ onMounted(() => {
       </div>
       <div class="right-body">
         <div class="message-body">
+          <el-scrollbar style="width: 100%; height: 100%">
 
+          </el-scrollbar>
         </div>
         <div class="send-box">
           <div style="height: 48px; width: calc(100% - 16px);margin-left: 16px; display: flex; align-items: center">

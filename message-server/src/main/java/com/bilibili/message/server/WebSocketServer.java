@@ -1,4 +1,4 @@
-package com.bilibili.message.config;
+package com.bilibili.message.server;
 
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
@@ -42,10 +42,8 @@ public class WebSocketServer {
         for (Object key : sessionMap.keySet()) {
             JSONObject jsonObject = new JSONObject();
             jsonObject.set("username", key);
-            // {"username", "zhang", "username": "admin"}
             array.add(jsonObject);
         }
-//        {"users": [{"username": "zhang"},{ "username": "admin"}]}
         sendAllMessage(JSONUtil.toJsonStr(result));  // 后台发送消息给所有的客户端
 
     }
@@ -72,7 +70,6 @@ public class WebSocketServer {
         JSONObject obj = JSONUtil.parseObj(message);
         String toUsername = obj.getStr("to"); // to表示发送给哪个用户，比如 admin
         String text = obj.getStr("text"); // 发送的消息文本  hello
-        // {"to": "admin", "text": "聊天文本"}
         Session toSession = sessionMap.get(toUsername); // 根据 to用户名来获取 session，再通过session发送消息文本
         if (toSession != null) {
             // 服务器端 再把消息组装一下，组装后的消息包含发送人和发送的文本内容
