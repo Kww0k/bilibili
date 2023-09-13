@@ -12,6 +12,38 @@ const router = createRouter({
             path: '/message',
             name: 'message',
             component: () => import('../views/message/MessageVue.vue'),
+            children: [
+                {
+                    path: '/selfMessage',
+                    name: 'message-selfMessage',
+                    component: () => import('@/views/message/selfMessage/SelfMessagePage.vue')
+                },
+                {
+                    path: '/aiteME',
+                    name: 'message-aiteME',
+                    component: () => import('@/views/message/aiteMe/AiteMePage.vue')
+                },
+                {
+                    path: '/likes',
+                    name: 'message-likes',
+                    component: () => import('@/views/message/likes/LikesPage.vue')
+                },
+                {
+                    path: '/recoverMe',
+                    name: 'message-recoverMe',
+                    component: () => import('@/views/message/recoverMe/RecoverMePage.vue')
+                },
+                {
+                    path: '/setting',
+                    name: 'message-setting',
+                    component: () => import('@/views/message/setting/SettingPage.vue')
+                },
+                {
+                    path: '/systemMessage',
+                    name: 'message-systemMessage',
+                    component: () => import('@/views/message/systemMessage/SystemMessagePage.vue')
+                },
+            ]
         },
         {
             path: '/:id',

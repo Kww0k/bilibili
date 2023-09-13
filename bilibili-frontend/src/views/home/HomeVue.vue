@@ -214,7 +214,7 @@ onMounted(() => {
         </div>
       </div>
       <div class="main-suggest">
-        <el-row :gutter="15" class="suggest-body">
+        <el-row :gutter="20" class="suggest-body">
           <el-col :span="10">
             <Banner/>
           </el-col>
@@ -240,7 +240,7 @@ onMounted(() => {
         </el-row>
       </div>
       <div class="main-video">
-        <el-row v-for="cards in cardList" :gutter="15" class="video-body">
+        <el-row v-for="cards in cardList" :gutter="20" class="video-body">
           <el-col v-for="card in cards" :span="5">
             <PageCard v-if="card.id !== 0"
                       :id="card.id"
