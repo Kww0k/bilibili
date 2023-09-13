@@ -3,13 +3,13 @@ package com.bilibili.message.server;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import com.bilibili.commons.service.MessageService;
 import jakarta.websocket.*;
 import jakarta.websocket.server.PathParam;
 import jakarta.websocket.server.ServerEndpoint;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -20,9 +20,11 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @ServerEndpoint(value = "/imserver/{username}")
 @Component
+@RequiredArgsConstructor
+@Slf4j
 public class WebSocketServer {
 
-    private static final Logger log = LoggerFactory.getLogger(WebSocketServer.class);
+    private final MessageService messageService;
 
     /**
      * 记录当前在线连接数
