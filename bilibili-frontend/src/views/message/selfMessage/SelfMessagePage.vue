@@ -4,11 +4,12 @@ import {computed, onMounted, ref} from "vue";
 import type {Ref} from "vue"
 import {More} from '@element-plus/icons-vue'
 import {ElMessage} from "element-plus";
-import type {Message} from "../../../../type/message";
+import type {AccountMessage, Message} from "../../../../type/message";
 
 let socket: WebSocket | null;
 const userId = ref(0)
-const users : Ref<Message[]> = ref([])
+const users : Ref<AccountMessage[]> = ref([])
+const messages : Ref<Message[]> = ref([])
 const maxChars = 500; // 最大字符数
 const desc = ref('')
 const remainingChars = computed(() => desc.value.length);
@@ -123,7 +124,17 @@ onMounted(() => {
       <div class="right-body">
         <div class="message-body">
           <el-scrollbar style="width: 100%; height: 100%">
+<!--            <div v-for="message in messages">-->
+<!--              <div class="message-main" v-if="message.to === userId">-->
 
+<!--              </div>-->
+<!--              <div class="message-main" v-if="message.from === 1">-->
+
+<!--              </div>-->
+<!--            </div>-->
+            <div class="message-main">
+
+            </div>
           </el-scrollbar>
         </div>
         <div class="send-box">
@@ -146,6 +157,12 @@ onMounted(() => {
 </template>
 
 <style scoped>
+.message-main {
+  width: 100%;
+  min-height: 48px;
+  overflow: hidden;
+  position: relative;
+}
 .desc-input  >>> .el-textarea__inner {
   background-color: transparent;
   color: #222;
