@@ -3,6 +3,7 @@ package com.bilibili.commons.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bilibili.commons.cache.AccountListCache;
+import com.bilibili.commons.cache.MessageCache;
 import com.bilibili.commons.domain.LoginUser;
 import com.bilibili.commons.domain.RestBean;
 import com.bilibili.commons.domain.dto.EmailLoginDTO;
@@ -10,6 +11,7 @@ import com.bilibili.commons.domain.dto.InsertAccountDTO;
 import com.bilibili.commons.domain.dto.UpdateAccountDTO;
 import com.bilibili.commons.domain.entity.Account;
 import com.bilibili.commons.domain.vo.AccountAuthVO;
+import com.bilibili.commons.domain.vo.AccountMessageVO;
 import com.bilibili.commons.domain.vo.AuthVO;
 import com.bilibili.commons.domain.vo.UpInfoVO;
 import com.bilibili.commons.exctption.auth.EmailLimitException;
@@ -48,6 +50,8 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
     private final UuidUtil uuidUtil;
 
     private final AccountListCache accountListCache;
+
+    private final MessageCache messageCache;
 
     private final BeanCopyUtils beanCopyUtils;
 
@@ -180,6 +184,15 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
     @Override
     public RestBean<UpInfoVO> getUpInfo(Integer id) {
         return RestBean.success(beanCopyUtils.copyBean(accountListCache.getOne(id), UpInfoVO.class));
+    }
+
+    @Override
+    public List<AccountMessageVO> getAccountMessageListById(Integer id) {
+        return messageCache.getList()
+                .stream()
+                .filter(message -> Objects.equals(id, message.getFromId()))
+                .map(message -> beanCopyUtils.copyBean(accountListCache.getOne(message.getToId()), AccountMessageVO.class))
+                .toList();
     }
 
 

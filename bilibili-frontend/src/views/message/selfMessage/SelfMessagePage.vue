@@ -1,101 +1,70 @@
 <script setup lang="ts">
 import {Apple} from '@element-plus/icons-vue'
 import {computed, onMounted, ref} from "vue";
+import type {Ref} from "vue"
 import {More} from '@element-plus/icons-vue'
+import {ElMessage} from "element-plus";
+import type {Message} from "../../../../type/message";
 
+let socket: WebSocket | null;
 const userId = ref(0)
-const test = ref([
-  {
-    id : 1,
-    nickname : 'cxc666',
-    desc : 'asdfasdfasfdasfasdfasdfasfasfasdasfasdfasdf',
-    url : 'src/assets/img/defaultAvatar.jpg'
-  },
-  {
-    id : 2,
-    nickname : 'cxc6666',
-    desc : 'asdfasdfasfdasfasdfasdfasfasfasdasfasdfasdf',
-    url : 'src/assets/img/defaultAvatar.jpg'
-  },
-  {
-    id : 3,
-    nickname : 'cxc66666',
-    desc : 'asdfasdfasfdasfasdfasdfasfasfasdasfasdfasdf',
-    url : 'src/assets/img/defaultAvatar.jpg'
-  },
-  {
-    id : 4,
-    nickname : 'cxc666666',
-    desc : 'asdfasdfasfdasfasdfasdfasfasfasdasfasdfasdf',
-    url : 'src/assets/img/defaultAvatar.jpg'
-  },
-  {
-    id : 5,
-    nickname : 'cxc6666666',
-    desc : 'asdfasdfasfdasfasdfasdfasfasfasdasfasdfasdf',
-    url : 'src/assets/img/defaultAvatar.jpg'
-  },
-  {
-    id : 6,
-    nickname : 'cxc66',
-    desc : 'asdfasdfasfdasfasdfasdfasfasfasdasfasdfasdf',
-    url : 'src/assets/img/defaultAvatar.jpg'
-  },
-  {
-    id : 7,
-    nickname : 'cxc6',
-    desc : 'asdfasdfasfdasfasdfasdfasfasfasdasfasdfasdf',
-    url : 'src/assets/img/defaultAvatar.jpg'
-  },
-  {
-    id : 8,
-    nickname : 'cxc',
-    desc : 'asdfasdfasfdasfasdfasdfasfasfasdasfasdfasdf',
-    url : 'src/assets/img/defaultAvatar.jpg'
-  },
-  {
-    id : 9,
-    nickname : 'cxc666',
-    desc : 'asdfasdfasfdasfasdfasdfasfasfasdasfasdfasdf',
-    url : 'src/assets/img/defaultAvatar.jpg'
-  },
-  {
-    id : 10,
-    nickname : 'cxc666',
-    desc : 'asdfasdfasfdasfasdfasdfasfasfasdasfasdfasdf',
-    url : 'src/assets/img/defaultAvatar.jpg'
-  },
-  {
-    id : 11,
-    nickname : 'cxc666',
-    desc : 'asdfasdfasfdasfasdfasdfasfasfasdasfasdfasdf',
-    url : 'src/assets/img/defaultAvatar.jpg'
-  },
-  {
-    id : 12,
-    nickname : 'cxc666',
-    desc : 'asdfasdfasfdasfasdfasdfasfasfasdasfasdfasdf',
-    url : 'src/assets/img/defaultAvatar.jpg'
-  },
-  {
-    id : 13,
-    nickname : 'cxc666',
-    desc : 'asdfasdfasfdasfasdfasdfasfasfasdasfasdfasdf',
-    url : 'src/assets/img/defaultAvatar.jpg'
-  },
-  {
-    id : 4,
-    nickname : 'cxc666',
-    desc : 'asdfasdfasfdasfasdfasdfasfasfasdasfasdfasdf',
-    url : 'src/assets/img/defaultAvatar.jpg'
-  },
-])
+const users : Ref<Message[]> = ref([])
 const maxChars = 500; // 最大字符数
 const desc = ref('')
 const remainingChars = computed(() => desc.value.length);
 
+const init = () => {
+  if (typeof (WebSocket) == "undefined") {
+    ElMessage.error("您的浏览器不支持在线聊天");
+  } else {
+    console.log("您的浏览器支持WebSocket");
+    let socketUrl = "ws://localhost:9101/api/message/imserver/" + 1;
+    if (socket != null) {
+      socket.close();
+      socket = null;
+    }
+    socket = new WebSocket(socketUrl);
+    socket.onopen = function () {
+    };
+    socket.onmessage = function (msg) {
+      let data = JSON.parse(msg.data)
+      if (data.code === 200) {
+        users.value = data.data
+        if (users.value.length > 0 && !userId.value)
+          userId.value = users.value[0].id
+      } else if (data.code === 201) {
+        console.log(data)
+        // 发送成功
+      } else {
+        ElMessage.error("未知异常")
+        return
+      }
+    };
+    //关闭事件
+    socket.onclose = function () {
+    };
+    //发生了错误事件
+    socket.onerror = function () {
+      ElMessage.error("未知错误");
+    }
+  }
+}
+
+const send = () => {
+  if (!userId.value) {
+    ElMessage.error("请选择发送对象")
+  }
+  if (!desc.value) {
+    ElMessage.error("请输入内容")
+  } else {
+    let message = {from: 1, to: userId.value, text: desc.value}
+    socket.send(JSON.stringify(message))
+    desc.value = ''
+  }
+}
+
 onMounted(() => {
-  userId.value = test.value[0].id
+  init()
 })
 
 </script>
@@ -125,7 +94,7 @@ onMounted(() => {
       </div>
       <div class="left-body">
         <el-scrollbar style="height: 100%;width: 100%;">
-          <div class="left-card" :style="{backgroundColor : userId === user.id ? '#e4e5e6' : ''}" v-for="user in test" @click="userId = user.id">
+          <div class="left-card" :style="{backgroundColor : userId === user.id ? '#e4e5e6' : ''}" v-for="user in users" @click="userId = user.id">
             <div class="close">
               <svg data-v-18a3b98b="" viewBox="0 0 40 40" class="css-1dtzbno"><path d="M22.83,20,38.42,4.41a2,2,0,1,0-2.83-2.83h0L20,17.17,4.41,1.58A2,2,0,0,0,1.58,4.41L17.17,20,1.58,35.59a2,2,0,0,0,2.83,2.83L20,22.83,35.59,38.42a2,2,0,1,0,2.83-2.83Z"></path></svg>
             </div>
@@ -136,7 +105,7 @@ onMounted(() => {
                   {{ user.nickname }}
                 </div>
                 <div style="color: #999;padding: 5px 0;overflow: hidden;width: 155px;white-space: nowrap;text-overflow: ellipsis;">
-                  {{ user.desc }}
+                  {{ user.signature }}
                 </div>
               </div>
             </div>
@@ -146,7 +115,7 @@ onMounted(() => {
     </div>
     <div class="right">
       <div class="right-title">
-        <span>{{ test.find(t => t.id === userId) ? test.find(t => t.id === userId).nickname : '' }}</span>
+        <span>{{ users.find(t => t.id === userId) ? users.find(t => t.id === userId).nickname : '' }}</span>
         <div style="position: absolute; right: 10px; top: 6px;cursor:pointer;">
           <el-icon><More /></el-icon>
         </div>
@@ -168,7 +137,7 @@ onMounted(() => {
               <div style="position: absolute; right: 88px;font-size: 12px;color: #c0c0c0; bottom: 25px">
                 {{ remainingChars }}/ {{ maxChars }}
               </div>
-              <el-button style="position: absolute; right: 16px" type="primary" plain>发送</el-button>
+              <el-button style="position: absolute; right: 16px" type="primary" plain @click="send">发送</el-button>
           </div>
         </div>
       </div>

@@ -11,6 +11,10 @@ public class HttpStatus {
      */
     public static final Integer HTTP_STATUS_200 = 200;
 
+    /**
+     * 201
+     */
+    public static final Integer HTTP_STATUS_201 = 201;
 
     /**
      * 401

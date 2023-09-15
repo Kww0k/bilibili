@@ -5,6 +5,7 @@ import com.alibaba.fastjson2.JSONWriter;
 import com.bilibili.commons.enums.HttpMessage;
 
 import static com.bilibili.commons.enums.HttpMessage.SUCCESS;
+import static com.bilibili.commons.enums.HttpMessage.SUCCESS_MESSAGE;
 
 /**
  * @author Silvery
@@ -18,6 +19,10 @@ public record RestBean<T>(int code, T data, String message) {
 
     public static <T> RestBean<T> success(T data) {
         return new RestBean<>(SUCCESS.getCode(), data, SUCCESS.getMessage());
+    }
+
+    public static <T> RestBean<T> successMessage(T data) {
+        return new RestBean<>(SUCCESS_MESSAGE.getCode(), data, SUCCESS_MESSAGE.getMessage());
     }
 
     public static <T> RestBean<T> failure(int code, String message) {

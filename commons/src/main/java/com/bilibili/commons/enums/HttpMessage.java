@@ -12,6 +12,7 @@ import static com.bilibili.commons.constants.HttpStatus.*;
 public enum HttpMessage {
 
     SUCCESS(HTTP_STATUS_200, "操作成功"),
+    SUCCESS_MESSAGE(HTTP_STATUS_201, "操作成功"),
     LOGOUT_ERROR(HTTP_STATUS_400, "退出登陆失败"),
     EMAIL_LIMIT(HTTP_STATUS_400, "请求过于频繁，请等待一分钟"),
     USER_NOT_FIND(HTTP_STATUS_404, "用户不存在"),

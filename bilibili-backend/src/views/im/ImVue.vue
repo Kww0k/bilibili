@@ -4,10 +4,10 @@
       <el-col :span="4">
         <el-card style="width: 300px; height: 300px; color: #333">
           <div style="padding-bottom: 10px; border-bottom: 1px solid #ccc">在线用户<span style="font-size: 12px">（点击聊天气泡开始聊天）</span></div>
-          <div style="padding: 10px 0" v-for="user in users" :key="user.username">
-            <span>{{ user.username }}</span>
+          <div style="padding: 10px 0" v-for="user in users" :key="user.id">
+            <span>{{ user.nickname }}</span>
             <el-button style="margin-left: 10px; font-size: 16px; cursor: pointer"
-               @click="chatUser = user.username"></el-button >
+               @click="chatUser = user.nickname"></el-button >
             <span style="font-size: 12px;color: limegreen; margin-left: 5px" v-if="user.username === chatUser">chatting...</span>
           </div>
         </el-card>
@@ -37,6 +37,7 @@
 
 import {SessionStorageService} from "@/util/storage";
 import {STORAGE_PREFIX, TOKEN, USER} from "@/config/cache";
+import {ElMessage} from "element-plus";
 
 let socket;
 
@@ -66,10 +67,6 @@ export default {
       if (!this.text) {
         this.$message({type: 'warning', message: "请输入内容"})
       } else {
-        if (typeof (WebSocket) == "undefined") {
-          console.log("您的浏览器不支持WebSocket");
-        } else {
-          console.log("您的浏览器支持WebSocket");
           // 组装待发送的消息 json
           // {"from": "zhang", "to": "admin", "text": "聊天文本"}
           let message = {from: this.user.username, to: this.chatUser, text: this.text}
@@ -78,7 +75,6 @@ export default {
           // 构建消息内容，本人消息
           this.createContent(null, this.user.username, this.text)
           this.text = '';
-        }
       }
     },
     createContent(remoteUser, nowUser, text) {  // 这个方法是用来将 json的聊天消息数据转换成 html的。
@@ -112,13 +108,13 @@ export default {
     },
     init() {
       this.user = SessionStorageService.get(`${STORAGE_PREFIX}${USER}`) ? JSON.parse(SessionStorageService.get(`${STORAGE_PREFIX}${USER}`) ) : {}
-      let username = this.user.username;
+      let id = this.user.id;
       let _this = this;
       if (typeof (WebSocket) == "undefined") {
-        console.log("您的浏览器不支持WebSocket");
+        ElMessage.error("您的浏览器不支持在线聊天");
       } else {
         console.log("您的浏览器支持WebSocket");
-        let socketUrl = "ws://localhost:9101/api/message/imserver/" + username;
+        let socketUrl = "ws://localhost:9101/api/message/imserver/" + id;
         if (socket != null) {
           socket.close();
           socket = null;
@@ -127,14 +123,13 @@ export default {
         socket = new WebSocket(socketUrl);
         //打开事件
         socket.onopen = function () {
-          console.log("websocket已打开");
         };
         //  浏览器端收消息，获得从服务端发送过来的文本消息
         socket.onmessage = function (msg) {
           console.log("收到数据====" + msg.data)
           let data = JSON.parse(msg.data)  // 对收到的json数据进行解析， 类似这样的： {"users": [{"username": "zhang"},{ "username": "admin"}]}
-          if (data.users) {  // 获取在线人员信息
-            _this.users = data.users.filter(user => user.username !== username)  // 获取当前连接的所有用户信息，并且排除自身，自己不会出现在自己的聊天列表里
+          if (data.code) {  // 获取在线人员信息
+            _this.users = data.data  // 获取当前连接的所有用户信息，并且排除自身，自己不会出现在自己的聊天列表里
           } else {
             // 如果服务器端发送过来的json数据 不包含 users 这个key，那么发送过来的就是聊天文本json数据
             //  // {"from": "zhang", "text": "hello"}
@@ -147,11 +142,10 @@ export default {
         };
         //关闭事件
         socket.onclose = function () {
-          console.log("websocket已关闭");
         };
         //发生了错误事件
         socket.onerror = function () {
-          console.log("websocket发生了错误");
+          ElMessage.error("未知错误");
         }
       }
     }

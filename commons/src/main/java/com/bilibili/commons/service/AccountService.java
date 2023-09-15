@@ -7,6 +7,7 @@ import com.bilibili.commons.domain.dto.InsertAccountDTO;
 import com.bilibili.commons.domain.dto.UpdateAccountDTO;
 import com.bilibili.commons.domain.entity.Account;
 import com.bilibili.commons.domain.vo.AccountAuthVO;
+import com.bilibili.commons.domain.vo.AccountMessageVO;
 import com.bilibili.commons.domain.vo.AuthVO;
 import com.bilibili.commons.domain.vo.UpInfoVO;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -90,4 +91,14 @@ public interface AccountService extends IService<Account>, UserDetailsService {
      * @return RestBean<UpInfoVO>
      */
     RestBean<UpInfoVO> getUpInfo(Integer id);
+
+    /**
+     * 根据用户id获取他发消息的列表
+     *
+     * @author Silvery
+     * @since 2023/9/15 17:17
+     * @param id 用户id
+     * @return List<AccountMessageVO>
+     */
+    List<AccountMessageVO> getAccountMessageListById(Integer id);
 }
