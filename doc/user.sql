@@ -14,3 +14,10 @@ create table todo
 )
     comment '代办事项';
 
+create table likes
+(
+    account_id int null,
+    likes_id   int null
+);
+
+

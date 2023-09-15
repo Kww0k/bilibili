@@ -3,11 +3,14 @@ package com.bilibili.message.server;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.bilibili.commons.service.MessageService;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.bilibili.commons.domain.entity.Account;
+import com.bilibili.commons.service.AccountService;
+import com.bilibili.commons.service.service.MessageService;
+import com.bilibili.commons.utils.SpringContext;
 import jakarta.websocket.*;
 import jakarta.websocket.server.PathParam;
 import jakarta.websocket.server.ServerEndpoint;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -18,34 +21,36 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * @author websocket服务
  */
-@ServerEndpoint(value = "/imserver/{username}")
 @Component
-@RequiredArgsConstructor
+@ServerEndpoint(value = "/imserver/{username}")
 @Slf4j
 public class WebSocketServer {
 
-    private final MessageService messageService;
+    MessageService messageService = (MessageService) SpringContext.getBean("messageService");
+
+    AccountService accountService = (AccountService) SpringContext.getBean("accountService");
 
     /**
      * 记录当前在线连接数
      */
     public static final Map<String, Session> sessionMap = new ConcurrentHashMap<>();
 
+
     /**
      * 连接建立成功调用的方法
      */
     @OnOpen
     public void onOpen(Session session, @PathParam("username") String username) {
+        Account account = accountService.getOne(new LambdaQueryWrapper<Account>().eq(Account::getUsername, username));
         sessionMap.put(username, session);
-        log.info("有新用户加入，username={}, 当前在线人数为：{}", username, sessionMap.size());
         JSONObject result = new JSONObject();
         JSONArray array = new JSONArray();
-        result.set("users", array);
         for (Object key : sessionMap.keySet()) {
             JSONObject jsonObject = new JSONObject();
-            jsonObject.set("username", key);
+            jsonObject.set("username", account.getNickname());
             array.add(jsonObject);
         }
+        result.set("users", array);
         sendAllMessage(JSONUtil.toJsonStr(result));  // 后台发送消息给所有的客户端
 
     }

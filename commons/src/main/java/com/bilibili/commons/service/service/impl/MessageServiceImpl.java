@@ -1,9 +1,9 @@
-package com.bilibili.commons.service.impl;
+package com.bilibili.commons.service.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bilibili.commons.domain.entity.Message;
 import com.bilibili.commons.mapper.MessageMapper;
-import com.bilibili.commons.service.MessageService;
+import com.bilibili.commons.service.service.MessageService;
 import org.springframework.stereotype.Service;
 
 /**

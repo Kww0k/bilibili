@@ -1,4 +1,4 @@
-package com.bilibili.commons.service;
+package com.bilibili.commons.service.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.bilibili.commons.domain.entity.Message;

@@ -1,17 +1,17 @@
 package com.bilibili.commons.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.bilibili.commons.domain.entity.Message;
+import com.bilibili.commons.domain.entity.Likes;
 import org.apache.ibatis.annotations.Mapper;
 
 
 /**
- * (Message)表数据库访问层
+ * (Likes)表数据库访问层
  *
  * @author Silvery
- * @since 2023-09-13 23:13:59
+ * @since 2023-09-15 16:01:36
  */
 @Mapper
-public interface MessageMapper extends BaseMapper<Message> {
+public interface LikesMapper extends BaseMapper<Likes> {
 
 }

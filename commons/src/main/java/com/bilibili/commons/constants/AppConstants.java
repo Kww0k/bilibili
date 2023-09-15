@@ -115,6 +115,14 @@ public class AppConstants {
      */
     public static final String FILE_CACHE = "file:cache";
     /**
+     * 消息缓存
+     */
+    public static final String MESSAGE_CACHE = "message:cache";
+    /**
+     * 关注缓存
+     */
+    public static final String LIKES_CACHE = "likes:cache";
+    /**
      * 标签缓存
      */
     public static final String TAG_CACHE = "tag:cache";
