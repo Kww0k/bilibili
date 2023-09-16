@@ -175,7 +175,7 @@ onMounted(() => {
               <div style="position: absolute; right: 88px;font-size: 12px;color: #c0c0c0; bottom: 25px">
                 {{ remainingChars }}/ {{ maxChars }}
               </div>
-              <el-button style="position: absolute; right: 16px" type="primary" plain @click="send">发送</el-button>
+              <el-button style="position: absolute; right: 16px" type="primary" @keyup.enter="send" plain @click="send">发送</el-button>
           </div>
         </div>
       </div>
