@@ -263,8 +263,102 @@
     </div>
   </el-collapse-transition>
 
-  <el-dialog>
-
+  <el-dialog
+      style="-webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 820px;
+    min-height: 430px;
+      background-image: url(https://s1.hdslb.com/bfs/seed/jinkela/short/mini-login-v2/img/22_open.4ea5f239.png),
+  url(https://s1.hdslb.com/bfs/seed/jinkela/short/mini-login-v2/img/33_open.f7d7f655.png);
+    border-radius: 8px;
+    padding: 0 65px 29px 70px;
+    background-position: 0 100%,100% 100%;
+    background-repeat: no-repeat,no-repeat;
+    background-size: 14%;
+    position: relative;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}"
+      v-model="loginDialog"
+      top="30vh"
+  >
+    <div style="width: 100%;min-height: 310px; display: flex">
+      <div style="width: 173px; display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-orient: vertical;-webkit-box-direction: normal;-ms-flex-direction: column;flex-direction: column;-webkit-box-align: center;-ms-flex-align: center;align-items: center;">
+        <div style="width: 100%;font-style: normal;font-weight: 500;font-size: 18px;line-height: 16px;color: #505050;margin-bottom: 26px; text-align: center">
+          扫描二维码登陆
+        </div>
+        <div style="width: 173px; height: 173px;border: 1px solid #e3e5e7;border-radius: 8px;background-color: #18191C">
+        </div>
+        <div style="margin-top: 18px; width: 100%">
+          <div style="font-weight: 400;font-size: 13px;text-align: center;color: #505050;">
+            请使用 <span style="color: #00aeec;">哔哩哔哩客户端</span>
+          </div>
+          <div style="font-weight: 400;font-size: 13px;text-align: center;color: #505050;">
+            扫码登录或扫码下载APP
+          </div>
+        </div>
+      </div>
+      <div style="position: relative;display: block;width: 1px;-webkit-box-flex: 0;-ms-flex: none; flex: none; height: 228px;background-color: #e3e5e7; margin: 43px 44px 0 45px;z-index: 1;border-radius: 8px;-webkit-transform: scaleX(.5);transform: scaleX(.5);">
+      </div>
+      <div style="width: 400px;display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-orient: vertical;-webkit-box-direction: normal; -ms-flex-direction: column;flex-direction: column;-webkit-box-align: center;-ms-flex-align: center;align-items: center;">
+        <div style="display: -webkit-box;display: -ms-flexbox;display: flex;align-content: center;-webkit-box-pack: center;-ms-flex-pack: center;justify-content: center;margin-bottom: 24px;">
+          <div :class="[loginType === 1 ? 'login-choose' : 'login-unchoose',]" @click="loginType=1">密码登陆</div>
+          <div style="width: 1px;height: 20px;background: #e3e5e7;border-radius: 8px;margin: 0 21px;"></div>
+          <div :class="[loginType === 2 ? 'login-choose' : 'login-unchoose',]" @click="loginType=2">邮箱登陆</div>
+        </div>
+        <div v-if="loginType === 1">
+          <form class="tab-form">
+            <div class="form-item">
+              <div>账号</div>
+              <el-input placeholder="请输入账号" style="width: 310px; margin-left: 20px"/>
+            </div>
+            <div style="display: block;width: 100%;height: 0;border-bottom: 1px solid #e3e5e7;">
+            </div>
+            <div class="form-item">
+              <div>
+                密码
+              </div>
+              <el-input placeholder="请输入密码" style="width: 210px; margin-left: 20px"/>
+            </div>
+          </form>
+          <div class="form-btn">
+            <el-button style="width: 194px;height: 40px;border-radius: 8px;" @click="loginType=2">注册</el-button>
+            <el-button style="width: 194px;height: 40px;border-radius: 8px;" type="primary">登录</el-button>
+          </div>
+        </div>
+        <div v-if="loginType === 2">
+          <form class="tab-form">
+            <div class="form-item">
+              <div>
+                邮箱
+              </div>
+              <el-input placeholder="请输入邮箱号" style="width: 185px;margin-left: 35px"/>
+            </div>
+            <div style="display: block;width: 100%;height: 0;border-bottom: 1px solid #e3e5e7;">
+            </div>
+            <div class="form-item">
+              <div>
+                验证码
+              </div>
+              <el-input placeholder="请输入验证码" style="width: 295px;margin-left: 20px"/>
+            </div>
+          </form>
+          <div class="form-btn" style="justify-content: center;">
+            <el-button style="width: 194px;height: 40px;border-radius: 8px;" type="primary">登录</el-button>
+          </div>
+        </div>
+        <div class="login-sns-wp">
+          <div class="login-sns-title">其他方式登录</div>
+          <div class="login-sns-content"><div class="login-sns-item"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAMAAACfWMssAAAAgVBMVEUAAABXu0BYt0BQt0BXu0BWu0BXu0BXu0BXu0BWukBWukBXvEBXu0BXvEBXvEBYukBVukBXu0BWt0BXukBXuEBXu0D////1+/Pq9+fV7s/A5rer3aBsw1jg89uBzHBiwEy14auL0Xug2ZOW1YeBzG93yGSW1YjL6sO14azL6cN2yGP3XpzOAAAAFXRSTlMA3yAQ78+/r5+AUI9w74BgYEBAkHDBb56KAAACF0lEQVRIx52W6XKDIBRGwT3GZmsRUXFP0vb9H7AKGS8aiCXnR0TCmU/gOoh0uJck8jEZwUGYXND/cOPggyz4CE//0HZgKeDIsdSA3Qs1Bk2XejLF7ckGe1fnOT7ZBDsaDxNiZ4Jna4Jnb7rgbeKrK7QnFuzBOxIrYrsJAth9iIdl/9CwLE0pv/elqfoegWpfXdAUYINW9GRkRIBWakBemiOVGRbpE1lpijwaPDANCxvCc8qBbcVF47vq5EQ1YjCK3nyXiXE3QqrpSseeu+jptc96XgWmHSGDEGtCmDHygpK5nUuRdr2MvvfNdMvzXCN+KVNk6RO0qOpr37fXJzFCwdzmT9532THZovmqFHxlF3/WcdWQGUsBI2g3K/G3WG3o4oEVsVqOK4RHaTpfaKkXCVsWzPTL65pPN7X4kxnEX6qIXS4mJqfOH5tVKSJWzJsiXqlcklxe5AI0yuL4RDUpiKkGphRrRFRK+lLk88AQSg4KXVC9TvwSRQ4MU5m1xZ2xlmnEm1LkrqeKTVbU5rcaNtJDCAWqCOutq90CpjiKMTFQZuuah/9Oo+h6ZtPkYTSxI0YKReWLtxFBpJ5bzjOasWYsoBp6HQSRW5R5tz4C4HS0PltjO/H05sH6iQDXtz0d3/94ANPes/9Asjd9572PwE8X6Tm+DPViZMQ5mLUDxGnVCFtqwDH0VlYQS22bcxIGIhn7UXLWWn+10s6FZo+4YQAAAABJRU5ErkJggg==" class="login-sns-item-icon"><span class="login-sns-name">微信登录</span></div><div class="login-sns-item"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAMAAACfWMssAAAAh1BMVEUAAADXQDjTQDzaQzfcRTfbRDfcRDbcQzbbRDbbRDfcQzbaQzbbRDbbRDbaRDfcQzbbRDfaQjjaQjXcQzfYRDfbRDTbRDf////gW1D99PPtoZvyubT76Ob20M3pioLdT0Tvrajkc2n20c3rlo7mfnb0xcD43NrrlY7kcmniZ1343driZ1z0xMEgvW1iAAAAFnRSTlMAIBDf34Dv78+/n1BAj7CvcGBgkHBwDUc+aAAAAmpJREFUSMeVlueCqjAQRgOI0qy7m0YVsN297/98OwEdCUQ05w8WDt/MkIjEhJv8RIFHAS/c/CTkM9w4XFKN5ebwgeaDNWURObYa4s+oMWrG1MOruDV9w9o1eU5A37JwDN6CUksTPWsTPXvTRe89wXBCa2rB+ukd6By3K6ca8WcNVoyxLB26i0ex/mxgzRTiMlx990A6C09PZ6XKwXbpIyP6Fn4C8zKONHVYFrJ4tJWfoUMJ5k2PPBi0igHZrX8j4HVLITPXB7udeK1gHem9ziJjouTwQYmnhCCuxh5UhSJO9qKmWwxrTcZeyh5UpcyFyOH0Bi5SaYNNyG7qYeK95CttWUWlJn6PW5RsSgVtlyqxoEhEQs1rNEPrldf5cI8Qb+hxYRKlaVsSY4NZKqU81aynpQY0kTNF3pS4fsDFvTESx4Gi0b4vMqWKdl4UcHWukmSeZXnRV9Gb5VgcDucIJ3B11JbckSmKyXAC7V7I52hxI2WmyYYk0m7+Dbd8JR7boTYlbshOE9WBsYb+MglBZ6r4p8TxXL+Hi7zov2dCnY1N8v7ViIS4z21V9q3U7Ap9YkzOulnrLAkZLtYTA4f+CpYLHEjFgCMdtwhiTBGedT+D/NwtIHU2V3li4tE9iO5qaILQwvF4LNUtTLsr8InnTX6Pebfq8qopmup/V29W0CkRIaNISDmxJwLqNeEYHwG8repzltVpA/Ua8UmP61ErPHy2xnbiniBflg9WxA0sCnXJAMezadDSRM/aRM/eDMCb4n7Z/glE9rOhq5i8xPFfaz7GmdXIs9aw4O1qZIUxam9IdtuwS/aCaJcYrT+uh9kYccQkXQAAAABJRU5ErkJggg==" class="login-sns-item-icon"><span class="login-sns-name">微博登录</span></div><div class="login-sns-item"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAMAAACfWMssAAAAb1BMVEUAAABMouVIn+NEn99MouVMouVMo+ZMouVKouRKouJMn+NMouZLouRLo+VMoeNMouZLoeVLoeVNn+RMouX///+83Pal0PL0+v6x1vRireiay/FXqOfS6Pl5uevH4vePxe+Ev+1utOrp9Pzp8/yEv+7XzqLPAAAAE3RSTlMA3yAQ74C/n2BQQK9wz5CPz7BwJ8NfpgAAAbNJREFUSMe1lutygjAQhTeEOyi2AQIC3t//GcvYqk3OYsh0+v1yMN+czc4mQBwyL5ONUDMiLsqc1iGzOFQGYZGu0KLZQkQSrNSQ6I2aGRqkpktxlXJQSc4LNsqJCBhPOCQwwXOa6PmbErxlNpJeVMqD6uWliqOfprPiyN5tcOp0PaObntnmo9hIAV39pFNA9BOogKb+RQN/h9+RCfzR1gbtQqSArtQmemAjUy4QI7GxBTy92qKGJfEshlgp0DO15srmhuIRFuX0Cc/2KO5hUUkF1xt3dxKKuUS3uCPBjA0w4rySwqYyDLCM+EqxVrd45UTtFm81ywlEuzkHXhyhOfY1DArfntg+jRMY/PB80CeODaLhHigpt7fYNSgeuvpgD7k0j9V4Gfbc6RjN7oRE1rCeejVo27vMD4/WFokynB33qUpnUYb+t5zg7+OhNYrVxx5PIzGRJ9ijniwxIC7y3DV3urZ9/DrDfQxvR793a+YnpvRk6+Nt6YXceRQq//rxgKb/h87/fVrtAmKQW2c/JfGkb0PDjBYJomUtMuJQTcRKDUmL0LLiDDWevCzie7LYJGXOWl/BnLhvbq/sWgAAAABJRU5ErkJggg==" class="login-sns-item-icon"><span class="login-sns-name">QQ登录</span></div></div></div>
+        <div class="login-agreement-wp">
+          <div> 未注册过哔哩哔哩的手机号，我们将自动帮你注册账号 <!----></div>
+          <div style="margin-left: 8px"> 登录或完成注册即代表你同意 <span> 用户协议 <span class="link_word"> 和 </span></span><span> 隐私政策 <span class="link_word">  </span></span>
+          </div>
+        </div>
+      </div>
+    </div>
   </el-dialog>
 </template>
 
@@ -279,6 +373,8 @@ const text = ref('')
 const isHovered = ref(false)
 const avatarType = ref(false)
 const loginDialog = ref(false)
+const loginType = ref(1)
+const isInputPassword = ref(false)
 
 const props = defineProps({
   type: {
@@ -321,6 +417,145 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.choose-password {
+  background-image: url(https://s1.hdslb.com/bfs/seed/jinkela/short/mini-login-v2/img/22_close.9382a5a8.png),
+  url(https://s1.hdslb.com/bfs/seed/jinkela/short/mini-login-v2/img/33_close.a8c18fc8.png);
+}
+.unchoose-password {
+  background-image: url(https://s1.hdslb.com/bfs/seed/jinkela/short/mini-login-v2/img/22_open.4ea5f239.png),
+  url(https://s1.hdslb.com/bfs/seed/jinkela/short/mini-login-v2/img/33_open.f7d7f655.png);
+}
+.form-item .el-input >>> .el-input__wrapper {
+  background-color : transparent;
+  box-shadow: 0 0 0 0;
+}
+.login-agreement-wp .link_word {
+  color: #999;
+}
+.login-agreement-wp span {
+  color: #00a1d6;
+  cursor: pointer;
+}
+.login-agreement-wp {
+  font-size: 13px;
+  font-weight: 300;
+  width: 351px;
+  position: absolute;
+  bottom: 29px;
+  left: 50%;
+  -webkit-transform: translate(-50%);
+  transform: translate(-50%);
+}
+.login-sns-name {
+  text-align: center;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  color: #9499a0;
+}
+.login-sns-item-icon {
+  width: 28px;
+  height: 28px;
+  margin-right: 8px;
+}
+.login-sns-item {
+  margin-right: 30px;
+  cursor: pointer;
+}
+.login-sns-content {
+  margin-top: 12px;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+.login-sns-content, .login-sns-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.login-sns-title {
+  text-align: center;
+  color: #9499a0;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+}
+.login-sns-wp {
+  margin-top: 24px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.form-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin-top: 20px;
+  width: 400px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 40px;
+  text-align: center;
+}
+.tab-form .form-item {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  height: 44px;
+  padding: 12px 20px;
+}
+.tab-form {
+  width: 400px;
+  height: 90px;
+  border: 1px solid #e3e5e7;
+  border-radius: 8px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #212121;
+}
+.login-choose {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  color: #4fa5d9;
+  cursor: not-allowed;
+}
+.login-unchoose {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  color: #505050;
+  cursor: pointer;
+}
 .header-big {
   transform: scale(1);
   position: absolute;
