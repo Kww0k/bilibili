@@ -2,12 +2,16 @@ package com.bilibili.commons.domain.entity;
 
 
 import java.io.Serializable;
+
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+
 /**
  * (Message)表实体类
  *
@@ -19,32 +23,33 @@ import com.baomidou.mybatisplus.annotation.TableName;
 @NoArgsConstructor
 @Accessors(chain = true)
 @TableName("message")
-public class Message  {
+public class Message {
     @TableId
     private Long id;
 
-     /**
+    /**
      * 内容
      */
     private String content;
-     /**
+    /**
      * 发起人
      */
     private Integer fromId;
-     /**
+    /**
      * 接受人
      */
     private Integer toId;
-     /**
+    /**
      * 创建时间
      */
+    @TableField(fill = FieldFill.INSERT)
     private String createTime;
-     /**
+    /**
      * 更新时间
      */
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private String updateTime;
     private Integer delFlag;
-
 
 
 }

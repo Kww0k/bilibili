@@ -26,4 +26,15 @@ public interface MessageService extends IService<Message> {
      * @return RestBean
      */
     RestBean<List<SendMessageVO>> getMessageByFromAndToId(Integer from, Integer to);
+
+    /**
+     * 发消息
+     *
+     * @author Silvery
+     * @since 2023/9/16 16:58
+     * @param id 发起人
+     * @param to 接受人
+     * @param text 内容
+     */
+    void insertNewMessage(Integer id, Integer to, String text);
 }

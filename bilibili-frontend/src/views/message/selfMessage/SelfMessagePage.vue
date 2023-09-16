@@ -37,8 +37,7 @@ const init = () => {
           userId.value = users.value[0].id
         getMessages()
       } else if (data.code === 201) {
-        console.log(data)
-        // 发送成功
+        messages.value.push(data.data)
       } else {
         ElMessage.error("未知异常")
         return

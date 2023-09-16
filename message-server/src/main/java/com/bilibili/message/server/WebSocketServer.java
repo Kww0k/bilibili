@@ -87,6 +87,7 @@ public class WebSocketServer {
             list.forEach(toSession ->
                     this.sendMessage(
                             RestBean.successMessage(new SendMessageVO().setFrom(id).setText(text).setTo(to)).toJsonString(), toSession));
+            messageService.insertNewMessage(id, to, text);
         } else {
             log.info("发送失败，未找到用户username={}的session", to);
         }
