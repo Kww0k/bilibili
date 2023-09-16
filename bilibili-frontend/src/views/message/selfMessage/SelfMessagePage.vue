@@ -5,6 +5,8 @@ import type {Ref} from "vue"
 import {More} from '@element-plus/icons-vue'
 import {ElMessage} from "element-plus";
 import type {AccountMessage, Message} from "../../../../type/message";
+import request from "@/net";
+import type {BaseResponse} from "../../../../type/response";
 
 let socket: WebSocket | null;
 const userId = ref(0)
@@ -33,6 +35,7 @@ const init = () => {
         users.value = data.data
         if (users.value.length > 0 && !userId.value)
           userId.value = users.value[0].id
+        getMessages()
       } else if (data.code === 201) {
         console.log(data)
         // 发送成功
@@ -51,6 +54,15 @@ const init = () => {
   }
 }
 
+const getMessages = () => {
+  request.get("/message/web/message/getMessageByFromAndToId?from=" + 1 + "&to=" + userId.value).then((res : BaseResponse<Message[]>) => {
+    if (res.code === 200)
+      messages.value = res.data
+    else
+      ElMessage.error(res.message)
+  })
+}
+
 const send = () => {
   if (!userId.value) {
     ElMessage.error("请选择发送对象")
@@ -62,6 +74,11 @@ const send = () => {
     socket.send(JSON.stringify(message))
     desc.value = ''
   }
+}
+
+const changeTo = (id : number) => {
+  userId.value = id;
+  getMessages()
 }
 
 onMounted(() => {
@@ -95,7 +112,7 @@ onMounted(() => {
       </div>
       <div class="left-body">
         <el-scrollbar style="height: 100%;width: 100%;">
-          <div class="left-card" :style="{backgroundColor : userId === user.id ? '#e4e5e6' : ''}" v-for="user in users" @click="userId = user.id">
+          <div class="left-card" :style="{backgroundColor : userId === user.id ? '#e4e5e6' : ''}" v-for="user in users" @click="changeTo(user.id)">
             <div class="close">
               <svg data-v-18a3b98b="" viewBox="0 0 40 40" class="css-1dtzbno"><path d="M22.83,20,38.42,4.41a2,2,0,1,0-2.83-2.83h0L20,17.17,4.41,1.58A2,2,0,0,0,1.58,4.41L17.17,20,1.58,35.59a2,2,0,0,0,2.83,2.83L20,22.83,35.59,38.42a2,2,0,1,0,2.83-2.83Z"></path></svg>
             </div>
@@ -128,7 +145,7 @@ onMounted(() => {
             </div>
             <div v-for="message in messages">
               <div class="message-main">
-                <div style="width: calc(100% - 32px); margin-left: 16px; display: flex; margin-bottom: 16px">
+                <div v-if="message.from === userId" style="width: calc(100% - 32px); margin-left: 16px; display: flex; margin-bottom: 16px">
                   <el-avatar :src="users.find(t => t.id === userId) ? users.find(t => t.id === userId).url : ''" style="width: 30px; height: 30px; margin-right: 8px"/>
                   <div class="message-content-left">
                     <div style="max-height: 198px; margin-left: 16px; margin-top: 8px; margin-right: 16px">
@@ -136,7 +153,7 @@ onMounted(() => {
                     </div>
                   </div>
                 </div>
-                <div style="justify-content: flex-end;width: calc(100% - 32px); margin-left: 16px; display: flex; margin-bottom: 16px">
+                <div v-if="message.from === 1" style="justify-content: flex-end;width: calc(100% - 32px); margin-left: 16px; display: flex; margin-bottom: 16px">
                   <div class="message-content-right">
                     <div style="max-height: 198px; margin-left: 16px; margin-top: 8px; margin-right: 16px">
                       {{ message.text }}

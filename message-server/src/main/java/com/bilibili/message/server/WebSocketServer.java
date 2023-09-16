@@ -80,15 +80,15 @@ public class WebSocketServer {
     public void onMessage(String message, Session session, @PathParam("id") Integer id) {
         log.info("服务端收到用户id={}的消息:{}", id, message);
         JSONObject obj = JSONUtil.parseObj(message);
-        String toUsername = obj.getStr("to"); // to表示发送给哪个用户，比如 admin
+        Integer to = Integer.parseInt(obj.getStr("to")); // to表示发送给哪个用户，比如 admin
         String text = obj.getStr("text"); // 发送的消息文本  hello
         List<Session> list = sessionMap.get(id);// 根据 to用户名来获取 session，再通过session发送消息文本
         if (list != null && !list.isEmpty()) {
             list.forEach(toSession ->
                     this.sendMessage(
-                            RestBean.successMessage(new SendMessageVO().setId(id).setText(text)).toJsonString(), toSession));
+                            RestBean.successMessage(new SendMessageVO().setFrom(id).setText(text).setTo(to)).toJsonString(), toSession));
         } else {
-            log.info("发送失败，未找到用户username={}的session", toUsername);
+            log.info("发送失败，未找到用户username={}的session", to);
         }
     }
 

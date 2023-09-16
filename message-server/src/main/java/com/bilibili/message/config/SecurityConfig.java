@@ -36,6 +36,7 @@ public class SecurityConfig {
         return http
                 .authorizeHttpRequests(conf -> conf
                         .requestMatchers("/imserver/**").permitAll()
+                        .requestMatchers("/web/**").permitAll()
                         .anyRequest().authenticated())
                 // 异常处理
                 .exceptionHandling(conf -> conf
