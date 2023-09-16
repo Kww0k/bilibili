@@ -137,27 +137,19 @@ onMounted(() => {
               </div>
               <div style="width: calc(100% - 32px); margin-left: 16px; display: flex; margin-bottom: 16px">
                 <el-avatar :src="users.find(t => t.id === userId) ? users.find(t => t.id === userId).url : ''" style="width: 30px; height: 30px; margin-right: 8px"/>
-                <div class="message-content">
+                <div class="message-content-left">
                   <div style="max-height: 198px; margin-left: 16px; margin-top: 8px; margin-right: 16px">
                     1111111
                   </div>
                 </div>
               </div>
-              <div style="width: calc(100% - 32px); margin-left: 16px; display: flex; margin-bottom: 16px">
-                <el-avatar :src="users.find(t => t.id === userId) ? users.find(t => t.id === userId).url : ''" style="width: 30px; height: 30px; margin-right: 8px"/>
-                <div class="message-content">
+              <div style="justify-content: flex-end;width: calc(100% - 32px); margin-left: 16px; display: flex; margin-bottom: 16px">
+                <div class="message-content-right">
                   <div style="max-height: 198px; margin-left: 16px; margin-top: 8px; margin-right: 16px">
                     1111111
                   </div>
                 </div>
-              </div>
-              <div style="width: calc(100% - 32px); margin-left: 16px; display: flex; margin-bottom: 16px">
                 <el-avatar :src="users.find(t => t.id === userId) ? users.find(t => t.id === userId).url : ''" style="width: 30px; height: 30px; margin-right: 8px"/>
-                <div class="message-content">
-                  <div style="max-height: 198px; margin-left: 16px; margin-top: 8px; margin-right: 16px">
-                    1111111
-                  </div>
-                </div>
               </div>
             </div>
           </el-scrollbar>
@@ -182,7 +174,20 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.message-content {
+.message-content-right {
+  min-height: 37px;
+  margin-right: 8px;
+  max-width: 230px;
+  line-height: 1.5;
+  font-size: 14px;
+  word-wrap: break-word;
+  word-break: break-word;
+  border-radius: 16px 0 16px 16px;
+  overflow: hidden;
+  background: #80b9f2;
+}
+.message-content-left {
+  min-height: 37px;
   max-width: 230px;
   line-height: 1.5;
   font-size: 14px;
