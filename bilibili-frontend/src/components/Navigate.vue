@@ -73,7 +73,8 @@
         <div class="center-entry_bar">
           <form id="nav-searchform" class="nav-searchform" style="border-radius: 8px;">
             <div class="nav-search-content">
-              <el-input placeholder="陈玄成的ACM金牌之路" :style="{backgroundColor : text !== '' ? '#F1F2F3' : 'transparent'}"
+              <el-input placeholder="陈玄成的ACM金牌之路"
+                        :style="{backgroundColor : text !== '' ? '#F1F2F3' : 'transparent'}"
                         class="nav-search-input" v-model="text" style="width: 100%"/>
               <div v-if="text !== '' " class="nav-search-clean" @click="text = ''">
                 <svg style="position: absolute; color: #C9CCD0" width="16" height="16" viewBox="0 0 16 16" fill="none"
@@ -96,14 +97,21 @@
       </div>
       <ul class="right-entry">
         <li class="header-avatar">
-          <div class="header-mine" v-if="!avatarType" @mouseenter="avatarType = true">
-            <el-avatar style="width: 38px; height: 38px; border: 2px solid #fff;"
-                       src="src/assets/img/defaultAvatar.jpg"/>
+          <div v-if="!SessionStorageService.get(`${STORAGE_PREFIX}${USER}`)">
+              <div class="header-mine" style="width: 36px;height: 36px;border-radius: 50%;color: #fff;background: #00AEEC;text-align: center;letter-spacing: 0;font-size: 14px;line-height: 36px;">
+                登陆
+              </div>
           </div>
-          <div class="header-big" v-if="avatarType" @mouseleave="avatarType = false">
-            <el-avatar
-                style="box-sizing: content-box;width: 82px;height:82px;transform: translate(0px, 0px); border: 2px solid #fff;"
-                src="src/assets/img/defaultAvatar.jpg"/>
+          <div v-if="SessionStorageService.get(`${STORAGE_PREFIX}${USER}`)">
+            <div class="header-mine" v-if="!avatarType" @mouseenter="avatarType = true">
+              <el-avatar style="width: 38px; height: 38px; border: 2px solid #fff;"
+                         src="src/assets/img/defaultAvatar.jpg"/>
+            </div>
+            <div class="header-big" v-if="avatarType" @mouseleave="avatarType = false">
+              <el-avatar
+                         style="box-sizing: content-box;width: 82px;height:82px;transform: translate(0px, 0px); border: 2px solid #fff;"
+                         src="src/assets/img/defaultAvatar.jpg"/>
+            </div>
           </div>
         </li>
         <li class="right-entry-outside">
@@ -225,6 +233,8 @@
 <script setup lang="ts">
 import {defineProps, onMounted, ref} from 'vue';
 import router from "@/router";
+import {SessionStorageService} from "@/util/storage";
+import {STORAGE_PREFIX, USER} from "@/config/cache";
 
 const activeIndex = ref(-1);
 const text = ref('')
@@ -255,8 +265,8 @@ onMounted(() => {
   document.querySelector('.el-input__wrapper').style.boxShadow = '0 0 0 0'
   // @ts-ignore
   document.querySelector('.el-input__wrapper').addEventListener('mouseenter', () => {
-      // @ts-ignore
-      document.querySelector('.el-input__wrapper').style.backgroundColor = '#F1F2F3'
+    // @ts-ignore
+    document.querySelector('.el-input__wrapper').style.backgroundColor = '#F1F2F3'
   });
   // @ts-ignore
   document.querySelector('.el-input__wrapper').addEventListener('mouseleave', () => {
@@ -319,9 +329,11 @@ onMounted(() => {
   text-align: center;
   cursor: pointer;
 }
+
 .bt:hover {
   background-color: #fc8bab;
 }
+
 .bt {
   display: flex;
   align-items: center;
@@ -370,6 +382,7 @@ onMounted(() => {
   right: 20px;
   cursor: pointer;
 }
+
 .nav-search-input {
   border-radius: 6px;
   flex: 1;
@@ -527,9 +540,10 @@ onMounted(() => {
   width: 100%;
   height: 64px;
   background-color: white;
-  animation: none!important;
+  animation: none !important;
   box-shadow: inset 0 -1px 0 #E3E5E7 !important;
 }
+
 .top {
   color: black;
   position: fixed;
@@ -541,9 +555,10 @@ onMounted(() => {
   width: 100%;
   height: 64px;
   background-color: white;
-  animation: none!important;
+  animation: none !important;
   box-shadow: inset 0 -1px 0 #E3E5E7 !important;
 }
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.2s;
