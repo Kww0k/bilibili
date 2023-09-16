@@ -133,7 +133,32 @@ onMounted(() => {
 <!--              </div>-->
 <!--            </div>-->
             <div class="message-main">
-
+              <div style="width: 100%; height: 38px">
+              </div>
+              <div style="width: calc(100% - 32px); margin-left: 16px; display: flex; margin-bottom: 16px">
+                <el-avatar :src="users.find(t => t.id === userId) ? users.find(t => t.id === userId).url : ''" style="width: 30px; height: 30px; margin-right: 8px"/>
+                <div class="message-content">
+                  <div style="max-height: 198px; margin-left: 16px; margin-top: 8px; margin-right: 16px">
+                    1111111
+                  </div>
+                </div>
+              </div>
+              <div style="width: calc(100% - 32px); margin-left: 16px; display: flex; margin-bottom: 16px">
+                <el-avatar :src="users.find(t => t.id === userId) ? users.find(t => t.id === userId).url : ''" style="width: 30px; height: 30px; margin-right: 8px"/>
+                <div class="message-content">
+                  <div style="max-height: 198px; margin-left: 16px; margin-top: 8px; margin-right: 16px">
+                    1111111
+                  </div>
+                </div>
+              </div>
+              <div style="width: calc(100% - 32px); margin-left: 16px; display: flex; margin-bottom: 16px">
+                <el-avatar :src="users.find(t => t.id === userId) ? users.find(t => t.id === userId).url : ''" style="width: 30px; height: 30px; margin-right: 8px"/>
+                <div class="message-content">
+                  <div style="max-height: 198px; margin-left: 16px; margin-top: 8px; margin-right: 16px">
+                    1111111
+                  </div>
+                </div>
+              </div>
             </div>
           </el-scrollbar>
         </div>
@@ -157,6 +182,16 @@ onMounted(() => {
 </template>
 
 <style scoped>
+.message-content {
+  max-width: 230px;
+  line-height: 1.5;
+  font-size: 14px;
+  word-wrap: break-word;
+  word-break: break-word;
+  border-radius: 0 16px 16px 16px;
+  overflow: hidden;
+  background: #fff;
+}
 .message-main {
   width: 100%;
   min-height: 48px;
@@ -176,6 +211,7 @@ onMounted(() => {
 .message-body {
   width: 100%;
   height: calc(100% - 162px);
+  background-color: #f4f5f7;
 }
 .send-box {
   height: 161px;
