@@ -124,32 +124,26 @@ onMounted(() => {
       <div class="right-body">
         <div class="message-body">
           <el-scrollbar style="width: 100%; height: 100%">
-<!--            <div v-for="message in messages">-->
-<!--              <div class="message-main" v-if="message.to === userId">-->
-
-<!--              </div>-->
-<!--              <div class="message-main" v-if="message.from === 1">-->
-
-<!--              </div>-->
-<!--            </div>-->
-            <div class="message-main">
-              <div style="width: 100%; height: 38px">
-              </div>
-              <div style="width: calc(100% - 32px); margin-left: 16px; display: flex; margin-bottom: 16px">
-                <el-avatar :src="users.find(t => t.id === userId) ? users.find(t => t.id === userId).url : ''" style="width: 30px; height: 30px; margin-right: 8px"/>
-                <div class="message-content-left">
-                  <div style="max-height: 198px; margin-left: 16px; margin-top: 8px; margin-right: 16px">
-                    1111111
+            <div style="width: 100%; height: 38px">
+            </div>
+            <div v-for="message in messages">
+              <div class="message-main">
+                <div style="width: calc(100% - 32px); margin-left: 16px; display: flex; margin-bottom: 16px">
+                  <el-avatar :src="users.find(t => t.id === userId) ? users.find(t => t.id === userId).url : ''" style="width: 30px; height: 30px; margin-right: 8px"/>
+                  <div class="message-content-left">
+                    <div style="max-height: 198px; margin-left: 16px; margin-top: 8px; margin-right: 16px">
+                      {{ message.text }}
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div style="justify-content: flex-end;width: calc(100% - 32px); margin-left: 16px; display: flex; margin-bottom: 16px">
-                <div class="message-content-right">
-                  <div style="max-height: 198px; margin-left: 16px; margin-top: 8px; margin-right: 16px">
-                    1111111
+                <div style="justify-content: flex-end;width: calc(100% - 32px); margin-left: 16px; display: flex; margin-bottom: 16px">
+                  <div class="message-content-right">
+                    <div style="max-height: 198px; margin-left: 16px; margin-top: 8px; margin-right: 16px">
+                      {{ message.text }}
+                    </div>
                   </div>
+                  <el-avatar :src="users.find(t => t.id === userId) ? users.find(t => t.id === userId).url : ''" style="width: 30px; height: 30px; margin-right: 8px"/>
                 </div>
-                <el-avatar :src="users.find(t => t.id === userId) ? users.find(t => t.id === userId).url : ''" style="width: 30px; height: 30px; margin-right: 8px"/>
               </div>
             </div>
           </el-scrollbar>
