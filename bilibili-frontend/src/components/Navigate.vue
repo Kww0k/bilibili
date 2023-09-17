@@ -127,10 +127,10 @@
                     </div>
                   </div>
                   <div style="width: 100%">
-                    <el-button @click="loginDialog = true" style="width: 100%; height: 41px; border-radius: 8px" type="primary">立即登陆</el-button>
+                    <el-button @click="loginDialog = true; isInputPassword = false" style="width: 100%; height: 41px; border-radius: 8px" type="primary">立即登陆</el-button>
                   </div>
                   <div style="margin-top: 16px; margin-bottom:20px;color: #18191C;text-align: center;letter-spacing: 0;font-size: 14px;line-height: 20px;">
-                    首次使用？ <span style="cursor:pointer;color: #00b5e5;" @click="loginDialog = true">点我注册</span>
+                    首次使用？ <span style="cursor:pointer;color: #00b5e5;" @click="loginDialog = true; isInputPassword = false">点我注册</span>
                   </div>
                 </div>
               </template>
@@ -264,12 +264,15 @@
   </el-collapse-transition>
 
   <el-dialog
+      @click="isInputPassword = false"
+      :style="{
+          backgroundImage: isInputPassword? 'url(https://s1.hdslb.com/bfs/seed/jinkela/short/mini-login-v2/img/22_close.9382a5a8.png), url(https://s1.hdslb.com/bfs/seed/jinkela/short/mini-login-v2/img/33_close.a8c18fc8.png)' :
+           'url(https://s1.hdslb.com/bfs/seed/jinkela/short/mini-login-v2/img/22_open.4ea5f239.png), url(https://s1.hdslb.com/bfs/seed/jinkela/short/mini-login-v2/img/33_open.f7d7f655.png)'
+      }"
       style="-webkit-box-sizing: border-box;
     box-sizing: border-box;
     width: 820px;
     min-height: 430px;
-      background-image: url(https://s1.hdslb.com/bfs/seed/jinkela/short/mini-login-v2/img/22_open.4ea5f239.png),
-  url(https://s1.hdslb.com/bfs/seed/jinkela/short/mini-login-v2/img/33_open.f7d7f655.png);
     border-radius: 8px;
     padding: 0 65px 29px 70px;
     background-position: 0 100%,100% 100%;
@@ -279,8 +282,7 @@
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    user-select: none;
-}"
+    user-select: none;"
       v-model="loginDialog"
       top="30vh"
   >
@@ -320,7 +322,7 @@
               <div>
                 密码
               </div>
-              <el-input placeholder="请输入密码" style="width: 210px; margin-left: 20px"/>
+              <el-input @click.stop @focus="isInputPassword = true" placeholder="请输入密码" style="width: 210px; margin-left: 20px"/>
             </div>
           </form>
           <div class="form-btn">
@@ -342,7 +344,7 @@
               <div>
                 验证码
               </div>
-              <el-input placeholder="请输入验证码" style="width: 295px;margin-left: 20px"/>
+              <el-input @click.stop @focus="isInputPassword = true" placeholder="请输入验证码" style="width: 295px;margin-left: 20px"/>
             </div>
           </form>
           <div class="form-btn" style="justify-content: center;">
