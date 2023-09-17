@@ -22,3 +22,10 @@ export function registerApi(registerForm : Register): Promise<BaseResponse<AuthV
         return res
     })
 }
+
+export function logoutApi(): Promise<BaseResponse<any>> {
+    // @ts-ignore
+    return request.post("/auth/logout").then((res: BaseResponse<any>) => {
+        return res
+    })
+}

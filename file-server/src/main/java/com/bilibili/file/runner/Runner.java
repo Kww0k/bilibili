@@ -28,9 +28,10 @@ public class Runner implements CommandLineRunner {
     public void run(String... args) {
         List<Files> list = filesMapper.selectList(null);
         list.forEach(files -> {
-            fileListCache.save(files);
             try {
-                filesMapper.updateById(files.setUrl(minioUtilS.generatePreviewUrl(files.getName(), files.getType())));
+                Files files1 = files.setUrl(minioUtilS.generatePreviewUrl(files.getName(), files.getType()));
+                filesMapper.updateById(files1);
+                fileListCache.save(files1);
             } catch (Exception e) {
                 e.printStackTrace();
             }
