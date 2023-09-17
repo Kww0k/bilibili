@@ -3,6 +3,11 @@ export interface Login{
     password: string
 }
 
+export interface Register {
+    email : string,
+    code : number
+}
+
 export interface AccountAuthVO {
     id: number,
     email: string,

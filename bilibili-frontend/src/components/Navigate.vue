@@ -488,8 +488,8 @@ import router from "@/router";
 import {SessionStorageService} from "@/util/storage";
 import {STORAGE_PREFIX, TOKEN, USER} from "@/config/cache";
 import {ElMessage} from "element-plus";
-import {loginApi, getCodeApi} from "@/api/login";
-import type {AccountAuthVO, Login} from "../../type/login";
+import {loginApi, getCodeApi, registerApi} from "@/api/login";
+import type {AccountAuthVO, Login, Register} from "../../type/login";
 
 const activeIndex = ref(-1);
 const text = ref('')
@@ -566,6 +566,24 @@ const register = () => {
     ElMessage.error("请输入验证码")
     return;
   }
+
+  const registerForm : Register = {
+    email : email.value,
+    code : parseInt(code.value)
+  }
+
+  registerApi(registerForm).then((data) => {
+    if (data.code === 200) {
+      SessionStorageService.set(`${STORAGE_PREFIX}${TOKEN}`, data.data.token)
+      SessionStorageService.set(`${STORAGE_PREFIX}${USER}`, JSON.stringify(data.data.accountAuthVO))
+      userInfo.value = data.data.accountAuthVO
+      resetDialog()
+      loginDialog.value = false
+      ElMessage.success("登陆成功")
+    } else {
+      ElMessage.error(data.message)
+    }
+  })
 }
 
 const resetDialog = () => {
