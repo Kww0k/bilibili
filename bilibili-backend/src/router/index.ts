@@ -14,11 +14,6 @@ const router = createRouter({
           component: () => import('@/views/dashboard/contribute/ContributePage.vue')
         },
         {
-          path: '/im',
-          name: 'im',
-          component: () => import('../views/im/ImVue.vue'),
-        },
-        {
           path: '/grassGod',
           name: 'dashboard-grassGod',
           component: () => import('@/views/dashboard/grassGod/GrassGodPage.vue')

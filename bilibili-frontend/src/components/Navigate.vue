@@ -97,10 +97,10 @@
       </div>
       <ul class="right-entry">
         <li class="header-avatar">
-          <div class="wait-login" v-if="!SessionStorageService.get(`${STORAGE_PREFIX}${USER}`)">
+          <div class="wait-login" v-if="!userInfo">
             <el-popover :width="359" popper-style="margin-top: 10px">
               <template #reference>
-                <div class="header-mine"
+                <div class="header-mine" @click="resetDialog;loginDialog = true"
                      style="width: 36px;height: 36px;border-radius: 50%;color: #fff;background: #00AEEC;text-align: center;letter-spacing: 0;font-size: 14px;line-height: 36px;">
                   登陆
                 </div>
@@ -176,19 +176,19 @@
                     </div>
                   </div>
                   <div style="width: 100%">
-                    <el-button @click="resetDialog" style="width: 100%; height: 41px; border-radius: 8px"
+                    <el-button @click="resetDialog;loginDialog = true" style="width: 100%; height: 41px; border-radius: 8px"
                                type="primary">立即登陆
                     </el-button>
                   </div>
                   <div
                       style="margin-top: 16px; margin-bottom:20px;color: #18191C;text-align: center;letter-spacing: 0;font-size: 14px;line-height: 20px;">
-                    首次使用？ <span style="cursor:pointer;color: #00b5e5;" @click="resetDialog">点我注册</span>
+                    首次使用？ <span style="cursor:pointer;color: #00b5e5;" @click="resetDialog;loginDialog = true">点我注册</span>
                   </div>
                 </div>
               </template>
             </el-popover>
           </div>
-          <div v-if="SessionStorageService.get(`${STORAGE_PREFIX}${USER}`)">
+          <div v-if="userInfo">
             <div class="header-mine" v-if="!avatarType" @mouseenter="avatarType = true">
               <el-avatar style="width: 38px; height: 38px; border: 2px solid #fff;"
                          src="src/assets/img/defaultAvatar.jpg"/>
@@ -316,7 +316,7 @@
   </el-collapse-transition>
 
   <el-dialog
-      @close="resetDialog"
+      @close="resetDialog;loginDialog = false"
       @click="isInputPassword = false"
       :style="{
           backgroundImage: isInputPassword? 'url(https://s1.hdslb.com/bfs/seed/jinkela/short/mini-login-v2/img/22_close.9382a5a8.png), url(https://s1.hdslb.com/bfs/seed/jinkela/short/mini-login-v2/img/33_close.a8c18fc8.png)' :
@@ -423,7 +423,7 @@
           </form>
           <div class="form-btn">
             <el-button style="width: 194px;height: 40px;border-radius: 8px;" @click="loginType=2;ElMessage.info('输入邮箱号，完成注册')">注册</el-button>
-            <el-button style="width: 194px;height: 40px;border-radius: 8px;" type="primary">登录</el-button>
+            <el-button style="width: 194px;height: 40px;border-radius: 8px;" type="primary" :disabled="allowToLogin" @click="login">登录</el-button>
           </div>
         </div>
         <div v-if="loginType === 2">
@@ -435,7 +435,10 @@
               <el-input v-model="email" maxlength="32" placeholder="请输入邮箱号"
                         style="width: 185px;margin-left: 35px"/>
               <div style="width: 1px;height: 26px;border-left: 1px solid #e3e5e7;margin-right: 20px;"></div>
-              <div style="  width: 90px;text-align: center;" :class="[allowToSend ? 'login-sns-allow' : 'login-sns-not-allow']">
+              <div v-if="allowToSend" @click="getCode" style="width: 90px;text-align: center;" :class="[allowToSend ? 'login-sns-allow' : 'login-sns-not-allow']">
+                {{ cd > 0 ? '重新发送(' + cd + ')' : '获取验证码'}}
+              </div>
+              <div v-if="!allowToSend" style="width: 90px;text-align: center;" :class="[allowToSend ? 'login-sns-allow' : 'login-sns-not-allow']">
                 {{ cd > 0 ? '重新发送(' + cd + ')' : '获取验证码'}}
               </div>
             </div>
@@ -451,7 +454,7 @@
             </div>
           </form>
           <div class="form-btn" style="justify-content: center;">
-            <el-button style="width: 194px;height: 40px;border-radius: 8px;" type="primary">登录</el-button>
+            <el-button @click="register" style="width: 194px;height: 40px;border-radius: 8px; " type="primary">登录/注册</el-button>
           </div>
         </div>
         <div class="login-sns-wp">
@@ -483,8 +486,10 @@
 import {defineProps, onMounted, ref, watch} from 'vue';
 import router from "@/router";
 import {SessionStorageService} from "@/util/storage";
-import {STORAGE_PREFIX, USER} from "@/config/cache";
+import {STORAGE_PREFIX, TOKEN, USER} from "@/config/cache";
 import {ElMessage} from "element-plus";
+import {loginApi, getCodeApi} from "@/api/login";
+import type {AccountAuthVO, Login} from "../../type/login";
 
 const activeIndex = ref(-1);
 const text = ref('')
@@ -500,6 +505,8 @@ const code = ref('')
 const showPassword = ref(false)
 const allowToSend = ref(false)
 const cd = ref(0)
+const allowToLogin = ref(true)
+const userInfo = ref<AccountAuthVO | null>(null);
 
 const props = defineProps({
   type: {
@@ -508,8 +515,60 @@ const props = defineProps({
   }
 });
 
+const login = () => {
+  const loginForm: Login = {
+    username: username.value,
+    password: password.value
+  };
+  loginApi(loginForm).then((data) => {
+    if (data.code === 200) {
+      SessionStorageService.set(`${STORAGE_PREFIX}${TOKEN}`, data.data.token)
+      SessionStorageService.set(`${STORAGE_PREFIX}${USER}`, JSON.stringify(data.data.accountAuthVO))
+      userInfo.value = data.data.accountAuthVO
+      resetDialog()
+      loginDialog.value = false
+      ElMessage.success("登陆成功")
+    } else {
+      ElMessage.error(data.message)
+      username.value = ''
+      password.value = ''
+    }
+  })
+}
+
+const getCode = () => {
+  getCodeApi(email.value).then((data) => {
+    if (data.code === 200) {
+      cd.value = 60
+      const timer = setInterval(() => {
+        cd.value--
+        if (cd.value === 0) {
+          clearInterval(timer)
+        }
+      }, 1000)
+      ElMessage.success("发送成功")
+    }
+    else
+      ElMessage.error(data.message)
+  })
+}
+
+const register = () => {
+  if (!email.value && !code.value) {
+    ElMessage.error("请输入邮箱号和验证码")
+    return
+  }
+  if (!email.value && code.value) {
+    ElMessage.error("请输入邮箱号")
+    return;
+  }
+  if (email.value && !code.value) {
+    ElMessage.error("请输入验证码")
+    return;
+  }
+}
+
 const resetDialog = () => {
-  loginDialog.value = !loginDialog.value
   loginType.value = 1
   isInputPassword.value = false
   username.value = ''
@@ -519,12 +578,21 @@ const resetDialog = () => {
   showPassword.value = false
 }
 
-watch(email, (newValue) => {
+watch([email, cd], ([newEmail, newCd]) => {
   // 添加你的合法性判断逻辑，例如正则表达式检查
-  if (newValue.match(/^[A-Za-z0-9]+@[A-Za-z0-9]+\.[A-Za-z]+$/)) {
+  if (newEmail.match(/^[A-Za-z0-9]+@[A-Za-z0-9]+\.[A-Za-z]+$/) && newCd === 0) {
     allowToSend.value = true
   } else {
     allowToSend.value = false
+  }
+})
+
+watch([username, password, loginDialog], ([newUsername, newPassword, newLoginDialog]) => {
+  if (!newLoginDialog) {
+    resetDialog()
+    return
+  } else {
+    allowToLogin.value = !(newUsername !== '' && newPassword !== '')
   }
 })
 
@@ -539,6 +607,10 @@ const endJump = (index: number) => {
 };
 
 onMounted(() => {
+  const storedUserInfo = SessionStorageService.get(`${STORAGE_PREFIX}${USER}`);
+  if (storedUserInfo) {
+    userInfo.value = JSON.parse(storedUserInfo);
+  }
   // @ts-ignore
   document.querySelector('.el-popper').style.borderRadius = '8px';
   // @ts-ignore

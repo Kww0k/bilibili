@@ -1,6 +1,7 @@
 import type {AuthVO, Login} from "../../../type/response/login";
 import request from "@/net";
 import type {BaseResponse} from "../../../type/response/response";
+import {ElMessage} from "element-plus";
 
 export function loginApi(loginForm: Login): Promise<BaseResponse<AuthVO>> {
     // @ts-ignore
@@ -8,3 +9,4 @@ export function loginApi(loginForm: Login): Promise<BaseResponse<AuthVO>> {
         return res
     })
 }
+
