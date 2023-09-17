@@ -107,30 +107,82 @@
               </template>
               <template #default>
                 <div style="width: calc(100% - 24px);margin-left: 14px; margin-top: 12px">
-                  <p style="margin-bottom: 15px;color: #18191C;font-size: 14px;line-height: 20px;font-weight: 500">登陆后你可以：</p>
+                  <p style="margin-bottom: 15px;color: #18191C;font-size: 14px;line-height: 20px;font-weight: 500">
+                    登陆后你可以：</p>
                   <div style="display: flex;flex-wrap: wrap;">
                     <div style="display: flex;align-items: center;margin-bottom: 14px;width: 50%;height: 26px;">
-                      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="24" height="24" fill="#00aeec"><path d="M12 4.99805C9.48178 4.99805 7.283 5.12616 5.73089 5.25202C4.65221 5.33949 3.81611 6.16352 3.72 7.23254C3.60607 8.4998 3.5 10.171 3.5 11.998C3.5 13.8251 3.60607 15.4963 3.72 16.76355C3.81611 17.83255 4.65221 18.6566 5.73089 18.7441C7.283 18.8699 9.48178 18.998 12 18.998C14.5185 18.998 16.7174 18.8699 18.2696 18.74405C19.3481 18.65655 20.184 17.8328 20.2801 16.76405C20.394 15.4973 20.5 13.82645 20.5 11.998C20.5 10.16965 20.394 8.49877 20.2801 7.23205C20.184 6.1633 19.3481 5.33952 18.2696 5.25205C16.7174 5.12618 14.5185 4.99805 12 4.99805zM5.60965 3.75693C7.19232 3.62859 9.43258 3.49805 12 3.49805C14.5677 3.49805 16.8081 3.62861 18.3908 3.75696C20.1881 3.90272 21.6118 5.29278 21.7741 7.09773C21.8909 8.3969 22 10.11405 22 11.998C22 13.88205 21.8909 15.5992 21.7741 16.8984C21.6118 18.7033 20.1881 20.09335 18.3908 20.23915C16.8081 20.3675 14.5677 20.498 12 20.498C9.43258 20.498 7.19232 20.3675 5.60965 20.2392C3.81206 20.0934 2.38831 18.70295 2.22603 16.8979C2.10918 15.5982 2 13.8808 2 11.998C2 10.1153 2.10918 8.39787 2.22603 7.09823C2.38831 5.29312 3.81206 3.90269 5.60965 3.75693z" fill=""></path><path d="M6.85626 8.28906C7.27047 8.28906 7.60626 8.62485 7.60626 9.03906L7.60626 11.25L10.43895 11.25L10.43895 9.03906C10.43895 8.62485 10.7747 8.28906 11.18895 8.28906C11.6031 8.28906 11.93895 8.62485 11.93895 9.03906L11.93895 14.96095C11.93895 15.37515 11.6031 15.71095 11.18895 15.71095C10.7747 15.71095 10.43895 15.37515 10.43895 14.96095L10.43895 12.75L7.60626 12.75L7.60626 14.96095C7.60626 15.37515 7.27047 15.71095 6.85626 15.71095C6.44205 15.71095 6.10626 15.37515 6.10626 14.96095L6.10626 9.03906C6.10626 8.62485 6.44205 8.28906 6.85626 8.28906z" fill=""></path><path d="M14.5492 9.80269L14.5492 14.19735C15.1834 14.17465 15.76965 14.1047 16.2202 13.87005C16.47645 13.7365 16.6803 13.55365 16.82725 13.28815C16.97795 13.016 17.09375 12.6113 17.09375 12C17.09375 11.38875 16.97795 10.98405 16.82725 10.7119C16.6803 10.4464 16.47645 10.26359 16.2202 10.12998C15.76965 9.89535 15.1834 9.8254 14.5492 9.80269zM13.0492 9.28909C13.0492 8.73971 13.4943 8.28713 14.05195 8.28944C14.86295 8.29268 15.99115 8.31782 16.9166 8.80148C17.4017 9.05504 17.83555 9.43502 18.1409 9.98772C18.4426 10.5338 18.59375 11.20265 18.59375 12C18.59375 12.79745 18.4426 13.46625 18.1409 14.01235C17.83555 14.565 17.4017 14.945 16.9166 15.1986C15.99115 15.6822 14.86295 15.70735 14.05195 15.7106C13.4943 15.7129 13.0492 15.26035 13.0492 14.71095L13.0492 9.28909z" fill=""></path></svg>
-                      <span style="margin-left: 6px;color: #18191C;font-size: 14px;line-height: 14px;word-break: keep-all;">免费看高清视频</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                           viewBox="0 0 24 24" width="24" height="24" fill="#00aeec">
+                        <path
+                            d="M12 4.99805C9.48178 4.99805 7.283 5.12616 5.73089 5.25202C4.65221 5.33949 3.81611 6.16352 3.72 7.23254C3.60607 8.4998 3.5 10.171 3.5 11.998C3.5 13.8251 3.60607 15.4963 3.72 16.76355C3.81611 17.83255 4.65221 18.6566 5.73089 18.7441C7.283 18.8699 9.48178 18.998 12 18.998C14.5185 18.998 16.7174 18.8699 18.2696 18.74405C19.3481 18.65655 20.184 17.8328 20.2801 16.76405C20.394 15.4973 20.5 13.82645 20.5 11.998C20.5 10.16965 20.394 8.49877 20.2801 7.23205C20.184 6.1633 19.3481 5.33952 18.2696 5.25205C16.7174 5.12618 14.5185 4.99805 12 4.99805zM5.60965 3.75693C7.19232 3.62859 9.43258 3.49805 12 3.49805C14.5677 3.49805 16.8081 3.62861 18.3908 3.75696C20.1881 3.90272 21.6118 5.29278 21.7741 7.09773C21.8909 8.3969 22 10.11405 22 11.998C22 13.88205 21.8909 15.5992 21.7741 16.8984C21.6118 18.7033 20.1881 20.09335 18.3908 20.23915C16.8081 20.3675 14.5677 20.498 12 20.498C9.43258 20.498 7.19232 20.3675 5.60965 20.2392C3.81206 20.0934 2.38831 18.70295 2.22603 16.8979C2.10918 15.5982 2 13.8808 2 11.998C2 10.1153 2.10918 8.39787 2.22603 7.09823C2.38831 5.29312 3.81206 3.90269 5.60965 3.75693z"
+                            fill=""></path>
+                        <path
+                            d="M6.85626 8.28906C7.27047 8.28906 7.60626 8.62485 7.60626 9.03906L7.60626 11.25L10.43895 11.25L10.43895 9.03906C10.43895 8.62485 10.7747 8.28906 11.18895 8.28906C11.6031 8.28906 11.93895 8.62485 11.93895 9.03906L11.93895 14.96095C11.93895 15.37515 11.6031 15.71095 11.18895 15.71095C10.7747 15.71095 10.43895 15.37515 10.43895 14.96095L10.43895 12.75L7.60626 12.75L7.60626 14.96095C7.60626 15.37515 7.27047 15.71095 6.85626 15.71095C6.44205 15.71095 6.10626 15.37515 6.10626 14.96095L6.10626 9.03906C6.10626 8.62485 6.44205 8.28906 6.85626 8.28906z"
+                            fill=""></path>
+                        <path
+                            d="M14.5492 9.80269L14.5492 14.19735C15.1834 14.17465 15.76965 14.1047 16.2202 13.87005C16.47645 13.7365 16.6803 13.55365 16.82725 13.28815C16.97795 13.016 17.09375 12.6113 17.09375 12C17.09375 11.38875 16.97795 10.98405 16.82725 10.7119C16.6803 10.4464 16.47645 10.26359 16.2202 10.12998C15.76965 9.89535 15.1834 9.8254 14.5492 9.80269zM13.0492 9.28909C13.0492 8.73971 13.4943 8.28713 14.05195 8.28944C14.86295 8.29268 15.99115 8.31782 16.9166 8.80148C17.4017 9.05504 17.83555 9.43502 18.1409 9.98772C18.4426 10.5338 18.59375 11.20265 18.59375 12C18.59375 12.79745 18.4426 13.46625 18.1409 14.01235C17.83555 14.565 17.4017 14.945 16.9166 15.1986C15.99115 15.6822 14.86295 15.70735 14.05195 15.7106C13.4943 15.7129 13.0492 15.26035 13.0492 14.71095L13.0492 9.28909z"
+                            fill=""></path>
+                      </svg>
+                      <span
+                          style="margin-left: 6px;color: #18191C;font-size: 14px;line-height: 14px;word-break: keep-all;">免费看高清视频</span>
                     </div>
                     <div style="display: flex;align-items: center;margin-bottom: 14px;width: 50%;height: 26px;">
-                      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="24" height="24" fill="#00aeec"><path d="M12 7.23438C12.4142 7.23438 12.75 7.57017 12.75 7.98438L12.75 11.68935L15.40535 14.34465C15.6982 14.63755 15.6982 15.11245 15.40535 15.40535C15.11245 15.6982 14.63755 15.6982 14.34465 15.40535L11.46965 12.53035C11.32905 12.3897 11.25 12.1989 11.25 12L11.25 7.98438C11.25 7.57017 11.5858 7.23438 12 7.23438z" fill=""></path><path d="M12 3.5C7.30558 3.5 3.5 7.30558 3.5 12C3.5 16.6944 7.30558 20.5 12 20.5C16.6944 20.5 20.5 16.6944 20.5 12C20.5 7.30558 16.6944 3.5 12 3.5zM2 12C2 6.47715 6.47715 2 12 2C17.52285 2 22 6.47715 22 12C22 17.52285 17.52285 22 12 22C6.47715 22 2 17.52285 2 12z" fill=""></path></svg>
-                      <span style="margin-left: 6px;color: #18191C;font-size: 14px;line-height: 14px;word-break: keep-all;">免费看高清视频</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                           viewBox="0 0 24 24" width="24" height="24" fill="#00aeec">
+                        <path
+                            d="M12 7.23438C12.4142 7.23438 12.75 7.57017 12.75 7.98438L12.75 11.68935L15.40535 14.34465C15.6982 14.63755 15.6982 15.11245 15.40535 15.40535C15.11245 15.6982 14.63755 15.6982 14.34465 15.40535L11.46965 12.53035C11.32905 12.3897 11.25 12.1989 11.25 12L11.25 7.98438C11.25 7.57017 11.5858 7.23438 12 7.23438z"
+                            fill=""></path>
+                        <path
+                            d="M12 3.5C7.30558 3.5 3.5 7.30558 3.5 12C3.5 16.6944 7.30558 20.5 12 20.5C16.6944 20.5 20.5 16.6944 20.5 12C20.5 7.30558 16.6944 3.5 12 3.5zM2 12C2 6.47715 6.47715 2 12 2C17.52285 2 22 6.47715 22 12C22 17.52285 17.52285 22 12 22C6.47715 22 2 17.52285 2 12z"
+                            fill=""></path>
+                      </svg>
+                      <span
+                          style="margin-left: 6px;color: #18191C;font-size: 14px;line-height: 14px;word-break: keep-all;">免费看高清视频</span>
                     </div>
                     <div style="display: flex;align-items: center;margin-bottom: 14px;width: 50%;height: 26px;">
-                      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="24" height="24" fill="#00aeec"><path d="M12 4.99805C9.48178 4.99805 7.283 5.12616 5.73089 5.25202C4.65221 5.33949 3.81611 6.16352 3.72 7.23254C3.60607 8.4998 3.5 10.171 3.5 11.998C3.5 13.8251 3.60607 15.4963 3.72 16.76355C3.81611 17.83255 4.65221 18.6566 5.73089 18.7441C7.283 18.8699 9.48178 18.998 12 18.998C14.5185 18.998 16.7174 18.8699 18.2696 18.74405C19.3481 18.65655 20.184 17.8328 20.2801 16.76405C20.394 15.4973 20.5 13.82645 20.5 11.998C20.5 10.16965 20.394 8.49877 20.2801 7.23205C20.184 6.1633 19.3481 5.33952 18.2696 5.25205C16.7174 5.12618 14.5185 4.99805 12 4.99805zM5.60965 3.75693C7.19232 3.62859 9.43258 3.49805 12 3.49805C14.5677 3.49805 16.8081 3.62861 18.3908 3.75696C20.1881 3.90272 21.6118 5.29278 21.7741 7.09773C21.8909 8.3969 22 10.11405 22 11.998C22 13.88205 21.8909 15.5992 21.7741 16.8984C21.6118 18.7033 20.1881 20.09335 18.3908 20.23915C16.8081 20.3675 14.5677 20.498 12 20.498C9.43258 20.498 7.19232 20.3675 5.60965 20.2392C3.81206 20.0934 2.38831 18.70295 2.22603 16.8979C2.10918 15.5982 2 13.8808 2 11.998C2 10.1153 2.10918 8.39787 2.22603 7.09823C2.38831 5.29312 3.81206 3.90269 5.60965 3.75693z" fill=""></path><path d="M15.875 9.25L9.875 9.25C9.46079 9.25 9.125 8.91421 9.125 8.5C9.125 8.08579 9.46079 7.75 9.875 7.75L15.875 7.75C16.2892 7.75 16.625 8.08579 16.625 8.5C16.625 8.91421 16.2892 9.25 15.875 9.25z" fill=""></path><path d="M17.375 12.75L11.375 12.75C10.9608 12.75 10.625 12.4142 10.625 12C10.625 11.5858 10.9608 11.25 11.375 11.25L17.375 11.25C17.7892 11.25 18.125 11.5858 18.125 12C18.125 12.4142 17.7892 12.75 17.375 12.75z" fill=""></path><path d="M7.875 8.5C7.875 8.91421 7.53921 9.25 7.125 9.25L6.625 9.25C6.21079 9.25 5.875 8.91421 5.875 8.5C5.875 8.08579 6.21079 7.75 6.625 7.75L7.125 7.75C7.53921 7.75 7.875 8.08579 7.875 8.5z" fill=""></path><path d="M9.375 12C9.375 12.4142 9.03921 12.75 8.625 12.75L8.125 12.75C7.71079 12.75 7.375 12.4142 7.375 12C7.375 11.5858 7.71079 11.25 8.125 11.25L8.625 11.25C9.03921 11.25 9.375 11.5858 9.375 12z" fill=""></path></svg>
-                      <span style="margin-left: 6px;color: #18191C;font-size: 14px;line-height: 14px;word-break: keep-all;">免费看高清视频</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                           viewBox="0 0 24 24" width="24" height="24" fill="#00aeec">
+                        <path
+                            d="M12 4.99805C9.48178 4.99805 7.283 5.12616 5.73089 5.25202C4.65221 5.33949 3.81611 6.16352 3.72 7.23254C3.60607 8.4998 3.5 10.171 3.5 11.998C3.5 13.8251 3.60607 15.4963 3.72 16.76355C3.81611 17.83255 4.65221 18.6566 5.73089 18.7441C7.283 18.8699 9.48178 18.998 12 18.998C14.5185 18.998 16.7174 18.8699 18.2696 18.74405C19.3481 18.65655 20.184 17.8328 20.2801 16.76405C20.394 15.4973 20.5 13.82645 20.5 11.998C20.5 10.16965 20.394 8.49877 20.2801 7.23205C20.184 6.1633 19.3481 5.33952 18.2696 5.25205C16.7174 5.12618 14.5185 4.99805 12 4.99805zM5.60965 3.75693C7.19232 3.62859 9.43258 3.49805 12 3.49805C14.5677 3.49805 16.8081 3.62861 18.3908 3.75696C20.1881 3.90272 21.6118 5.29278 21.7741 7.09773C21.8909 8.3969 22 10.11405 22 11.998C22 13.88205 21.8909 15.5992 21.7741 16.8984C21.6118 18.7033 20.1881 20.09335 18.3908 20.23915C16.8081 20.3675 14.5677 20.498 12 20.498C9.43258 20.498 7.19232 20.3675 5.60965 20.2392C3.81206 20.0934 2.38831 18.70295 2.22603 16.8979C2.10918 15.5982 2 13.8808 2 11.998C2 10.1153 2.10918 8.39787 2.22603 7.09823C2.38831 5.29312 3.81206 3.90269 5.60965 3.75693z"
+                            fill=""></path>
+                        <path
+                            d="M15.875 9.25L9.875 9.25C9.46079 9.25 9.125 8.91421 9.125 8.5C9.125 8.08579 9.46079 7.75 9.875 7.75L15.875 7.75C16.2892 7.75 16.625 8.08579 16.625 8.5C16.625 8.91421 16.2892 9.25 15.875 9.25z"
+                            fill=""></path>
+                        <path
+                            d="M17.375 12.75L11.375 12.75C10.9608 12.75 10.625 12.4142 10.625 12C10.625 11.5858 10.9608 11.25 11.375 11.25L17.375 11.25C17.7892 11.25 18.125 11.5858 18.125 12C18.125 12.4142 17.7892 12.75 17.375 12.75z"
+                            fill=""></path>
+                        <path
+                            d="M7.875 8.5C7.875 8.91421 7.53921 9.25 7.125 9.25L6.625 9.25C6.21079 9.25 5.875 8.91421 5.875 8.5C5.875 8.08579 6.21079 7.75 6.625 7.75L7.125 7.75C7.53921 7.75 7.875 8.08579 7.875 8.5z"
+                            fill=""></path>
+                        <path
+                            d="M9.375 12C9.375 12.4142 9.03921 12.75 8.625 12.75L8.125 12.75C7.71079 12.75 7.375 12.4142 7.375 12C7.375 11.5858 7.71079 11.25 8.125 11.25L8.625 11.25C9.03921 11.25 9.375 11.5858 9.375 12z"
+                            fill=""></path>
+                      </svg>
+                      <span
+                          style="margin-left: 6px;color: #18191C;font-size: 14px;line-height: 14px;word-break: keep-all;">免费看高清视频</span>
                     </div>
                     <div style="display: flex;align-items: center;margin-bottom: 14px;width: 50%;height: 26px;">
-                      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="24" height="24" fill="#00aeec"><path d="M12 4.99805C9.48178 4.99805 7.283 5.12616 5.73089 5.25202C4.65221 5.33949 3.81611 6.16352 3.72 7.23254C3.60607 8.4998 3.5 10.171 3.5 11.998C3.5 13.8251 3.60607 15.4963 3.72 16.76355C3.81611 17.83255 4.65221 18.6566 5.73089 18.7441C7.283 18.8699 9.48178 18.998 12 18.998C14.5185 18.998 16.7174 18.8699 18.2696 18.74405C19.3481 18.65655 20.184 17.8328 20.2801 16.76405C20.394 15.4973 20.5 13.82645 20.5 11.998C20.5 10.16965 20.394 8.49877 20.2801 7.23205C20.184 6.1633 19.3481 5.33952 18.2696 5.25205C16.7174 5.12618 14.5185 4.99805 12 4.99805zM5.60965 3.75693C7.19232 3.62859 9.43258 3.49805 12 3.49805C14.5677 3.49805 16.8081 3.62861 18.3908 3.75696C20.1881 3.90272 21.6118 5.29278 21.7741 7.09773C21.8909 8.3969 22 10.11405 22 11.998C22 13.88205 21.8909 15.5992 21.7741 16.8984C21.6118 18.7033 20.1881 20.09335 18.3908 20.23915C16.8081 20.3675 14.5677 20.498 12 20.498C9.43258 20.498 7.19232 20.3675 5.60965 20.2392C3.81206 20.0934 2.38831 18.70295 2.22603 16.8979C2.10918 15.5982 2 13.8808 2 11.998C2 10.1153 2.10918 8.39787 2.22603 7.09823C2.38831 5.29312 3.81206 3.90269 5.60965 3.75693z" fill=""></path><path d="M14.7138 10.96875C15.50765 11.4271 15.50765 12.573 14.71375 13.0313L11.5362 14.8659C10.74235 15.3242 9.75 14.7513 9.75001 13.8346L9.75001 10.1655C9.75001 9.24881 10.74235 8.67587 11.5362 9.13422L14.7138 10.96875z" fill=""></path></svg>
-                      <span style="margin-left: 6px;color: #18191C;font-size: 14px;line-height: 14px;word-break: keep-all;">免费看高清视频</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                           viewBox="0 0 24 24" width="24" height="24" fill="#00aeec">
+                        <path
+                            d="M12 4.99805C9.48178 4.99805 7.283 5.12616 5.73089 5.25202C4.65221 5.33949 3.81611 6.16352 3.72 7.23254C3.60607 8.4998 3.5 10.171 3.5 11.998C3.5 13.8251 3.60607 15.4963 3.72 16.76355C3.81611 17.83255 4.65221 18.6566 5.73089 18.7441C7.283 18.8699 9.48178 18.998 12 18.998C14.5185 18.998 16.7174 18.8699 18.2696 18.74405C19.3481 18.65655 20.184 17.8328 20.2801 16.76405C20.394 15.4973 20.5 13.82645 20.5 11.998C20.5 10.16965 20.394 8.49877 20.2801 7.23205C20.184 6.1633 19.3481 5.33952 18.2696 5.25205C16.7174 5.12618 14.5185 4.99805 12 4.99805zM5.60965 3.75693C7.19232 3.62859 9.43258 3.49805 12 3.49805C14.5677 3.49805 16.8081 3.62861 18.3908 3.75696C20.1881 3.90272 21.6118 5.29278 21.7741 7.09773C21.8909 8.3969 22 10.11405 22 11.998C22 13.88205 21.8909 15.5992 21.7741 16.8984C21.6118 18.7033 20.1881 20.09335 18.3908 20.23915C16.8081 20.3675 14.5677 20.498 12 20.498C9.43258 20.498 7.19232 20.3675 5.60965 20.2392C3.81206 20.0934 2.38831 18.70295 2.22603 16.8979C2.10918 15.5982 2 13.8808 2 11.998C2 10.1153 2.10918 8.39787 2.22603 7.09823C2.38831 5.29312 3.81206 3.90269 5.60965 3.75693z"
+                            fill=""></path>
+                        <path
+                            d="M14.7138 10.96875C15.50765 11.4271 15.50765 12.573 14.71375 13.0313L11.5362 14.8659C10.74235 15.3242 9.75 14.7513 9.75001 13.8346L9.75001 10.1655C9.75001 9.24881 10.74235 8.67587 11.5362 9.13422L14.7138 10.96875z"
+                            fill=""></path>
+                      </svg>
+                      <span
+                          style="margin-left: 6px;color: #18191C;font-size: 14px;line-height: 14px;word-break: keep-all;">免费看高清视频</span>
                     </div>
                   </div>
                   <div style="width: 100%">
-                    <el-button @click="loginDialog = true; isInputPassword = false" style="width: 100%; height: 41px; border-radius: 8px" type="primary">立即登陆</el-button>
+                    <el-button @click="resetDialog" style="width: 100%; height: 41px; border-radius: 8px"
+                               type="primary">立即登陆
+                    </el-button>
                   </div>
-                  <div style="margin-top: 16px; margin-bottom:20px;color: #18191C;text-align: center;letter-spacing: 0;font-size: 14px;line-height: 20px;">
-                    首次使用？ <span style="cursor:pointer;color: #00b5e5;" @click="loginDialog = true; isInputPassword = false">点我注册</span>
+                  <div
+                      style="margin-top: 16px; margin-bottom:20px;color: #18191C;text-align: center;letter-spacing: 0;font-size: 14px;line-height: 20px;">
+                    首次使用？ <span style="cursor:pointer;color: #00b5e5;" @click="resetDialog">点我注册</span>
                   </div>
                 </div>
               </template>
@@ -264,6 +316,7 @@
   </el-collapse-transition>
 
   <el-dialog
+      @close="resetDialog"
       @click="isInputPassword = false"
       :style="{
           backgroundImage: isInputPassword? 'url(https://s1.hdslb.com/bfs/seed/jinkela/short/mini-login-v2/img/22_close.9382a5a8.png), url(https://s1.hdslb.com/bfs/seed/jinkela/short/mini-login-v2/img/33_close.a8c18fc8.png)' :
@@ -287,8 +340,10 @@
       top="30vh"
   >
     <div style="width: 100%;min-height: 310px; display: flex">
-      <div style="width: 173px; display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-orient: vertical;-webkit-box-direction: normal;-ms-flex-direction: column;flex-direction: column;-webkit-box-align: center;-ms-flex-align: center;align-items: center;">
-        <div style="width: 100%;font-style: normal;font-weight: 500;font-size: 18px;line-height: 16px;color: #505050;margin-bottom: 26px; text-align: center">
+      <div
+          style="width: 173px; display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-orient: vertical;-webkit-box-direction: normal;-ms-flex-direction: column;flex-direction: column;-webkit-box-align: center;-ms-flex-align: center;align-items: center;">
+        <div
+            style="width: 100%;font-style: normal;font-weight: 500;font-size: 18px;line-height: 16px;color: #505050;margin-bottom: 26px; text-align: center">
           扫描二维码登陆
         </div>
         <div style="width: 173px; height: 173px;border: 1px solid #e3e5e7;border-radius: 8px;background-color: #18191C">
@@ -302,10 +357,13 @@
           </div>
         </div>
       </div>
-      <div style="position: relative;display: block;width: 1px;-webkit-box-flex: 0;-ms-flex: none; flex: none; height: 228px;background-color: #e3e5e7; margin: 43px 44px 0 45px;z-index: 1;border-radius: 8px;-webkit-transform: scaleX(.5);transform: scaleX(.5);">
+      <div
+          style="position: relative;display: block;width: 1px;-webkit-box-flex: 0;-ms-flex: none; flex: none; height: 228px;background-color: #e3e5e7; margin: 43px 44px 0 45px;z-index: 1;border-radius: 8px;-webkit-transform: scaleX(.5);transform: scaleX(.5);">
       </div>
-      <div style="width: 400px;display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-orient: vertical;-webkit-box-direction: normal; -ms-flex-direction: column;flex-direction: column;-webkit-box-align: center;-ms-flex-align: center;align-items: center;">
-        <div style="display: -webkit-box;display: -ms-flexbox;display: flex;align-content: center;-webkit-box-pack: center;-ms-flex-pack: center;justify-content: center;margin-bottom: 24px;">
+      <div
+          style="width: 400px;display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-orient: vertical;-webkit-box-direction: normal; -ms-flex-direction: column;flex-direction: column;-webkit-box-align: center;-ms-flex-align: center;align-items: center;">
+        <div
+            style="display: -webkit-box;display: -ms-flexbox;display: flex;align-content: center;-webkit-box-pack: center;-ms-flex-pack: center;justify-content: center;margin-bottom: 24px;">
           <div :class="[loginType === 1 ? 'login-choose' : 'login-unchoose',]" @click="loginType=1">密码登陆</div>
           <div style="width: 1px;height: 20px;background: #e3e5e7;border-radius: 8px;margin: 0 21px;"></div>
           <div :class="[loginType === 2 ? 'login-choose' : 'login-unchoose',]" @click="loginType=2">邮箱登陆</div>
@@ -314,7 +372,8 @@
           <form class="tab-form">
             <div class="form-item">
               <div>账号</div>
-              <el-input placeholder="请输入账号" style="width: 310px; margin-left: 20px"/>
+              <el-input v-model="username" oninput="value=value.replace(/\s+/g, '')" maxlength="32"
+                        placeholder="请输入账号" style="width: 310px; margin-left: 20px"/>
             </div>
             <div style="display: block;width: 100%;height: 0;border-bottom: 1px solid #e3e5e7;">
             </div>
@@ -322,11 +381,48 @@
               <div>
                 密码
               </div>
-              <el-input @click.stop @focus="isInputPassword = true" placeholder="请输入密码" style="width: 210px; margin-left: 20px"/>
+              <el-input @click.stop v-model="password" maxlength="32" oninput="value=value.replace(/\s+/g, '')"
+                        :type="showPassword ? 'text' : 'password'" @focus="isInputPassword = true"
+                        placeholder="请输入密码" style="width: 210px; margin-left: 20px"/>
+              <div @click.stop @click="showPassword = !showPassword" v-if="!showPassword"
+                   style="--thememini-color: #00a1d6;width: 20px;height: 20px;position: relative;display: inline-block;cursor: pointer;margin-right: 10px;">
+                <svg data-v-1932284b="" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                     xmlns="http://www.w3.org/2000/svg">
+                  <path data-v-1932284b="" fill-rule="evenodd" clip-rule="evenodd"
+                        d="M17.5753 6.85456C17.7122 6.71896 17.8939 6.63806 18.0866 6.63806C18.7321 6.63806 19.0436 7.42626 18.5748 7.87006C18.1144 8.30554 17.457 8.69885 16.6478 9.03168L18.1457 10.5296C18.2101 10.5941 18.2613 10.6706 18.2962 10.7548C18.331 10.839 18.349 10.9293 18.349 11.0204C18.349 11.1116 18.331 11.2019 18.2962 11.2861C18.2613 11.3703 18.2101 11.4468 18.1457 11.5113C18.0812 11.5757 18.0047 11.6269 17.9205 11.6618C17.8363 11.6967 17.746 11.7146 17.6548 11.7146C17.5637 11.7146 17.4734 11.6967 17.3892 11.6618C17.305 11.6269 17.2284 11.5757 17.164 11.5113L15.3409 9.68819C15.2898 9.63708 15.247 9.57838 15.2141 9.51428C14.4874 9.71293 13.6876 9.87122 12.8344 9.98119C12.8363 9.99011 12.8381 9.99908 12.8397 10.0081L13.2874 12.5472C13.315 12.7266 13.2713 12.9098 13.1656 13.0573C13.0598 13.2049 12.9005 13.3052 12.7217 13.3367C12.5429 13.3683 12.3589 13.3285 12.2091 13.2259C12.0592 13.1234 11.9555 12.9663 11.9202 12.7882L11.4725 10.2491C11.4645 10.2039 11.4611 10.1581 11.4621 10.1125C10.9858 10.1428 10.4976 10.1586 10.0002 10.1586C9.57059 10.1586 9.14778 10.1468 8.73362 10.1241C8.73477 10.1656 8.7322 10.2074 8.72578 10.249L8.27808 12.7881C8.24612 12.9694 8.14345 13.1306 7.99265 13.2362C7.84186 13.3418 7.65528 13.3831 7.47398 13.3512C7.29268 13.3192 7.1315 13.2166 7.0259 13.0658C6.9203 12.915 6.87892 12.7284 6.91088 12.5471L7.35858 10.008C7.35877 10.007 7.35896 10.0061 7.35915 10.0052C6.50085 9.90284 5.6941 9.75191 4.95838 9.56025C4.93012 9.60634 4.89634 9.64933 4.85748 9.68819L3.03438 11.5113C2.96992 11.5757 2.8934 11.6269 2.80918 11.6618C2.72496 11.6967 2.63469 11.7146 2.54353 11.7146C2.45237 11.7146 2.36211 11.6967 2.27789 11.6618C2.19367 11.6269 2.11714 11.5757 2.05268 11.5113C1.98822 11.4468 1.93709 11.3703 1.90221 11.2861C1.86732 11.2019 1.84937 11.1116 1.84937 11.0204C1.84937 10.9293 1.86732 10.839 1.90221 10.7548C1.93709 10.6706 1.98822 10.5941 2.05268 10.5296L3.49373 9.08855C2.6197 8.744 1.91247 8.33062 1.42559 7.87006C0.956591 7.42636 1.26799 6.63816 1.91359 6.63816C2.10629 6.63816 2.28789 6.71896 2.42489 6.85456C2.70009 7.12696 3.19529 7.45886 3.98459 7.77796C5.54429 8.40856 7.73699 8.77016 10.0001 8.77016C12.2632 8.77016 14.4558 8.40856 16.0156 7.77796C16.8049 7.45886 17.3001 7.12696 17.5753 6.85456Z"
+                        fill="#9499A0"></path>
+                </svg>
+              </div>
+              <div @click.stop @click="showPassword = !showPassword" v-if="showPassword"
+                   style="--thememini-color: #00a1d6;width: 20px;height: 20px;position: relative;display: inline-block;cursor: pointer;margin-right: 10px;">
+                <svg data-v-1932284b="" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                     xmlns="http://www.w3.org/2000/svg">
+                  <path data-v-1932284b="" fill-rule="evenodd" clip-rule="evenodd"
+                        d="M2.11069 9.43732C3.21647 7.77542 5.87904 4.58331 9.89458 4.58331C13.8801 4.58331 16.6483 7.72502 17.8345 9.4049C18.0905 9.76747 18.0905 10.2325 17.8345 10.5951C16.6483 12.2749 13.8801 15.4166 9.89458 15.4166C5.87904 15.4166 3.21647 12.2245 2.11069 10.5626C1.88009 10.2161 1.88009 9.7839 2.11069 9.43732ZM9.89458 3.33331C5.19832 3.33331 2.20919 7.03277 1.07001 8.74489C0.560324 9.51091 0.560323 10.4891 1.07001 11.2551C2.20919 12.9672 5.19832 16.6666 9.89458 16.6666C14.5412 16.6666 17.6368 13.0422 18.8556 11.3161C19.4168 10.5213 19.4168 9.4787 18.8556 8.68391C17.6368 6.95774 14.5412 3.33331 9.89458 3.33331ZM7.29165 9.99998C7.29165 8.50421 8.50421 7.29165 9.99998 7.29165C11.4958 7.29165 12.7083 8.50421 12.7083 9.99998C12.7083 11.4958 11.4958 12.7083 9.99998 12.7083C8.50421 12.7083 7.29165 11.4958 7.29165 9.99998ZM9.99998 6.04165C7.81385 6.04165 6.04165 7.81385 6.04165 9.99998C6.04165 12.1861 7.81385 13.9583 9.99998 13.9583C12.1861 13.9583 13.9583 12.1861 13.9583 9.99998C13.9583 7.81385 12.1861 6.04165 9.99998 6.04165Z"
+                        fill="#9499A0"></path>
+                </svg>
+              </div>
+              <el-popover trigger="click" :width="332" popper-style="margin-top: 10px">
+                <template #reference>
+                  <div style="color: #00a1d6;cursor: pointer;">忘记密码？</div>
+                </template>
+                <template #default>
+                  <div style="width: 100%; height: 86px;cursor: pointer;">
+                    <div style="width: 100%; height: 43px;" @click="loginType=2;ElMessage.info('输入邮箱号，完成注册')">
+                      <div style="font-size: 14px;line-height: 18px;color: #212121;margin-left: 10px">发送短信快速登录</div>
+                      <div style="font-size: 12px;color: #999;line-height: 18px;margin-left: 10px">未注册或绑定哔哩哔哩的手机号，将帮你注册新账号</div>
+                    </div>
+                    <div style="width: 100%; height: 33px;margin-top: 10px">
+                      <div style="font-size: 14px;line-height: 18px;color: #212121;margin-left: 10px">去找回密码</div>
+                      <div style="font-size: 12px;color: #999;line-height: 18px;margin-left: 10px">通过绑定的手机号/邮箱重置密码</div>
+                    </div>
+                  </div>
+                </template>
+              </el-popover>
             </div>
           </form>
           <div class="form-btn">
-            <el-button style="width: 194px;height: 40px;border-radius: 8px;" @click="loginType=2">注册</el-button>
+            <el-button style="width: 194px;height: 40px;border-radius: 8px;" @click="loginType=2;ElMessage.info('输入邮箱号，完成注册')">注册</el-button>
             <el-button style="width: 194px;height: 40px;border-radius: 8px;" type="primary">登录</el-button>
           </div>
         </div>
@@ -336,7 +432,12 @@
               <div>
                 邮箱
               </div>
-              <el-input placeholder="请输入邮箱号" style="width: 185px;margin-left: 35px"/>
+              <el-input v-model="email" maxlength="32" placeholder="请输入邮箱号"
+                        style="width: 185px;margin-left: 35px"/>
+              <div style="width: 1px;height: 26px;border-left: 1px solid #e3e5e7;margin-right: 20px;"></div>
+              <div style="  width: 90px;text-align: center;" :class="[allowToSend ? 'login-sns-allow' : 'login-sns-not-allow']">
+                {{ cd > 0 ? '重新发送(' + cd + ')' : '获取验证码'}}
+              </div>
             </div>
             <div style="display: block;width: 100%;height: 0;border-bottom: 1px solid #e3e5e7;">
             </div>
@@ -344,7 +445,9 @@
               <div>
                 验证码
               </div>
-              <el-input @click.stop @focus="isInputPassword = true" placeholder="请输入验证码" style="width: 295px;margin-left: 20px"/>
+              <el-input v-model="code" oninput="value=value.replace(/[^\d]/g, '')" maxlength="6" @click.stop
+                        @focus="isInputPassword = true" placeholder="请输入验证码"
+                        style="width: 295px;margin-left: 20px"/>
             </div>
           </form>
           <div class="form-btn" style="justify-content: center;">
@@ -353,10 +456,22 @@
         </div>
         <div class="login-sns-wp">
           <div class="login-sns-title">其他方式登录</div>
-          <div class="login-sns-content"><div class="login-sns-item"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAMAAACfWMssAAAAgVBMVEUAAABXu0BYt0BQt0BXu0BWu0BXu0BXu0BXu0BWukBWukBXvEBXu0BXvEBXvEBYukBVukBXu0BWt0BXukBXuEBXu0D////1+/Pq9+fV7s/A5rer3aBsw1jg89uBzHBiwEy14auL0Xug2ZOW1YeBzG93yGSW1YjL6sO14azL6cN2yGP3XpzOAAAAFXRSTlMA3yAQ78+/r5+AUI9w74BgYEBAkHDBb56KAAACF0lEQVRIx52W6XKDIBRGwT3GZmsRUXFP0vb9H7AKGS8aiCXnR0TCmU/gOoh0uJck8jEZwUGYXND/cOPggyz4CE//0HZgKeDIsdSA3Qs1Bk2XejLF7ckGe1fnOT7ZBDsaDxNiZ4Jna4Jnb7rgbeKrK7QnFuzBOxIrYrsJAth9iIdl/9CwLE0pv/elqfoegWpfXdAUYINW9GRkRIBWakBemiOVGRbpE1lpijwaPDANCxvCc8qBbcVF47vq5EQ1YjCK3nyXiXE3QqrpSseeu+jptc96XgWmHSGDEGtCmDHygpK5nUuRdr2MvvfNdMvzXCN+KVNk6RO0qOpr37fXJzFCwdzmT9532THZovmqFHxlF3/WcdWQGUsBI2g3K/G3WG3o4oEVsVqOK4RHaTpfaKkXCVsWzPTL65pPN7X4kxnEX6qIXS4mJqfOH5tVKSJWzJsiXqlcklxe5AI0yuL4RDUpiKkGphRrRFRK+lLk88AQSg4KXVC9TvwSRQ4MU5m1xZ2xlmnEm1LkrqeKTVbU5rcaNtJDCAWqCOutq90CpjiKMTFQZuuah/9Oo+h6ZtPkYTSxI0YKReWLtxFBpJ5bzjOasWYsoBp6HQSRW5R5tz4C4HS0PltjO/H05sH6iQDXtz0d3/94ANPes/9Asjd9572PwE8X6Tm+DPViZMQ5mLUDxGnVCFtqwDH0VlYQS22bcxIGIhn7UXLWWn+10s6FZo+4YQAAAABJRU5ErkJggg==" class="login-sns-item-icon"><span class="login-sns-name">微信登录</span></div><div class="login-sns-item"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAMAAACfWMssAAAAh1BMVEUAAADXQDjTQDzaQzfcRTfbRDfcRDbcQzbbRDbbRDfcQzbaQzbbRDbbRDbaRDfcQzbbRDfaQjjaQjXcQzfYRDfbRDTbRDf////gW1D99PPtoZvyubT76Ob20M3pioLdT0Tvrajkc2n20c3rlo7mfnb0xcD43NrrlY7kcmniZ1343driZ1z0xMEgvW1iAAAAFnRSTlMAIBDf34Dv78+/n1BAj7CvcGBgkHBwDUc+aAAAAmpJREFUSMeVlueCqjAQRgOI0qy7m0YVsN297/98OwEdCUQ05w8WDt/MkIjEhJv8RIFHAS/c/CTkM9w4XFKN5ebwgeaDNWURObYa4s+oMWrG1MOruDV9w9o1eU5A37JwDN6CUksTPWsTPXvTRe89wXBCa2rB+ukd6By3K6ca8WcNVoyxLB26i0ex/mxgzRTiMlx990A6C09PZ6XKwXbpIyP6Fn4C8zKONHVYFrJ4tJWfoUMJ5k2PPBi0igHZrX8j4HVLITPXB7udeK1gHem9ziJjouTwQYmnhCCuxh5UhSJO9qKmWwxrTcZeyh5UpcyFyOH0Bi5SaYNNyG7qYeK95CttWUWlJn6PW5RsSgVtlyqxoEhEQs1rNEPrldf5cI8Qb+hxYRKlaVsSY4NZKqU81aynpQY0kTNF3pS4fsDFvTESx4Gi0b4vMqWKdl4UcHWukmSeZXnRV9Gb5VgcDucIJ3B11JbckSmKyXAC7V7I52hxI2WmyYYk0m7+Dbd8JR7boTYlbshOE9WBsYb+MglBZ6r4p8TxXL+Hi7zov2dCnY1N8v7ViIS4z21V9q3U7Ap9YkzOulnrLAkZLtYTA4f+CpYLHEjFgCMdtwhiTBGedT+D/NwtIHU2V3li4tE9iO5qaILQwvF4LNUtTLsr8InnTX6Pebfq8qopmup/V29W0CkRIaNISDmxJwLqNeEYHwG8repzltVpA/Ua8UmP61ErPHy2xnbiniBflg9WxA0sCnXJAMezadDSRM/aRM/eDMCb4n7Z/glE9rOhq5i8xPFfaz7GmdXIs9aw4O1qZIUxam9IdtuwS/aCaJcYrT+uh9kYccQkXQAAAABJRU5ErkJggg==" class="login-sns-item-icon"><span class="login-sns-name">微博登录</span></div><div class="login-sns-item"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAMAAACfWMssAAAAb1BMVEUAAABMouVIn+NEn99MouVMouVMo+ZMouVKouRKouJMn+NMouZLouRLo+VMoeNMouZLoeVLoeVNn+RMouX///+83Pal0PL0+v6x1vRireiay/FXqOfS6Pl5uevH4vePxe+Ev+1utOrp9Pzp8/yEv+7XzqLPAAAAE3RSTlMA3yAQ74C/n2BQQK9wz5CPz7BwJ8NfpgAAAbNJREFUSMe1lutygjAQhTeEOyi2AQIC3t//GcvYqk3OYsh0+v1yMN+czc4mQBwyL5ONUDMiLsqc1iGzOFQGYZGu0KLZQkQSrNSQ6I2aGRqkpktxlXJQSc4LNsqJCBhPOCQwwXOa6PmbErxlNpJeVMqD6uWliqOfprPiyN5tcOp0PaObntnmo9hIAV39pFNA9BOogKb+RQN/h9+RCfzR1gbtQqSArtQmemAjUy4QI7GxBTy92qKGJfEshlgp0DO15srmhuIRFuX0Cc/2KO5hUUkF1xt3dxKKuUS3uCPBjA0w4rySwqYyDLCM+EqxVrd45UTtFm81ywlEuzkHXhyhOfY1DArfntg+jRMY/PB80CeODaLhHigpt7fYNSgeuvpgD7k0j9V4Gfbc6RjN7oRE1rCeejVo27vMD4/WFokynB33qUpnUYb+t5zg7+OhNYrVxx5PIzGRJ9ijniwxIC7y3DV3urZ9/DrDfQxvR793a+YnpvRk6+Nt6YXceRQq//rxgKb/h87/fVrtAmKQW2c/JfGkb0PDjBYJomUtMuJQTcRKDUmL0LLiDDWevCzie7LYJGXOWl/BnLhvbq/sWgAAAABJRU5ErkJggg==" class="login-sns-item-icon"><span class="login-sns-name">QQ登录</span></div></div></div>
+          <div class="login-sns-content">
+            <div class="login-sns-item"><img
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAMAAACfWMssAAAAgVBMVEUAAABXu0BYt0BQt0BXu0BWu0BXu0BXu0BXu0BWukBWukBXvEBXu0BXvEBXvEBYukBVukBXu0BWt0BXukBXuEBXu0D////1+/Pq9+fV7s/A5rer3aBsw1jg89uBzHBiwEy14auL0Xug2ZOW1YeBzG93yGSW1YjL6sO14azL6cN2yGP3XpzOAAAAFXRSTlMA3yAQ78+/r5+AUI9w74BgYEBAkHDBb56KAAACF0lEQVRIx52W6XKDIBRGwT3GZmsRUXFP0vb9H7AKGS8aiCXnR0TCmU/gOoh0uJck8jEZwUGYXND/cOPggyz4CE//0HZgKeDIsdSA3Qs1Bk2XejLF7ckGe1fnOT7ZBDsaDxNiZ4Jna4Jnb7rgbeKrK7QnFuzBOxIrYrsJAth9iIdl/9CwLE0pv/elqfoegWpfXdAUYINW9GRkRIBWakBemiOVGRbpE1lpijwaPDANCxvCc8qBbcVF47vq5EQ1YjCK3nyXiXE3QqrpSseeu+jptc96XgWmHSGDEGtCmDHygpK5nUuRdr2MvvfNdMvzXCN+KVNk6RO0qOpr37fXJzFCwdzmT9532THZovmqFHxlF3/WcdWQGUsBI2g3K/G3WG3o4oEVsVqOK4RHaTpfaKkXCVsWzPTL65pPN7X4kxnEX6qIXS4mJqfOH5tVKSJWzJsiXqlcklxe5AI0yuL4RDUpiKkGphRrRFRK+lLk88AQSg4KXVC9TvwSRQ4MU5m1xZ2xlmnEm1LkrqeKTVbU5rcaNtJDCAWqCOutq90CpjiKMTFQZuuah/9Oo+h6ZtPkYTSxI0YKReWLtxFBpJ5bzjOasWYsoBp6HQSRW5R5tz4C4HS0PltjO/H05sH6iQDXtz0d3/94ANPes/9Asjd9572PwE8X6Tm+DPViZMQ5mLUDxGnVCFtqwDH0VlYQS22bcxIGIhn7UXLWWn+10s6FZo+4YQAAAABJRU5ErkJggg=="
+                class="login-sns-item-icon"><span class="login-sns-name">微信登录</span></div>
+            <div class="login-sns-item"><img
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAMAAACfWMssAAAAh1BMVEUAAADXQDjTQDzaQzfcRTfbRDfcRDbcQzbbRDbbRDfcQzbaQzbbRDbbRDbaRDfcQzbbRDfaQjjaQjXcQzfYRDfbRDTbRDf////gW1D99PPtoZvyubT76Ob20M3pioLdT0Tvrajkc2n20c3rlo7mfnb0xcD43NrrlY7kcmniZ1343driZ1z0xMEgvW1iAAAAFnRSTlMAIBDf34Dv78+/n1BAj7CvcGBgkHBwDUc+aAAAAmpJREFUSMeVlueCqjAQRgOI0qy7m0YVsN297/98OwEdCUQ05w8WDt/MkIjEhJv8RIFHAS/c/CTkM9w4XFKN5ebwgeaDNWURObYa4s+oMWrG1MOruDV9w9o1eU5A37JwDN6CUksTPWsTPXvTRe89wXBCa2rB+ukd6By3K6ca8WcNVoyxLB26i0ex/mxgzRTiMlx990A6C09PZ6XKwXbpIyP6Fn4C8zKONHVYFrJ4tJWfoUMJ5k2PPBi0igHZrX8j4HVLITPXB7udeK1gHem9ziJjouTwQYmnhCCuxh5UhSJO9qKmWwxrTcZeyh5UpcyFyOH0Bi5SaYNNyG7qYeK95CttWUWlJn6PW5RsSgVtlyqxoEhEQs1rNEPrldf5cI8Qb+hxYRKlaVsSY4NZKqU81aynpQY0kTNF3pS4fsDFvTESx4Gi0b4vMqWKdl4UcHWukmSeZXnRV9Gb5VgcDucIJ3B11JbckSmKyXAC7V7I52hxI2WmyYYk0m7+Dbd8JR7boTYlbshOE9WBsYb+MglBZ6r4p8TxXL+Hi7zov2dCnY1N8v7ViIS4z21V9q3U7Ap9YkzOulnrLAkZLtYTA4f+CpYLHEjFgCMdtwhiTBGedT+D/NwtIHU2V3li4tE9iO5qaILQwvF4LNUtTLsr8InnTX6Pebfq8qopmup/V29W0CkRIaNISDmxJwLqNeEYHwG8repzltVpA/Ua8UmP61ErPHy2xnbiniBflg9WxA0sCnXJAMezadDSRM/aRM/eDMCb4n7Z/glE9rOhq5i8xPFfaz7GmdXIs9aw4O1qZIUxam9IdtuwS/aCaJcYrT+uh9kYccQkXQAAAABJRU5ErkJggg=="
+                class="login-sns-item-icon"><span class="login-sns-name">微博登录</span></div>
+            <div class="login-sns-item"><img
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAMAAACfWMssAAAAb1BMVEUAAABMouVIn+NEn99MouVMouVMo+ZMouVKouRKouJMn+NMouZLouRLo+VMoeNMouZLoeVLoeVNn+RMouX///+83Pal0PL0+v6x1vRireiay/FXqOfS6Pl5uevH4vePxe+Ev+1utOrp9Pzp8/yEv+7XzqLPAAAAE3RSTlMA3yAQ74C/n2BQQK9wz5CPz7BwJ8NfpgAAAbNJREFUSMe1lutygjAQhTeEOyi2AQIC3t//GcvYqk3OYsh0+v1yMN+czc4mQBwyL5ONUDMiLsqc1iGzOFQGYZGu0KLZQkQSrNSQ6I2aGRqkpktxlXJQSc4LNsqJCBhPOCQwwXOa6PmbErxlNpJeVMqD6uWliqOfprPiyN5tcOp0PaObntnmo9hIAV39pFNA9BOogKb+RQN/h9+RCfzR1gbtQqSArtQmemAjUy4QI7GxBTy92qKGJfEshlgp0DO15srmhuIRFuX0Cc/2KO5hUUkF1xt3dxKKuUS3uCPBjA0w4rySwqYyDLCM+EqxVrd45UTtFm81ywlEuzkHXhyhOfY1DArfntg+jRMY/PB80CeODaLhHigpt7fYNSgeuvpgD7k0j9V4Gfbc6RjN7oRE1rCeejVo27vMD4/WFokynB33qUpnUYb+t5zg7+OhNYrVxx5PIzGRJ9ijniwxIC7y3DV3urZ9/DrDfQxvR793a+YnpvRk6+Nt6YXceRQq//rxgKb/h87/fVrtAmKQW2c/JfGkb0PDjBYJomUtMuJQTcRKDUmL0LLiDDWevCzie7LYJGXOWl/BnLhvbq/sWgAAAABJRU5ErkJggg=="
+                class="login-sns-item-icon"><span class="login-sns-name">QQ登录</span></div>
+          </div>
+        </div>
         <div class="login-agreement-wp">
           <div> 未注册过哔哩哔哩的手机号，我们将自动帮你注册账号 <!----></div>
-          <div style="margin-left: 8px"> 登录或完成注册即代表你同意 <span> 用户协议 <span class="link_word"> 和 </span></span><span> 隐私政策 <span class="link_word">  </span></span>
+          <div style="margin-left: 8px"> 登录或完成注册即代表你同意 <span> 用户协议 <span class="link_word"> 和 </span></span><span> 隐私政策 <span
+              class="link_word">  </span></span>
           </div>
         </div>
       </div>
@@ -365,10 +480,11 @@
 </template>
 
 <script setup lang="ts">
-import {defineProps, onMounted, ref} from 'vue';
+import {defineProps, onMounted, ref, watch} from 'vue';
 import router from "@/router";
 import {SessionStorageService} from "@/util/storage";
 import {STORAGE_PREFIX, USER} from "@/config/cache";
+import {ElMessage} from "element-plus";
 
 const activeIndex = ref(-1);
 const text = ref('')
@@ -377,6 +493,13 @@ const avatarType = ref(false)
 const loginDialog = ref(false)
 const loginType = ref(1)
 const isInputPassword = ref(false)
+const username = ref('')
+const password = ref('')
+const email = ref('')
+const code = ref('')
+const showPassword = ref(false)
+const allowToSend = ref(false)
+const cd = ref(0)
 
 const props = defineProps({
   type: {
@@ -384,6 +507,26 @@ const props = defineProps({
     required: true
   }
 });
+
+const resetDialog = () => {
+  loginDialog.value = !loginDialog.value
+  loginType.value = 1
+  isInputPassword.value = false
+  username.value = ''
+  password.value = ''
+  email.value = ''
+  code.value = ''
+  showPassword.value = false
+}
+
+watch(email, (newValue) => {
+  // 添加你的合法性判断逻辑，例如正则表达式检查
+  if (newValue.match(/^[A-Za-z0-9]+@[A-Za-z0-9]+\.[A-Za-z]+$/)) {
+    allowToSend.value = true
+  } else {
+    allowToSend.value = false
+  }
+})
 
 const startJump = (index: number) => {
   activeIndex.value = index;
@@ -419,25 +562,28 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.choose-password {
-  background-image: url(https://s1.hdslb.com/bfs/seed/jinkela/short/mini-login-v2/img/22_close.9382a5a8.png),
-  url(https://s1.hdslb.com/bfs/seed/jinkela/short/mini-login-v2/img/33_close.a8c18fc8.png);
+.login-sns-not-allow {
+  color: #c9ccd0 !important;
+  cursor: not-allowed;
 }
-.unchoose-password {
-  background-image: url(https://s1.hdslb.com/bfs/seed/jinkela/short/mini-login-v2/img/22_open.4ea5f239.png),
-  url(https://s1.hdslb.com/bfs/seed/jinkela/short/mini-login-v2/img/33_open.f7d7f655.png);
+.login-sns-allow {
+  color: #00a1d6;
+  cursor: pointer;
 }
 .form-item .el-input >>> .el-input__wrapper {
-  background-color : transparent;
+  background-color: transparent;
   box-shadow: 0 0 0 0;
 }
+
 .login-agreement-wp .link_word {
   color: #999;
 }
+
 .login-agreement-wp span {
   color: #00a1d6;
   cursor: pointer;
 }
+
 .login-agreement-wp {
   font-size: 13px;
   font-weight: 300;
@@ -448,6 +594,7 @@ onMounted(() => {
   -webkit-transform: translate(-50%);
   transform: translate(-50%);
 }
+
 .login-sns-name {
   text-align: center;
   font-weight: 400;
@@ -455,21 +602,25 @@ onMounted(() => {
   line-height: 16px;
   color: #9499a0;
 }
+
 .login-sns-item-icon {
   width: 28px;
   height: 28px;
   margin-right: 8px;
 }
+
 .login-sns-item {
   margin-right: 30px;
   cursor: pointer;
 }
+
 .login-sns-content {
   margin-top: 12px;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
 }
+
 .login-sns-content, .login-sns-item {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -478,6 +629,7 @@ onMounted(() => {
   -ms-flex-align: center;
   align-items: center;
 }
+
 .login-sns-title {
   text-align: center;
   color: #9499a0;
@@ -485,6 +637,7 @@ onMounted(() => {
   font-size: 13px;
   line-height: 16px;
 }
+
 .login-sns-wp {
   margin-top: 24px;
   display: -webkit-box;
@@ -501,6 +654,7 @@ onMounted(() => {
   -ms-flex-align: center;
   align-items: center;
 }
+
 .form-btn {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -516,6 +670,7 @@ onMounted(() => {
   line-height: 40px;
   text-align: center;
 }
+
 .tab-form .form-item {
   position: relative;
   display: -webkit-box;
@@ -533,6 +688,7 @@ onMounted(() => {
   height: 44px;
   padding: 12px 20px;
 }
+
 .tab-form {
   width: 400px;
   height: 90px;
@@ -544,6 +700,7 @@ onMounted(() => {
   line-height: 20px;
   color: #212121;
 }
+
 .login-choose {
   font-weight: 500;
   font-size: 18px;
@@ -551,6 +708,7 @@ onMounted(() => {
   color: #4fa5d9;
   cursor: not-allowed;
 }
+
 .login-unchoose {
   font-weight: 500;
   font-size: 18px;
@@ -558,6 +716,7 @@ onMounted(() => {
   color: #505050;
   cursor: pointer;
 }
+
 .header-big {
   transform: scale(1);
   position: absolute;
