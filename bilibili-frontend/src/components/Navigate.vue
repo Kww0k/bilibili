@@ -361,7 +361,7 @@
         </li>
         <li>
           <div class="right-entry-item">
-            <div class="bt">
+            <div class="bt" @click="redirectToLogin">
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"
                    class="header-upload-entry__icon">
                 <path
@@ -374,7 +374,6 @@
               </svg>
               投稿
             </div>
-
           </div>
         </li>
       </ul>
@@ -625,6 +624,12 @@ const logout = () => {
     } else
       ElMessage.error(data.message)
   })
+}
+const redirectToLogin = () => {
+  if (!userInfo.value) {
+    resetDialog();
+    loginDialog.value = true
+  }
 }
 
 const getCode = () => {
