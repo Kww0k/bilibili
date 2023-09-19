@@ -516,6 +516,7 @@
               <div v-if="!allowToSend" style="width: 90px;text-align: center;"
                    :class="[allowToSend ? 'login-sns-allow' : 'login-sns-not-allow']">
                 {{ cd > 0 ? '重新发送(' + cd + ')' : '获取验证码' }}
+
               </div>
             </div>
             <div style="display: block;width: 100%;height: 0;border-bottom: 1px solid #e3e5e7;">
