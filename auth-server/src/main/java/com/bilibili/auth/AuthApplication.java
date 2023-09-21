@@ -9,6 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = {"com.bilibili.commons", "com.bilibili.auth"})
 @MapperScan("com.bilibili.commons.mapper")
 public class AuthApplication {
+
     public static void main(String[] args) {
         SpringApplication.run(AuthApplication.class);
     }
