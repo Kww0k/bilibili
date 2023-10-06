@@ -3,6 +3,7 @@ package com.bilibili.commons.exctption;
 import com.bilibili.commons.domain.RestBean;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.BindException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -31,6 +32,8 @@ public class GlobalExceptionHandler {
         if (e instanceof MethodArgumentNotValidException exception)
             if (exception.getFieldError() != null)
                 return RestBean.failure(HTTP_STATUS_422, exception.getFieldError().getDefaultMessage());
+        if (e instanceof BindException exception)
+            return RestBean.failure(HTTP_STATUS_422, exception.getMessage());
         if (e instanceof SQLException exception)
             return RestBean.failure(exception.getErrorCode(), exception.getMessage());
         return RestBean.failure(SYSTEM_ERROR.getCode(), e.getMessage());
