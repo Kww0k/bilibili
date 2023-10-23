@@ -1,4 +1,4 @@
-package com.bilibili.commons.service.service.impl;
+package com.bilibili.commons.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.bilibili.commons.cache.AccountListCache;
@@ -8,7 +8,7 @@ import com.bilibili.commons.domain.entity.Message;
 import com.bilibili.commons.domain.vo.SendMessageVO;
 import com.bilibili.commons.exctption.auth.UserNotFindException;
 import com.bilibili.commons.mapper.MessageMapper;
-import com.bilibili.commons.service.service.MessageService;
+import com.bilibili.commons.service.MessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

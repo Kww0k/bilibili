@@ -6,7 +6,7 @@ import com.bilibili.commons.domain.RestBean;
 import com.bilibili.commons.domain.vo.AccountMessageVO;
 import com.bilibili.commons.domain.vo.SendMessageVO;
 import com.bilibili.commons.service.AccountService;
-import com.bilibili.commons.service.service.MessageService;
+import com.bilibili.commons.service.MessageService;
 import com.bilibili.commons.utils.SpringContext;
 import jakarta.websocket.*;
 import jakarta.websocket.server.PathParam;

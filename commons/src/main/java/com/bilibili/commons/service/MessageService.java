@@ -1,4 +1,4 @@
-package com.bilibili.commons.service.service;
+package com.bilibili.commons.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.bilibili.commons.domain.RestBean;

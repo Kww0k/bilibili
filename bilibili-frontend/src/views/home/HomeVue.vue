@@ -31,7 +31,6 @@ const getAdviceList = () => {
 
 const getCardList = () => {
   listCardApi().then((data) => {
-    console.log(data)
     const nullCard: Card = {
       id: 0,
       title: '',

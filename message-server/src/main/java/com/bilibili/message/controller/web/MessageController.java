@@ -3,7 +3,7 @@ package com.bilibili.message.controller.web;
 import com.bilibili.commons.annotation.SystemLog;
 import com.bilibili.commons.domain.RestBean;
 import com.bilibili.commons.domain.vo.SendMessageVO;
-import com.bilibili.commons.service.service.MessageService;
+import com.bilibili.commons.service.MessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
